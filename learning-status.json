@@ -1,0 +1,381 @@
+{
+  "schema_version": 1,
+  "data_version": 11,
+  "updated_at": null,
+  "updated_at_note": "旧记录可能没有精确保存时间；空值不是同步失败。",
+  "synced_at": "2026-11-01T06:51:32.693974Z",
+  "last_learning_date": "2026-11-01",
+  "current_cpp_lesson": {
+    "number": 18,
+    "title": "std::string 与 string_view",
+    "status": "未开始",
+    "verification": "",
+    "review": "",
+    "goal": "字符串读写、查找、切片、拼接、string_view 只读视图与生命周期约束。",
+    "acceptance": "实现文本单词频次前处理；能够识别悬空 string_view 的风险。"
+  },
+  "cpp_lessons": [
+    {
+      "number": 1,
+      "title": "环境与编译运行",
+      "status": "已实践",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 2,
+      "title": "变量与基本类型",
+      "status": "已实践",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 3,
+      "title": "函数与值传递",
+      "status": "已实践",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 4,
+      "title": "引用与 const",
+      "status": "已实践",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 5,
+      "title": "指针与地址",
+      "status": "已实践",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 6,
+      "title": "数组与动态内存",
+      "status": "已实践",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 7,
+      "title": "类与成员函数",
+      "status": "已实践",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 8,
+      "title": "构造与析构",
+      "status": "已实践",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 9,
+      "title": "RAII 与资源管理",
+      "status": "已实践",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 10,
+      "title": "智能指针入门",
+      "status": "已实践",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 11,
+      "title": "拷贝构造",
+      "status": "已实践",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 12,
+      "title": "拷贝赋值",
+      "status": "已实践",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 13,
+      "title": "移动构造",
+      "status": "已实践",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 14,
+      "title": "移动赋值与 Rule of Five",
+      "status": "已实验通过",
+      "verification": "日报有移动赋值与自移动两项终端输出；原值100的移动、自移动保护符合预期。主体完成，unique_ptr/Rule of Zero自测题待复习。",
+      "review": "unique_ptr 与 Rule of Zero 自测题待复习"
+    },
+    {
+      "number": 15,
+      "title": "基本类型与控制流程复核",
+      "status": "已实验通过",
+      "verification": "日报数组统计：Sum402、Max91、Average80.4、整数除法80；阈值80→90，Count3→1。",
+      "review": ""
+    },
+    {
+      "number": 16,
+      "title": "函数与参数设计",
+      "status": "已实验通过",
+      "verification": "日报含重载输出Int/Double，默认参数演示；increase(a)和increase(a,5)后Final a=36。",
+      "review": ""
+    },
+    {
+      "number": 17,
+      "title": "作用域与 const 正确性",
+      "status": "已验收",
+      "verification": "日报作用域输出10/25/10，引用问答30 20正确。用户后续确认17节验收，并回答：离开作用域后a没了，指针成为悬空指针。补充术语：p是指针，*p为未定义行为。",
+      "review": ""
+    },
+    {
+      "number": 18,
+      "title": "std::string 与 string_view",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 19,
+      "title": "std::vector 动态数组",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 20,
+      "title": "std::array 与 std::span",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 21,
+      "title": "迭代器与 STL 算法",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 22,
+      "title": "关联容器",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 23,
+      "title": "Lambda 表达式",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 24,
+      "title": "阶段项目：数据处理工具",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 25,
+      "title": "函数模板与类模板",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 26,
+      "title": "Rule of Zero 与 RAII",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 27,
+      "title": "智能指针全景",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 28,
+      "title": "移动语义进阶",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 29,
+      "title": "异常与资源安全",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 30,
+      "title": "constexpr 与程序组织",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 31,
+      "title": "现代标准库类型",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 32,
+      "title": "阶段项目：安全数据模块",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 33,
+      "title": "头文件与多文件工程",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 34,
+      "title": "CMake 工程化",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 35,
+      "title": "Debug 与 Release",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 36,
+      "title": "Sanitizer 与内存错误定位",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 37,
+      "title": "LLDB 进阶调试",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 38,
+      "title": "单元测试与 CTest",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 39,
+      "title": "Git 与项目文档",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 40,
+      "title": "阶段项目：模块化工程",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 41,
+      "title": "内存布局与对齐",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 42,
+      "title": "CPU Cache 与数据布局",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 43,
+      "title": "Benchmark 方法",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 44,
+      "title": "Profiling 入门",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 45,
+      "title": "编译优化与向量化",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 46,
+      "title": "线程基础",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 47,
+      "title": "同步与原子操作",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    },
+    {
+      "number": 48,
+      "title": "毕业项目：CPU 算子优化",
+      "status": "未开始",
+      "verification": "",
+      "review": ""
+    }
+  ],
+  "recent_learning": [
+    {
+      "date": "2026-11-01",
+      "track": "Linux",
+      "title": "Linux 复习｜Shell、权限、位置参数与脚本路径",
+      "summary": "文件与文本处理、grep/管道/wc/find/重定向；Shell文件检查、权限755、位置参数、Shebang及脚本路径。设备：惠普光影精灵7，Windows + WSL Ubuntu；目录[本地路径已省略]。",
+      "experiments_and_verification": "grep错误行2条；find找到app.log；覆盖/追加输出hello与world。check_log.sh错误数1（errror误拼写）、无错误0、文件不存在分支均有输出。权限644→755；args.sh参数hello/123/2；跨目录path_demo.sh输出PWD=[本地路径已省略] path=/usr/bin/bash。",
+      "mastery": "已展示终端输出的项目已验证；其余只讲解或待实操。学习时长未实测。",
+      "open_questions": "误拼写errror导致计数1不是脚本失败。$0是脚本调用名/路径，$1是第一个传入参数。Shebang差异已讲解。尚待验证项目见复习清单。",
+      "next_step": "Linux：先用sed修正errror并复测，再验证无参数默认文件名和包含文件名的报错；随后补PATH、source和路径对照实验，再做Git/CMake/GDB小项目。C++现有接续点保持不变（当前为第18节），每日Linux复习≤1小时。"
+    },
+    {
+      "date": "2026-10-31",
+      "track": "C++",
+      "title": "C++ 第 14–17 节学习日报｜第 17 节已验收",
+      "summary": "移动赋值与五法则/零法则；基本类型、auto、整数除法与范围 for；重载、默认参数、引用传递；作用域、生命周期、const 与悬空指针。",
+      "experiments_and_verification": "日报所附终端输出：移动后源为空、目标值100；自移动值100；数组统计402/91/3→1/80.4/80；引用增量后36；作用域10/25/10；引用问答30 20。用户补充作答：“因为离开作用域了，a没了，引用不到了，就变成悬空指针了”。判定：对象生命周期结束和悬空指针的核心判断正确。术语补充：p 是指针而非引用，离开作用域后解引用 *p 是未定义行为；不保证输出 100、0 或编译报错。",
+      "mastery": "第14–16节实验已验证；第17节已验收（用户补充确认）；第14节留一题待复习。",
+      "open_questions": "第14节 unique_ptr/Rule of Zero 自测题待复习。第17节悬空指针题已回答并验收。",
+      "next_step": "下一次从第18节 std::string 与 std::string_view 开始；另安排第14节 unique_ptr 与 Rule of Zero 复习题。"
+    }
+  ],
+  "verified_summary": "第1–13节主要练习沿用原进度。2026-10-31日报附有第14节移动赋值和自移动输出、第15节数组统计两组输出、第16节重载及引用增量输出、第17节作用域输出和引用语义问答。第17节随后由用户确认验收；生命周期回答指出局部对象离开作用域后消失、指针悬空，核心判断正确。\n\nLinux 2026-11-01：惠普光影精灵7，Windows + WSL Ubuntu，目录[本地路径已省略]。已验证grep/管道/wc/find/重定向、日志检查三分支、chmod755、bash与直接执行、位置参数及跨目录path_demo.sh。仅有主目录启动的一组路径输出；command -v bash在脚本内已验证。",
+  "open_questions": "第14节：含 unique_ptr 成员且未自定义特殊成员函数的类，为何不能拷贝却可以移动？此自测题待复习。第17节生命周期题已验收，复习时注意 p 是指针，解引用悬空指针是未定义行为。\n\nLinux 待实操：sed修正errror后复测计数为2（未展示输出）；不传参数调用check_log.sh，验证默认文件名（未展示输出）；报错信息补充文件名后重新验证（未展示输出）；查看PATH并运行command -v code（待实操）；对比source/bash/直接执行及$0/BASH_SOURCE[0]（待实操）；补做从脚本所在目录启动的对照输出（尚缺一组）；Git/CMake/GDB小型C++项目综合实践（今日未开展）。",
+  "next_step": "下一次从第18节 std::string 与 std::string_view 开始；另安排第14节 unique_ptr 与 Rule of Zero 复习题。\n\nLinux：先用sed修正errror并复测，再验证无参数默认文件名和包含文件名的报错；随后补PATH、source和路径对照实验，再做Git/CMake/GDB小项目。C++现有接续点保持不变（当前为第18节），每日Linux复习≤1小时。",
+  "linux_and_cann_plan": "保留既定 48 节 C++ 主线，不把未完成课程标记为已完成。\nLinux 复习每天 ≤ 1 小时，优先结合 C++ 工程。\n第 48 节及阶段项目验收后，再依据笔记、代码、测试和 Benchmark 系统复盘，细化 Ascend C/CANN 课程。\n长期目标：2027 CANN 算子竞赛 → 可复现 AI 系统研究 → AI Infra 实习。\n不编造时长、实验结果或掌握程度；实际赛程与投稿时间以官方公告为准。"
+}
