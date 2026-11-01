@@ -42,6 +42,21 @@ def timestamp(value):
         raise ValueError('timestamp requires timezone')
     return parsed.astimezone(dt.timezone.utc).isoformat().replace('+00:00', 'Z')
 
+
+def project_plan(value):
+    if not isinstance(value, dict):
+        return None
+    domains = []
+    for d in value.get('domains', [])[:12]:
+        modules = []
+        for u in d.get('modules', [])[:20]:
+            topics = []
+            for t in u.get('topics', [])[:30]:
+                topics.append({'title': clean(t.get('title'), 180), 'status': clean(t.get('status'), 40), 'focus': t.get('focus') is True, 'difficult': t.get('difficult') is True, 'knowledge_points': [clean(k, 180) for k in t.get('knowledgePoints', [])[:20]]})
+            modules.append({'code': clean(u.get('code'), 30), 'title': clean(u.get('title'), 180), 'prerequisites': clean(u.get('prerequisites'), 400), 'acceptance': clean(u.get('acceptance'), 700), 'topics': topics})
+        domains.append({'id': clean(d.get('id'), 40), 'name': clean(d.get('name'), 100), 'priority': clean(d.get('priority'), 160), 'modules': modules})
+    return {'version': clean(value.get('version'), 60), 'goal': clean(value.get('goal'), 400), 'policy': clean(value.get('policy'), 1000), 'domains': domains}
+
 def project(source, synced_at):
     if source.get('schemaVersion') != 1:
         raise ValueError('unsupported source schema')
@@ -64,7 +79,7 @@ def project(source, synced_at):
         recent.append({'date': date_only(r.get('date')), 'track': clean(r.get('track'), 40), 'title': clean(r.get('title'), 180), 'summary': clean(r.get('summary')), 'experiments_and_verification': clean(r.get('experimentsAndVerification')), 'mastery': clean(r.get('mastery'), 700), 'open_questions': clean(r.get('openQuestions')), 'next_step': clean(r.get('nextStep'))})
     continuity = source.get('continuity', {})
     # Explicit allowlist: never publish source wholesale, note bodies, identities or files.
-    return {'schema_version': 1, 'data_version': revision, 'updated_at': timestamp(source.get('lastUpdatedAt')), 'updated_at_note': '旧记录可能没有精确保存时间；空值不是同步失败。', 'synced_at': timestamp(synced_at), 'last_learning_date': date_only(source.get('lastLearningDate')), 'current_cpp_lesson': current, 'cpp_lessons': courses, 'recent_learning': recent, 'verified_summary': clean(continuity.get('verified'), 2400), 'open_questions': clean(continuity.get('openQuestions'), 2400), 'next_step': clean(continuity.get('nextStep'), 2000), 'linux_and_cann_plan': clean(continuity.get('longTermPlan'), 2000)}
+    return {'schema_version': 1, 'data_version': revision, 'updated_at': timestamp(source.get('lastUpdatedAt')), 'updated_at_note': '旧记录可能没有精确保存时间；空值不是同步失败。', 'synced_at': timestamp(synced_at), 'last_learning_date': date_only(source.get('lastLearningDate')), 'current_cpp_lesson': current, 'cpp_lessons': courses, 'recent_learning': recent, 'verified_summary': clean(continuity.get('verified'), 2400), 'open_questions': clean(continuity.get('openQuestions'), 2400), 'next_step': clean(continuity.get('nextStep'), 2000), 'linux_and_cann_plan': clean(continuity.get('longTermPlan'), 2000), 'learning_path': project_plan(source.get('learningPlan'))}
 
 def markdown(data):
     c = data['current_cpp_lesson']
@@ -74,6 +89,17 @@ def markdown(data):
     lines += ['', '## 48 节课程状态']
     for l in data['cpp_lessons']:
         lines.append(f"- 第 {l['number']} 节｜{l['title']}｜{l['status']}" + ('｜复习：' + l['review'] if l['review'] else ''))
+
+    plan = data.get('learning_path')
+    if plan:
+        lines += ['', '## AI Infra全体系学习路线', plan['goal'], plan['policy'], '规划版本：' + plan['version']]
+        for d in plan['domains']:
+            lines += ['', '### ' + d['name'] + '｜' + d['priority']]
+            for u in d['modules']:
+                lines += ['', '#### ' + u['code'] + ' ' + u['title'], '前置：' + u['prerequisites'], '验收：' + u['acceptance']]
+                for t in u['topics']:
+                    lines.append('- ' + t['title'] + '｜' + t['status'] + ('｜★重点' if t['focus'] else '') + ('｜▲难点' if t['difficult'] else ''))
+                    lines.append('  学习范围：' + '；'.join(t['knowledge_points']))
     lines += ['', '## 使用规则', '只以网站已保存的学习摘要为来源；不推测时长或补写实验。读取失败时应明确告知用户，不能把历史缓存视为最新进度。原始笔记、身份、凭据和私密文件不在本镜像中。', '']
     return '\n'.join(lines)
 
