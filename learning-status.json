@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "data_version": 11,
-  "updated_at": null,
+  "data_version": 15,
+  "updated_at": "2026-11-01T13:49:06.945000Z",
   "updated_at_note": "旧记录可能没有精确保存时间；空值不是同步失败。",
-  "synced_at": "2026-11-01T06:58:50.452673Z",
+  "synced_at": "2026-11-01T13:50:40.910416Z",
   "last_learning_date": "2026-11-01",
   "current_cpp_lesson": {
-    "number": 18,
-    "title": "std::string 与 string_view",
+    "number": 22,
+    "title": "关联容器",
     "status": "未开始",
     "verification": "",
     "review": "",
-    "goal": "字符串读写、查找、切片、拼接、string_view 只读视图与生命周期约束。",
-    "acceptance": "实现文本单词频次前处理；能够识别悬空 string_view 的风险。"
+    "goal": "map、unordered_map、set 的常用操作，排序性、哈希与复杂度区别。",
+    "acceptance": "实现词频计数，比较 map 与 unordered_map 的输出顺序及适用场景。"
   },
   "cpp_lessons": [
     {
@@ -137,29 +137,29 @@
     {
       "number": 18,
       "title": "std::string 与 string_view",
-      "status": "未开始",
-      "verification": "",
+      "status": "已验收",
+      "verification": "实验A：s修改后FANN，copy仍CANN，view为FANN；实验B size=13、find=5，copy为operator、part为Operator；分词6词/CANN3次，追加后7词/4次；remove_prefix理解题通过。",
       "review": ""
     },
     {
       "number": 19,
       "title": "std::vector 动态数组",
-      "status": "未开始",
-      "verification": "",
+      "status": "已验收",
+      "verification": "引用遍历得15 25 35 45，sum120；reserve后size3/capacity8，追加至9后capacity16（本机结果）；地址变化验证扩容且未访问失效ref；统计size7/capacity16/sum588/max93/count3/average84/reallocated=false。",
       "review": ""
     },
     {
       "number": 20,
       "title": "std::array 与 std::span",
-      "status": "未开始",
-      "verification": "",
+      "status": "已验收",
+      "verification": "局部span修改array结果10 25 40 40；统一sumValues(span<const int>)结果array60/vector220/raw6，修改后vector230；追加后旧span长度仍3，扩容后重建span长度9、末项99；IntelliSense设c++20后诊断解决。",
       "review": ""
     },
     {
       "number": 21,
       "title": "迭代器与 STL 算法",
-      "status": "未开始",
-      "verification": "",
+      "status": "已验收",
+      "verification": "sort后15 27 42 60 83，find42索引2，sum227；修改元素后10 25 30 40 50，find100返回end不解引用；扩容后重建迭代器；erase返回40，安全删除20倍数后10 50。四项实验通过验收。",
       "review": ""
     },
     {
@@ -355,6 +355,16 @@
   "recent_learning": [
     {
       "date": "2026-11-01",
+      "track": "C++",
+      "title": "C++ 第18–21节学习日报｜四节已验收",
+      "summary": "string/string_view拥有关系与切片；vector的size/capacity/reserve与扩容失效；array/span统一连续容器接口；迭代器与STL算法、end安全和erase失效规则。",
+      "experiments_and_verification": "第18节：实验A：s修改后FANN，copy仍CANN，view为FANN；实验B size=13、find=5，copy为operator、part为Operator；分词6词/CANN3次，追加后7词/4次；remove_prefix理解题通过。\n第19节：引用遍历得15 25 35 45，sum120；reserve后size3/capacity8，追加至9后capacity16（本机结果）；地址变化验证扩容且未访问失效ref；统计size7/capacity16/sum588/max93/count3/average84/reallocated=false。\n第20节：局部span修改array结果10 25 40 40；统一sumValues(span<const int>)结果array60/vector220/raw6，修改后vector230；追加后旧span长度仍3，扩容后重建span长度9、末项99；IntelliSense设c++20后诊断解决。\n第21节：sort后15 27 42 60 83，find42索引2，sum227；修改元素后10 25 30 40 50，find100返回end不解引用；扩容后重建迭代器；erase返回40，安全删除20倍数后10 50。四项实验通过验收。",
+      "mastery": "第18、19、20、21节已验收；第22节未开始／实验待运行；学习时长未实测。",
+      "open_questions": "第14节 unique_ptr/Rule of Zero题仍待复习；第22节仅布置map词频实验，未提交运行证据，不标记学习中或验收。视图生命周期、扩容导致引用/span/迭代器失效、旧end失效及erase返回值需持续巩固。",
+      "next_step": "第22节「关联容器」仍未开始：先运行 std::map<std::string,int> 词频统计实验并提交实际输出，再核对 ++counts[word]、结构化绑定、find、it->first / it->second 与 map.size()。随后按48节主线推进；第14节 unique_ptr / Rule of Zero 自测题继续待复习。"
+    },
+    {
+      "date": "2026-11-01",
       "track": "Linux",
       "title": "Linux 复习｜Shell、权限、位置参数与脚本路径",
       "summary": "文件与文本处理、grep/管道/wc/find/重定向；Shell文件检查、权限755、位置参数、Shebang及脚本路径。设备：惠普光影精灵7，Windows + WSL Ubuntu；目录[本地路径已省略]。",
@@ -374,8 +384,8 @@
       "next_step": "下一次从第18节 std::string 与 std::string_view 开始；另安排第14节 unique_ptr 与 Rule of Zero 复习题。"
     }
   ],
-  "verified_summary": "第1–13节主要练习沿用原进度。2026-10-31日报附有第14节移动赋值和自移动输出、第15节数组统计两组输出、第16节重载及引用增量输出、第17节作用域输出和引用语义问答。第17节随后由用户确认验收；生命周期回答指出局部对象离开作用域后消失、指针悬空，核心判断正确。\n\nLinux 2026-11-01：惠普光影精灵7，Windows + WSL Ubuntu，目录[本地路径已省略]。已验证grep/管道/wc/find/重定向、日志检查三分支、chmod755、bash与直接执行、位置参数及跨目录path_demo.sh。仅有主目录启动的一组路径输出；command -v bash在脚本内已验证。",
-  "open_questions": "第14节：含 unique_ptr 成员且未自定义特殊成员函数的类，为何不能拷贝却可以移动？此自测题待复习。第17节生命周期题已验收，复习时注意 p 是指针，解引用悬空指针是未定义行为。\n\nLinux 待实操：sed修正errror后复测计数为2（未展示输出）；不传参数调用check_log.sh，验证默认文件名（未展示输出）；报错信息补充文件名后重新验证（未展示输出）；查看PATH并运行command -v code（待实操）；对比source/bash/直接执行及$0/BASH_SOURCE[0]（待实操）；补做从脚本所在目录启动的对照输出（尚缺一组）；Git/CMake/GDB小型C++项目综合实践（今日未开展）。",
-  "next_step": "下一次从第18节 std::string 与 std::string_view 开始；另安排第14节 unique_ptr 与 Rule of Zero 复习题。\n\nLinux：先用sed修正errror并复测，再验证无参数默认文件名和包含文件名的报错；随后补PATH、source和路径对照实验，再做Git/CMake/GDB小项目。C++现有接续点保持不变（当前为第18节），每日Linux复习≤1小时。",
+  "verified_summary": "第1–13节主要练习沿用原进度。2026-10-31日报附有第14节移动赋值和自移动输出、第15节数组统计两组输出、第16节重载及引用增量输出、第17节作用域输出和引用语义问答。第17节随后由用户确认验收；生命周期回答指出局部对象离开作用域后消失、指针悬空，核心判断正确。\n\nLinux 2026-11-01：惠普光影精灵7，Windows + WSL Ubuntu，目录[本地路径已省略]。已验证grep/管道/wc/find/重定向、日志检查三分支、chmod755、bash与直接执行、位置参数及跨目录path_demo.sh。仅有主目录启动的一组路径输出；command -v bash在脚本内已验证。\n\n2026-11-01 C++：第18–21节已验收。string/view复制与观察、分词6/3→7/4；vector统计588/93/3/84与重分配检查；span三类容器求和与重建；STL排序/查找/求和、迭代器失效与erase安全删除均有日报实测依据。第1–17节沿用既有状态。",
+  "open_questions": "第14节：含 unique_ptr 成员且未自定义特殊成员函数的类，为何不能拷贝却可以移动？此自测题待复习。第17节生命周期题已验收，复习时注意 p 是指针，解引用悬空指针是未定义行为。\n\nLinux 待实操：sed修正errror后复测计数为2（未展示输出）；不传参数调用check_log.sh，验证默认文件名（未展示输出）；报错信息补充文件名后重新验证（未展示输出）；查看PATH并运行command -v code（待实操）；对比source/bash/直接执行及$0/BASH_SOURCE[0]（待实操）；补做从脚本所在目录启动的对照输出（尚缺一组）；Git/CMake/GDB小型C++项目综合实践（今日未开展）。\n\n第14节 unique_ptr/Rule of Zero题仍待复习；第22节仅布置map词频实验，未提交运行证据，不标记学习中或验收。视图生命周期、扩容导致引用/span/迭代器失效、旧end失效及erase返回值需持续巩固。",
+  "next_step": "第22节「关联容器」仍未开始：先运行 std::map<std::string,int> 词频统计实验并提交实际输出，再核对 ++counts[word]、结构化绑定、find、it->first / it->second 与 map.size()。随后按48节主线推进；第14节 unique_ptr / Rule of Zero 自测题继续待复习。\n\nLinux：先用sed修正errror并复测，再验证无参数默认文件名和包含文件名的报错；随后补PATH、source和路径对照实验，再做Git/CMake/GDB小项目。C++现有接续点为第22节，每日Linux复习≤1小时。",
   "linux_and_cann_plan": "保留既定 48 节 C++ 主线，不把未完成课程标记为已完成。\nLinux 复习每天 ≤ 1 小时，优先结合 C++ 工程。\n第 48 节及阶段项目验收后，再依据笔记、代码、测试和 Benchmark 系统复盘，细化 Ascend C/CANN 课程。\n长期目标：2027 CANN 算子竞赛 → 可复现 AI 系统研究 → AI Infra 实习。\n不编造时长、实验结果或掌握程度；实际赛程与投稿时间以官方公告为准。"
 }

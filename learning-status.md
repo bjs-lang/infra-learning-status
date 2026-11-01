@@ -1,29 +1,33 @@
 # 学习进度只读镜像
 
-数据版本：11
-网站最后保存：未知（旧记录未记录精确保存时间）
-本次同步：2026-11-01T06:58:50.452673Z
+数据版本：15
+网站最后保存：2026-11-01T13:49:06.945000Z
+本次同步：2026-11-01T13:50:40.910416Z
 最近学习：2026-11-01
 
 每次使用请检查同步时间和 GitHub Actions 最近一次运行结果；文件可读取不代表同步服务始终正常。
 
 ## 当前 C++ 起点
-第 18/48 节｜std::string 与 string_view｜未开始
+第 22/48 节｜关联容器｜未开始
 
 ## 已验证与记录边界
 第1–13节主要练习沿用原进度。2026-10-31日报附有第14节移动赋值和自移动输出、第15节数组统计两组输出、第16节重载及引用增量输出、第17节作用域输出和引用语义问答。第17节随后由用户确认验收；生命周期回答指出局部对象离开作用域后消失、指针悬空，核心判断正确。
 
 Linux 2026-11-01：惠普光影精灵7，Windows + WSL Ubuntu，目录[本地路径已省略]。已验证grep/管道/wc/find/重定向、日志检查三分支、chmod755、bash与直接执行、位置参数及跨目录path_demo.sh。仅有主目录启动的一组路径输出；command -v bash在脚本内已验证。
 
+2026-11-01 C++：第18–21节已验收。string/view复制与观察、分词6/3→7/4；vector统计588/93/3/84与重分配检查；span三类容器求和与重建；STL排序/查找/求和、迭代器失效与erase安全删除均有日报实测依据。第1–17节沿用既有状态。
+
 ## 疑问与薄弱点
 第14节：含 unique_ptr 成员且未自定义特殊成员函数的类，为何不能拷贝却可以移动？此自测题待复习。第17节生命周期题已验收，复习时注意 p 是指针，解引用悬空指针是未定义行为。
 
 Linux 待实操：sed修正errror后复测计数为2（未展示输出）；不传参数调用check_log.sh，验证默认文件名（未展示输出）；报错信息补充文件名后重新验证（未展示输出）；查看PATH并运行command -v code（待实操）；对比source/bash/直接执行及$0/BASH_SOURCE[0]（待实操）；补做从脚本所在目录启动的对照输出（尚缺一组）；Git/CMake/GDB小型C++项目综合实践（今日未开展）。
 
-## 下一步
-下一次从第18节 std::string 与 std::string_view 开始；另安排第14节 unique_ptr 与 Rule of Zero 复习题。
+第14节 unique_ptr/Rule of Zero题仍待复习；第22节仅布置map词频实验，未提交运行证据，不标记学习中或验收。视图生命周期、扩容导致引用/span/迭代器失效、旧end失效及erase返回值需持续巩固。
 
-Linux：先用sed修正errror并复测，再验证无参数默认文件名和包含文件名的报错；随后补PATH、source和路径对照实验，再做Git/CMake/GDB小项目。C++现有接续点保持不变（当前为第18节），每日Linux复习≤1小时。
+## 下一步
+第22节「关联容器」仍未开始：先运行 std::map<std::string,int> 词频统计实验并提交实际输出，再核对 ++counts[word]、结构化绑定、find、it->first / it->second 与 map.size()。随后按48节主线推进；第14节 unique_ptr / Rule of Zero 自测题继续待复习。
+
+Linux：先用sed修正errror并复测，再验证无参数默认文件名和包含文件名的报错；随后补PATH、source和路径对照实验，再做Git/CMake/GDB小项目。C++现有接续点为第22节，每日Linux复习≤1小时。
 
 ## Linux / CANN 主线
 保留既定 48 节 C++ 主线，不把未完成课程标记为已完成。
@@ -33,6 +37,16 @@ Linux 复习每天 ≤ 1 小时，优先结合 C++ 工程。
 不编造时长、实验结果或掌握程度；实际赛程与投稿时间以官方公告为准。
 
 ## 最近学习摘要
+
+### 2026-11-01｜C++｜C++ 第18–21节学习日报｜四节已验收
+string/string_view拥有关系与切片；vector的size/capacity/reserve与扩容失效；array/span统一连续容器接口；迭代器与STL算法、end安全和erase失效规则。
+实验结论：第18节：实验A：s修改后FANN，copy仍CANN，view为FANN；实验B size=13、find=5，copy为operator、part为Operator；分词6词/CANN3次，追加后7词/4次；remove_prefix理解题通过。
+第19节：引用遍历得15 25 35 45，sum120；reserve后size3/capacity8，追加至9后capacity16（本机结果）；地址变化验证扩容且未访问失效ref；统计size7/capacity16/sum588/max93/count3/average84/reallocated=false。
+第20节：局部span修改array结果10 25 40 40；统一sumValues(span<const int>)结果array60/vector220/raw6，修改后vector230；追加后旧span长度仍3，扩容后重建span长度9、末项99；IntelliSense设c++20后诊断解决。
+第21节：sort后15 27 42 60 83，find42索引2，sum227；修改元素后10 25 30 40 50，find100返回end不解引用；扩容后重建迭代器；erase返回40，安全删除20倍数后10 50。四项实验通过验收。
+掌握情况：第18、19、20、21节已验收；第22节未开始／实验待运行；学习时长未实测。
+疑问：第14节 unique_ptr/Rule of Zero题仍待复习；第22节仅布置map词频实验，未提交运行证据，不标记学习中或验收。视图生命周期、扩容导致引用/span/迭代器失效、旧end失效及erase返回值需持续巩固。
+下一步：第22节「关联容器」仍未开始：先运行 std::map<std::string,int> 词频统计实验并提交实际输出，再核对 ++counts[word]、结构化绑定、find、it->first / it->second 与 map.size()。随后按48节主线推进；第14节 unique_ptr / Rule of Zero 自测题继续待复习。
 
 ### 2026-11-01｜Linux｜Linux 复习｜Shell、权限、位置参数与脚本路径
 文件与文本处理、grep/管道/wc/find/重定向；Shell文件检查、权限755、位置参数、Shebang及脚本路径。设备：惠普光影精灵7，Windows + WSL Ubuntu；目录[本地路径已省略]。
@@ -66,10 +80,10 @@ Linux 复习每天 ≤ 1 小时，优先结合 C++ 工程。
 - 第 15 节｜基本类型与控制流程复核｜已实验通过
 - 第 16 节｜函数与参数设计｜已实验通过
 - 第 17 节｜作用域与 const 正确性｜已验收
-- 第 18 节｜std::string 与 string_view｜未开始
-- 第 19 节｜std::vector 动态数组｜未开始
-- 第 20 节｜std::array 与 std::span｜未开始
-- 第 21 节｜迭代器与 STL 算法｜未开始
+- 第 18 节｜std::string 与 string_view｜已验收
+- 第 19 节｜std::vector 动态数组｜已验收
+- 第 20 节｜std::array 与 std::span｜已验收
+- 第 21 节｜迭代器与 STL 算法｜已验收
 - 第 22 节｜关联容器｜未开始
 - 第 23 节｜Lambda 表达式｜未开始
 - 第 24 节｜阶段项目：数据处理工具｜未开始
