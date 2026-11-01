@@ -18,6 +18,8 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - name: Test approved public projection
         run: python3 -m unittest -v test_sync.py
       - name: Read current website data
