@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "data_version": 18,
-  "updated_at": "2026-11-01T13:51:56.081000Z",
+  "data_version": 19,
+  "updated_at": "2026-11-01T14:44:31.917000Z",
   "updated_at_note": "旧记录可能没有精确保存时间；空值不是同步失败。",
-  "synced_at": "2026-11-01T14:14:11.065863Z",
+  "synced_at": "2026-11-01T14:44:42.329247Z",
   "last_learning_date": "2026-11-01",
   "current_cpp_lesson": {
     "number": 22,
@@ -387,5 +387,1625 @@
   "verified_summary": "第1–13节主要练习沿用原进度。2026-10-31日报附有第14节移动赋值和自移动输出、第15节数组统计两组输出、第16节重载及引用增量输出、第17节作用域输出和引用语义问答。第17节随后由用户确认验收；生命周期回答指出局部对象离开作用域后消失、指针悬空，核心判断正确。\n\nLinux 2026-11-01：惠普光影精灵7，Windows + WSL Ubuntu，目录[本地路径已省略]。已验证grep/管道/wc/find/重定向、日志检查三分支、chmod755、bash与直接执行、位置参数及跨目录path_demo.sh。仅有主目录启动的一组路径输出；command -v bash在脚本内已验证。\n\n2026-11-01 C++：第18–21节已验收。string/view复制与观察、分词6/3→7/4；vector统计588/93/3/84与重分配检查；span三类容器求和与重建；STL排序/查找/求和、迭代器失效与erase安全删除均有日报实测依据。第1–17节沿用既有状态。",
   "open_questions": "第14节：含 unique_ptr 成员且未自定义特殊成员函数的类，为何不能拷贝却可以移动？此自测题待复习。第17节生命周期题已验收，复习时注意 p 是指针，解引用悬空指针是未定义行为。\n\nLinux 待实操：sed修正errror后复测计数为2（未展示输出）；不传参数调用check_log.sh，验证默认文件名（未展示输出）；报错信息补充文件名后重新验证（未展示输出）；查看PATH并运行command -v code（待实操）；对比source/bash/直接执行及$0/BASH_SOURCE[0]（待实操）；补做从脚本所在目录启动的对照输出（尚缺一组）；Git/CMake/GDB小型C++项目综合实践（今日未开展）。\n\n第14节 unique_ptr/Rule of Zero题仍待复习；第22节仅布置map词频实验，未提交运行证据，不标记学习中或验收。视图生命周期、扩容导致引用/span/迭代器失效、旧end失效及erase返回值需持续巩固。",
   "next_step": "第22节「关联容器」仍未开始：先运行 std::map<std::string,int> 词频统计实验并提交实际输出，再核对 ++counts[word]、结构化绑定、find、it->first / it->second 与 map.size()。随后按48节主线推进；第14节 unique_ptr / Rule of Zero 自测题继续待复习。\n\nLinux：先用sed修正errror并复测，再验证无参数默认文件名和包含文件名的报错；随后补PATH、source和路径对照实验，再做Git/CMake/GDB小项目。C++现有接续点为第22节，每日Linux复习≤1小时。",
-  "linux_and_cann_plan": "保留既定 48 节 C++ 主线，不把未完成课程标记为已完成。\nLinux 复习每天 ≤ 1 小时，优先结合 C++ 工程。\n第 48 节及阶段项目验收后，再依据笔记、代码、测试和 Benchmark 系统复盘，细化 Ascend C/CANN 课程。\n长期目标：2027 CANN 算子竞赛 → 可复现 AI 系统研究 → AI Infra 实习。\n不编造时长、实验结果或掌握程度；实际赛程与投稿时间以官方公告为准。"
+  "linux_and_cann_plan": "保留既定 48 节 C++ 主线，不把未完成课程标记为已完成。\nLinux 复习每天 ≤ 1 小时，优先结合 C++ 工程。\n第 48 节及阶段项目验收后，再依据笔记、代码、测试和 Benchmark 系统复盘，细化 Ascend C/CANN 课程。\n长期目标：2027 CANN 算子竞赛 → 可复现 AI 系统研究 → AI Infra 实习。\n不编造时长、实验结果或掌握程度；实际赛程与投稿时间以官方公告为准。",
+  "learning_path": {
+    "version": "2026-11-01-v1",
+    "goal": "AI Infra工程师：以Ascend/CANN算子优化为近期专业主线，拓展模型、推理与分布式系统。",
+    "policy": "保留原48节C++主线；Linux复习每天≤1小时；后续课程先完成前置与阶段验收；2027赛事日程待公告；软挑为限时可选支线；研究、实习以可复现项目为证据。",
+    "domains": [
+      {
+        "id": "linux",
+        "name": "Linux 与开发环境",
+        "priority": "共同基础 · 持续复习",
+        "modules": [
+          {
+            "code": "L01",
+            "title": "文件、文本与 Shell 管道",
+            "prerequisites": "无；已有入门记录",
+            "acceptance": "独立定位日志并统计；覆盖空输入、无匹配和缺失文件；保留命令与输出。",
+            "topics": [
+              {
+                "title": "文件系统、路径与查找",
+                "status": "已实践",
+                "focus": false,
+                "difficult": false,
+                "knowledge_points": [
+                  "根目录/家目录与绝对相对路径",
+                  "pwd / ls / cd / mkdir",
+                  "cp / mv / rm",
+                  "find 与文件匹配",
+                  "当前目录与脚本目录"
+                ]
+              },
+              {
+                "title": "grep / 管道 / 重定向",
+                "status": "已验收",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "grep -n 与大小写匹配",
+                  "管道连接命令",
+                  "wc -l 计数",
+                  "> 覆盖与 >> 追加",
+                  "stdout / stderr 区分"
+                ]
+              },
+              {
+                "title": "sed / awk 与文本处理",
+                "status": "待复习",
+                "focus": false,
+                "difficult": false,
+                "knowledge_points": [
+                  "sed 替换与 errror 拼写修正",
+                  "awk 字段与聚合",
+                  "正则与边界情况",
+                  "修改前备份与复测"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "L02",
+            "title": "可靠脚本与环境变量",
+            "prerequisites": "L01",
+            "acceptance": "check_log.sh 在不同工作目录运行；验证默认参数、文件名报错、退出码与 source 的差异。",
+            "topics": [
+              {
+                "title": "分支、循环、函数与参数",
+                "status": "已实践",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "if / case / for / while",
+                  "函数与 return / exit",
+                  "$0 / $1 / $# / shift",
+                  "日志检查三分支",
+                  "默认参数与错误消息"
+                ]
+              },
+              {
+                "title": "PATH / source / Bash 路径",
+                "status": "待复习",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "PATH / export / .bashrc",
+                  "command -v",
+                  "source 与子进程",
+                  "BASH_SOURCE[0] / dirname / realpath",
+                  "$(命令) 与带空格路径"
+                ]
+              },
+              {
+                "title": "权限、执行方式与退出状态",
+                "status": "已实践",
+                "focus": false,
+                "difficult": false,
+                "knowledge_points": [
+                  "rwx 与 755 / 644 / 600",
+                  "chmod 与可执行位",
+                  "bash script.sh / ./script.sh",
+                  "Shebang 固定路径与 env",
+                  "退出码与权限错误"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "L03",
+            "title": "进程、网络与系统排错",
+            "prerequisites": "L01–L02",
+            "acceptance": "完成一个 CPU/内存/网络排错案例，说明证据如何支持结论；不随意重启核心服务。",
+            "topics": [
+              {
+                "title": "进程、信号与资源监控",
+                "status": "有笔记",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "ps / top / htop",
+                  "PID 与父子进程",
+                  "kill / 信号",
+                  "前后台任务",
+                  "CPU / 内存 / 磁盘资源"
+                ]
+              },
+              {
+                "title": "IP / DNS / 端口与连接排查",
+                "status": "有笔记",
+                "focus": false,
+                "difficult": false,
+                "knowledge_points": [
+                  "ip addr / route",
+                  "ping / curl",
+                  "DNS解析",
+                  "ss 与监听端口",
+                  "连接超时和服务排查"
+                ]
+              },
+              {
+                "title": "APT / systemd / journalctl",
+                "status": "已实践",
+                "focus": false,
+                "difficult": false,
+                "knowledge_points": [
+                  "apt update / upgrade / install",
+                  "软件源与包状态",
+                  "systemctl status",
+                  "loaded / active / enabled / static",
+                  "journalctl 与日志轮转"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "L04",
+            "title": "远程环境与工程工具",
+            "prerequisites": "L02–L03；C++33–40 配合",
+            "acceptance": "远程建立可恢复会话；用 Git+CMake+调试器构建并排查一个多文件 C++ 项目。",
+            "topics": [
+              {
+                "title": "SSH 密钥、远程开发与 tmux",
+                "status": "已实践",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "ssh -V / ssh-keygen",
+                  "Ed25519公私钥与权限",
+                  "authorized_keys与真实连接",
+                  "scp / rsync基础",
+                  "tmux 创建/分离/恢复"
+                ]
+              },
+              {
+                "title": "Git 分支、提交与冲突处理",
+                "status": "有笔记",
+                "focus": false,
+                "difficult": false,
+                "knowledge_points": [
+                  "init / status / add / commit",
+                  "diff / log",
+                  "分支与合并",
+                  "冲突处理",
+                  ".gitignore 与远程协作"
+                ]
+              },
+              {
+                "title": "编译 / CMake / GDB 或 LLDB",
+                "status": "已实践",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "编译、链接与可执行文件",
+                  "Make / CMake",
+                  "Debug / Release",
+                  "GDB / LLDB断点与栈",
+                  "跨目录构建与小项目"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cpp",
+        "name": "C++ 与 CPU 工程",
+        "priority": "当前主线 · 原 48 节",
+        "modules": [
+          {
+            "code": "C01",
+            "title": "语法、生命周期与所有权",
+            "prerequisites": "既有第1–14节",
+            "acceptance": "通过值/引用、深拷贝、移动赋值、自移动与析构实验；保留第14节 Rule of Zero 复习项。",
+            "topics": [
+              {
+                "title": "编译、类型、函数与引用",
+                "status": "已实践",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "clang与C++20",
+                  "变量与类型",
+                  "值传递/引用传递",
+                  "const与作用域",
+                  "函数接口"
+                ]
+              },
+              {
+                "title": "指针、类、RAII 与智能指针入门",
+                "status": "已实践",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "地址、数组与指针",
+                  "动态内存与悬空问题",
+                  "构造/析构",
+                  "初始化列表",
+                  "RAII与资源所有权"
+                ]
+              },
+              {
+                "title": "拷贝 / 移动与五法则",
+                "status": "已实践",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "拷贝构造/拷贝赋值",
+                  "浅拷贝与深拷贝",
+                  "std::move语义",
+                  "移动构造/移动赋值",
+                  "self-move与五法则"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "C02",
+            "title": "标准库、容器与数据处理",
+            "prerequisites": "C01；原15–24节",
+            "acceptance": "交付第24节数据处理工具；测试空输入、越界风险与失效迭代器，不访问已失效对象。",
+            "topics": [
+              {
+                "title": "类型、参数与 const 复核",
+                "status": "已实践",
+                "focus": false,
+                "difficult": false,
+                "knowledge_points": [
+                  "函数参数与返回值",
+                  "重载与类型",
+                  "const正确性",
+                  "引用生命周期",
+                  "统计与整数除法"
+                ]
+              },
+              {
+                "title": "string / vector / array / span / 迭代器",
+                "status": "已验收",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "string与string_view",
+                  "vector的size/capacity/reserve",
+                  "array与span",
+                  "迭代器失效",
+                  "sort / find / accumulate"
+                ]
+              },
+              {
+                "title": "关联容器、Lambda 与阶段项目",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "map / unordered_map / set",
+                  "词频统计与复杂度",
+                  "Lambda与捕获",
+                  "STL组合",
+                  "第24节数据处理工具"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "C03",
+            "title": "泛型与现代 C++",
+            "prerequisites": "C02；原25–32节",
+            "acceptance": "安全数据模块通过拷贝/移动/异常边界测试；解释 unique_ptr、shared_ptr 与 Rule of Zero 的取舍。",
+            "topics": [
+              {
+                "title": "模板、constexpr 与标准库类型",
+                "status": "未开始",
+                "focus": false,
+                "difficult": true,
+                "knowledge_points": [
+                  "函数/类模板",
+                  "类型推导与约束入门",
+                  "constexpr",
+                  "optional / variant等类型",
+                  "程序组织"
+                ]
+              },
+              {
+                "title": "Rule of Zero、智能指针与移动进阶",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "unique_ptr / shared_ptr / weak_ptr",
+                  "Rule of Zero",
+                  "值语义与所有权",
+                  "移动语义进阶",
+                  "循环引用"
+                ]
+              },
+              {
+                "title": "异常安全与安全数据模块",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "异常传播",
+                  "基本/强异常保证",
+                  "RAII清理",
+                  "边界测试",
+                  "安全数据模块"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "C04",
+            "title": "构建、调试与测试工程",
+            "prerequisites": "C03；原33–40节",
+            "acceptance": "多文件工程可从干净目录构建；CTest 通过；用 Sanitizer/调试器定位一个真实错误。",
+            "topics": [
+              {
+                "title": "头文件、CMake、Debug / Release",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "头文件与编译单元",
+                  "链接与ODR",
+                  "CMake target",
+                  "Debug/Release编译选项",
+                  "多文件工程"
+                ]
+              },
+              {
+                "title": "Sanitizer、LLDB 与单元测试",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "LLDB断点/观察/调用栈",
+                  "AddressSanitizer / UBSan",
+                  "内存错误定位",
+                  "单元测试",
+                  "CTest"
+                ]
+              },
+              {
+                "title": "Git、文档与模块化项目",
+                "status": "未开始",
+                "focus": false,
+                "difficult": false,
+                "knowledge_points": [
+                  "Git提交与版本",
+                  "README与使用例",
+                  "模块化接口",
+                  "干净环境构建",
+                  "工程阶段验收"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "C05",
+            "title": "性能、并发与 CPU 算子",
+            "prerequisites": "C04；原41–48节",
+            "acceptance": "CPU 算子有正确性测试、预热/重复测量、基线与优化对照，解释缓存、向量化或同步瓶颈。",
+            "topics": [
+              {
+                "title": "内存布局、对齐与 CPU Cache",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "sizeof / alignof / padding",
+                  "连续与离散布局",
+                  "缓存行与局部性",
+                  "AoS / SoA",
+                  "带宽与访存模式"
+                ]
+              },
+              {
+                "title": "Benchmark、Profiling 与向量化",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "预热与重复测量",
+                  "单调时钟与基线",
+                  "Profiling与热点",
+                  "编译优化",
+                  "自动向量化"
+                ]
+              },
+              {
+                "title": "线程、同步、原子与毕业项目",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "thread / jthread",
+                  "mutex与条件变量",
+                  "数据竞争",
+                  "atomic与内存序入门",
+                  "CPU算子毕业项目"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "python",
+        "name": "Python 与张量编程",
+        "priority": "下一阶段 · 模型桥梁",
+        "modules": [
+          {
+            "code": "P01",
+            "title": "Python 工程基础",
+            "prerequisites": "C++基础；不用等待语言细节全部精通",
+            "acceptance": "交付带 CLI、配置和测试的数据处理包；固定依赖与随机种子。",
+            "topics": [
+              {
+                "title": "容器、函数、迭代与异常",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "list / dict / set",
+                  "函数/类/迭代器",
+                  "生成器与上下文管理",
+                  "异常",
+                  "类型提示"
+                ]
+              },
+              {
+                "title": "模块、虚拟环境、依赖与 pytest",
+                "status": "未开始",
+                "focus": false,
+                "difficult": false,
+                "knowledge_points": [
+                  "venv与依赖固定",
+                  "模块/包/导入",
+                  "argparse",
+                  "pytest",
+                  "代码布局与配置"
+                ]
+              },
+              {
+                "title": "文件 / JSON / 数据管线与可视化",
+                "status": "未开始",
+                "focus": false,
+                "difficult": false,
+                "knowledge_points": [
+                  "文件与JSON/CSV",
+                  "NumPy数据转换",
+                  "批处理管线",
+                  "Matplotlib可视化",
+                  "日志与实验配置"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "P02",
+            "title": "NumPy 与数值验证",
+            "prerequisites": "P01；线性代数同步补",
+            "acceptance": "用 NumPy 建立 Add/Reduce/Matmul 参考；覆盖广播、非连续布局与浮点误差。",
+            "topics": [
+              {
+                "title": "shape、stride、广播与向量化",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "shape / axis / dtype",
+                  "stride与连续性",
+                  "广播规则",
+                  "切片/视图/复制",
+                  "向量化与归约"
+                ]
+              },
+              {
+                "title": "FP32/FP16、误差与稳定性",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "浮点舍入",
+                  "绝对/相对误差",
+                  "FP32 / FP16 / BF16",
+                  "数值稳定Softmax",
+                  "容差与随机参考测试"
+                ]
+              },
+              {
+                "title": "基准脚本、统计与实验数据存档",
+                "status": "未开始",
+                "focus": false,
+                "difficult": false,
+                "knowledge_points": [
+                  "预热、同步与计时",
+                  "重复次数与分位数",
+                  "shape/dtype测试矩阵",
+                  "结果CSV/JSON",
+                  "可复现实验脚本"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "P03",
+            "title": "PyTorch 训练与扩展接口",
+            "prerequisites": "P02；M01–M02 配合",
+            "acceptance": "训练一个小模型并保存/恢复；对照 autograd 与手推结果，正确计时异步设备。",
+            "topics": [
+              {
+                "title": "Tensor、device、autograd 与 nn.Module",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "Tensor与device",
+                  "requires_grad与计算图",
+                  "autograd",
+                  "nn.Module / Parameter",
+                  "train / eval / no_grad"
+                ]
+              },
+              {
+                "title": "DataLoader、优化器与训练循环",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "Dataset / DataLoader",
+                  "loss与optimizer",
+                  "训练/验证划分",
+                  "checkpoint",
+                  "随机种子与恢复"
+                ]
+              },
+              {
+                "title": "Profiler、扩展算子接口与编译入门",
+                "status": "未开始",
+                "focus": false,
+                "difficult": true,
+                "knowledge_points": [
+                  "PyTorch Profiler",
+                  "CPU/设备trace",
+                  "自定义算子接口",
+                  "torch.compile概念",
+                  "扩展正确性检查"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "systems",
+        "name": "计算机系统与平台",
+        "priority": "贯穿全程 · 用实验补齐",
+        "modules": [
+          {
+            "code": "S01",
+            "title": "操作系统与内存层次",
+            "prerequisites": "Linux基础；C++资源管理",
+            "acceptance": "用进程/线程、缺页与缓存实验说明时间和内存变化，区分虚拟内存与显存。",
+            "topics": [
+              {
+                "title": "进程线程、调度、锁与 IO",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "进程/线程与上下文切换",
+                  "调度",
+                  "阻塞/非阻塞IO",
+                  "锁与并发",
+                  "系统调用"
+                ]
+              },
+              {
+                "title": "虚拟内存、页表、mmap 与 NUMA",
+                "status": "未开始",
+                "focus": false,
+                "difficult": true,
+                "knowledge_points": [
+                  "虚拟地址与页表",
+                  "缺页",
+                  "mmap",
+                  "内存分配",
+                  "NUMA与数据放置"
+                ]
+              },
+              {
+                "title": "Cache、SIMD、带宽与 Roofline",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "多级Cache与局部性",
+                  "SIMD",
+                  "内存带宽",
+                  "算术强度",
+                  "Roofline模型"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "S02",
+            "title": "异构架构与通信基础",
+            "prerequisites": "S01；数值与矩阵运算",
+            "acceptance": "画出 CPU↔GPU/NPU 数据流；测量拷贝/计算开销；解释拓扑与集合通信成本。",
+            "topics": [
+              {
+                "title": "GPU/NPU 执行与存储层级",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "Host / Device",
+                  "GPU线程/块与NPU AI Core",
+                  "寄存器/本地/全局存储",
+                  "异步搬运",
+                  "计算单元与同步"
+                ]
+              },
+              {
+                "title": "TCP、RPC、RDMA 与带宽/时延",
+                "status": "未开始",
+                "focus": false,
+                "difficult": true,
+                "knowledge_points": [
+                  "TCP连接",
+                  "RPC与序列化",
+                  "带宽与往返延迟",
+                  "RDMA概念",
+                  "设备互联与拓扑"
+                ]
+              },
+              {
+                "title": "并行分解、同步与通信成本",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "数据/任务分解",
+                  "负载均衡",
+                  "同步成本",
+                  "Amdahl定律",
+                  "通信与计算重叠"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "S03",
+            "title": "编译图与系统工程",
+            "prerequisites": "C++工程；PyTorch前向",
+            "acceptance": "导出小模型计算图，比较图优化前后正确性和耗时；解释动态 shape 引起的变化。",
+            "topics": [
+              {
+                "title": "编译链接、IR 与计算图",
+                "status": "未开始",
+                "focus": false,
+                "difficult": true,
+                "knowledge_points": [
+                  "预处理/编译/链接",
+                  "中间表示IR",
+                  "计算图",
+                  "静态/动态shape",
+                  "编译缓存"
+                ]
+              },
+              {
+                "title": "融合、调度、内存规划与动态 shape",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "常量折叠",
+                  "算子融合",
+                  "执行调度",
+                  "内存复用",
+                  "动态shape特化"
+                ]
+              },
+              {
+                "title": "Runtime、异步执行与内存分配器",
+                "status": "未开始",
+                "focus": false,
+                "difficult": true,
+                "knowledge_points": [
+                  "异步执行队列",
+                  "执行依赖",
+                  "内存池",
+                  "启动开销",
+                  "Host/Device同步点"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "S04",
+            "title": "部署平台与可观测性",
+            "prerequisites": "Linux网络；Python工程",
+            "acceptance": "容器化服务可复现启动；采集日志、延迟、资源曲线并做一次故障定位。",
+            "topics": [
+              {
+                "title": "Docker、依赖隔离与镜像",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "Dockerfile",
+                  "镜像与容器",
+                  "卷/网络/设备映射",
+                  "依赖固定",
+                  "复现与资源限制"
+                ]
+              },
+              {
+                "title": "Kubernetes / GPU调度基础与任务队列",
+                "status": "未开始",
+                "focus": false,
+                "difficult": false,
+                "knowledge_points": [
+                  "Kubernetes基本对象",
+                  "GPU/NPU资源调度概念",
+                  "任务队列",
+                  "配额与优先级",
+                  "弹性扩缩容"
+                ]
+              },
+              {
+                "title": "日志、Metrics、Trace 与服务可靠性",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "结构化日志",
+                  "Metrics",
+                  "Trace与热点",
+                  "错误率与SLO",
+                  "一次故障复盘"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "models",
+        "name": "深度学习与大模型",
+        "priority": "必要模型理解 · 与算子对应",
+        "modules": [
+          {
+            "code": "M01",
+            "title": "数学、自动微分与训练基础",
+            "prerequisites": "P01–P02",
+            "acceptance": "手推并数值检验一个层的梯度；解释损失、过拟合与训练/验证划分。",
+            "topics": [
+              {
+                "title": "矩阵、概率、链式法则与数值误差",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "矩阵乘与张量维度",
+                  "概率与期望",
+                  "导数与链式法则",
+                  "梯度检验",
+                  "数值误差"
+                ]
+              },
+              {
+                "title": "MLP/CNN、反向传播与优化器",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "MLP / CNN",
+                  "前向与反向",
+                  "损失函数",
+                  "SGD / Adam",
+                  "过拟合与泛化"
+                ]
+              },
+              {
+                "title": "训练稳定性、混合精度与评估",
+                "status": "未开始",
+                "focus": false,
+                "difficult": true,
+                "knowledge_points": [
+                  "数据划分与泄漏",
+                  "归一化",
+                  "混合精度/损失缩放",
+                  "训练稳定性",
+                  "验证与测试指标"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "M02",
+            "title": "Transformer 的张量视角",
+            "prerequisites": "M01；P03",
+            "acceptance": "实现小型多头 Attention / Transformer block；逐层标注 shape、FLOPs、激活与权重内存。",
+            "topics": [
+              {
+                "title": "QKV、Attention、Mask 与 Softmax",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "Q/K/V投影",
+                  "缩放点积",
+                  "因果Mask",
+                  "多头Attention",
+                  "Softmax稳定性"
+                ]
+              },
+              {
+                "title": "Norm、FFN、位置编码与残差",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "LayerNorm / RMSNorm",
+                  "FFN / 激活",
+                  "残差连接",
+                  "位置编码 / RoPE概念",
+                  "Transformer block"
+                ]
+              },
+              {
+                "title": "算量、显存、序列长度与瓶颈",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "FLOPs与参数量",
+                  "激活/权重内存",
+                  "序列长度影响",
+                  "Attention复杂度",
+                  "计算受限/访存受限"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "M03",
+            "title": "LLM 训练与推理机制",
+            "prerequisites": "M02；小规模模型可运行",
+            "acceptance": "比较 prefill/decode；估算并实测 KV Cache；理解小规模微调与 MoE 路由，不追求训练大模型。",
+            "topics": [
+              {
+                "title": "Tokenizer、自回归、KV Cache 与解码",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "Tokenizer",
+                  "自回归生成",
+                  "prefill / decode",
+                  "KV Cache容量",
+                  "采样与停止条件"
+                ]
+              },
+              {
+                "title": "SFT、LoRA、量化/蒸馏基础",
+                "status": "未开始",
+                "focus": false,
+                "difficult": false,
+                "knowledge_points": [
+                  "SFT与数据",
+                  "LoRA/参数高效微调",
+                  "PTQ/QAT概念",
+                  "蒸馏",
+                  "质量回归与资源取舍"
+                ]
+              },
+              {
+                "title": "MoE、稀疏与多模态工作负载",
+                "status": "未开始",
+                "focus": false,
+                "difficult": true,
+                "knowledge_points": [
+                  "专家与路由",
+                  "负载不均衡",
+                  "稀疏计算",
+                  "多模态输入",
+                  "专家通信开销"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "kernel",
+        "name": "Ascend C 与算子优化",
+        "priority": "近期专业主修 · CANN",
+        "modules": [
+          {
+            "code": "K01",
+            "title": "Ascend 编程模型与基础算子",
+            "prerequisites": "C++48阶段复盘；P02；S01–S02；环境可用",
+            "acceptance": "搭建固定版本环境；实现 Add/广播/Reduce 并对齐 NumPy/PyTorch 的参考输出。",
+            "topics": [
+              {
+                "title": "Host/Device、AI Core 与内存模型",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "Host Tiling / Device Kernel",
+                  "AI Core架构",
+                  "Vector / Cube",
+                  "GM与Local Memory",
+                  "版本与工具链"
+                ]
+              },
+              {
+                "title": "Tensor、CopyIn/Compute/CopyOut 与同步",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "GlobalTensor / LocalTensor",
+                  "TPipe / TQue / TBuf",
+                  "CopyIn/Compute/CopyOut",
+                  "缓冲分配",
+                  "同步与依赖"
+                ]
+              },
+              {
+                "title": "shape/dtype、边界与精度测试",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "参考实现",
+                  "随机/边界shape",
+                  "dtype与溢出",
+                  "误差容限",
+                  "空/小/非整除场景"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "K02",
+            "title": "Tiling 与并行搬运",
+            "prerequisites": "K01",
+            "acceptance": "实现多核和核内切分；覆盖尾块、对齐、UB容量与非整除 shape；解释每个策略。",
+            "topics": [
+              {
+                "title": "Host Tiling、多核划分与负载均衡",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "TilingData与参数",
+                  "多核分块",
+                  "核内切分",
+                  "shape分支",
+                  "负载均衡"
+                ]
+              },
+              {
+                "title": "尾块、对齐、UB容量与内存复用",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "地址与搬运对齐",
+                  "尾核/尾块",
+                  "UB容量预算",
+                  "内存复用",
+                  "边界保护"
+                ]
+              },
+              {
+                "title": "流水、DoubleBuffer 与同步消融",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "计算与搬运流水",
+                  "DoubleBuffer",
+                  "同步与事件",
+                  "流水空泡",
+                  "优化消融"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "K03",
+            "title": "模型高频算子与优化方法",
+            "prerequisites": "K02；M02",
+            "acceptance": "从 Reduce→Softmax/LayerNorm→Matmul 递进；选1–2类深入，报告多 shape/dtype 精度和真实性能。",
+            "topics": [
+              {
+                "title": "归约、Softmax 与 LayerNorm",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "归约切分",
+                  "Softmax稳定性",
+                  "LayerNorm统计",
+                  "小/大shape策略",
+                  "精度与带宽"
+                ]
+              },
+              {
+                "title": "GEMM / Cube / 矩阵分块",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "矩阵分块",
+                  "Cube计算",
+                  "矩阵布局",
+                  "复用与搬运",
+                  "不同M/N/K形状"
+                ]
+              },
+              {
+                "title": "融合、Attention 与自动调优",
+                "status": "未开始",
+                "focus": false,
+                "difficult": true,
+                "knowledge_points": [
+                  "融合边界与收益",
+                  "Attention数据流",
+                  "特定shape优化",
+                  "搜索空间",
+                  "自动调优与泛化"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "K04",
+            "title": "Profiling、工程接入与迁移",
+            "prerequisites": "K02；S03；P03",
+            "acceptance": "CPU孪生查精度，NPU上板测性能；提供 msprof 证据、编译命令、框架接入和消融报告。",
+            "topics": [
+              {
+                "title": "msprof、瓶颈与公平 Benchmark",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "CPU孪生精度调试",
+                  "NPU上板",
+                  "msprof trace",
+                  "瓶颈假设",
+                  "基线/多次测量/加速比"
+                ]
+              },
+              {
+                "title": "算子包、aclnn 与 PyTorch 适配",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "算子原型与shape推导",
+                  "算子编译/部署",
+                  "aclnn调用",
+                  "PyTorch适配",
+                  "CI与回归矩阵"
+                ]
+              },
+              {
+                "title": "CUDA/Triton 对照与可移植性",
+                "status": "未开始",
+                "focus": false,
+                "difficult": true,
+                "knowledge_points": [
+                  "CUDA执行/内存模型",
+                  "Triton tile编程",
+                  "同算子跨后端对照",
+                  "硬件差异",
+                  "可移植性取舍"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "inference",
+        "name": "推理引擎与服务优化",
+        "priority": "专业拓展 · 从算子到系统",
+        "modules": [
+          {
+            "code": "I01",
+            "title": "模型执行与端到端基线",
+            "prerequisites": "P03；M02–M03；S03",
+            "acceptance": "部署一个可运行模型；区分冷启动、预热、稳态；定位预处理、模型与后处理热点。",
+            "topics": [
+              {
+                "title": "加载、图执行、导出与后端适配",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "模型加载",
+                  "导出/编译",
+                  "执行后端",
+                  "冷启动与稳态",
+                  "预处理/前向/后处理"
+                ]
+              },
+              {
+                "title": "KV Cache、显存预算与分页管理",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "KV Cache容量估算",
+                  "分页管理",
+                  "碎片与复用",
+                  "长上下文",
+                  "显存预算"
+                ]
+              },
+              {
+                "title": "吞吐、TTFT、TPOT、p95与显存",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "吞吐tokens/s与requests/s",
+                  "TTFT",
+                  "TPOT / ITL",
+                  "p50/p95/p99",
+                  "峰值显存与失败率"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "I02",
+            "title": "调度、精度与服务优化",
+            "prerequisites": "I01；Kernel基础",
+            "acceptance": "逐项比较 batch、序列长度与并发；在相同质量约束下比较量化、调度及内存策略。",
+            "topics": [
+              {
+                "title": "Continuous Batching / Chunked Prefill",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "连续批处理",
+                  "Chunked Prefill",
+                  "队列与调度",
+                  "延迟/吞吐取舍",
+                  "混合请求负载"
+                ]
+              },
+              {
+                "title": "PTQ/QAT、KV压缩与精度回归",
+                "status": "未开始",
+                "focus": false,
+                "difficult": true,
+                "knowledge_points": [
+                  "PTQ / QAT",
+                  "权重/激活量化",
+                  "KV压缩",
+                  "校准数据",
+                  "质量与性能回归"
+                ]
+              },
+              {
+                "title": "投机解码、前缀缓存与图优化",
+                "status": "未开始",
+                "focus": false,
+                "difficult": true,
+                "knowledge_points": [
+                  "投机解码",
+                  "接受率与额外计算",
+                  "前缀缓存",
+                  "计算图优化",
+                  "不同负载收益"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "I03",
+            "title": "引擎阅读、扩展与在线可靠性",
+            "prerequisites": "I01–I02；Linux网络/容器",
+            "acceptance": "选 vLLM 或同类引擎追踪一次请求；交付扩展/修复、压测报告与失败率、尾延迟分析。",
+            "topics": [
+              {
+                "title": "vLLM请求路径、Runtime 与扩展点",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "请求入口→调度→执行",
+                  "KV管理",
+                  "后端与算子扩展点",
+                  "阅读调用链",
+                  "最小修复/扩展"
+                ]
+              },
+              {
+                "title": "TP/PP、PD分离、路由与伸缩",
+                "status": "未开始",
+                "focus": false,
+                "difficult": true,
+                "knowledge_points": [
+                  "张量/流水并行",
+                  "Prefill/Decode分离",
+                  "KV跨节点传输",
+                  "请求路由",
+                  "资源扩缩容"
+                ]
+              },
+              {
+                "title": "API、限流、队列、压测与可观测性",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "API与流式返回",
+                  "限流与队列",
+                  "负载生成",
+                  "质量约束",
+                  "可观测性和尾延迟"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "distributed",
+        "name": "分布式训练与通信",
+        "priority": "后续拓展 · 正确性先行",
+        "modules": [
+          {
+            "code": "D01",
+            "title": "从单卡到 DDP",
+            "prerequisites": "单卡训练稳定；S02通信基础",
+            "acceptance": "验证梯度与单卡参考一致；解释 rank/world size、采样器和通信顺序；记录一轮 trace。",
+            "topics": [
+              {
+                "title": "AllReduce / AllGather / ReduceScatter",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "Broadcast",
+                  "AllReduce",
+                  "AllGather",
+                  "ReduceScatter",
+                  "Ring/树与通信成本"
+                ]
+              },
+              {
+                "title": "torchrun、DDP、梯度同步与数据划分",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "rank / world_size",
+                  "torchrun",
+                  "进程组与梯度同步",
+                  "DistributedSampler",
+                  "全局batch与随机性"
+                ]
+              },
+              {
+                "title": "死锁、超时、随机种子与数值一致性",
+                "status": "未开始",
+                "focus": false,
+                "difficult": true,
+                "knowledge_points": [
+                  "通信顺序一致性",
+                  "梯度与单卡对照",
+                  "超时/死锁",
+                  "数据重复",
+                  "数值误差与复现"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "D02",
+            "title": "状态切分与混合并行",
+            "prerequisites": "D01；M03；显存预算",
+            "acceptance": "比较 DDP 与 FSDP/ZeRO 的状态占用；理解 TP/PP；用真实资源验证吞吐/显存取舍。",
+            "topics": [
+              {
+                "title": "FSDP / ZeRO 与检查点",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "参数/梯度/优化器状态",
+                  "ZeRO分阶段",
+                  "FSDP切分",
+                  "峰值显存",
+                  "检查点格式"
+                ]
+              },
+              {
+                "title": "Tensor / Pipeline / Expert Parallel",
+                "status": "未开始",
+                "focus": false,
+                "difficult": true,
+                "knowledge_points": [
+                  "Tensor Parallel",
+                  "Pipeline Parallel",
+                  "Expert Parallel",
+                  "混合并行布局",
+                  "流水气泡"
+                ]
+              },
+              {
+                "title": "拓扑、NCCL/HCCL 与通信计算重叠",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "NCCL / HCCL",
+                  "设备与网络拓扑",
+                  "bucket与调度",
+                  "计算通信重叠",
+                  "trace与瓶颈"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "D03",
+            "title": "训练系统实验与容错",
+            "prerequisites": "D02；平台可观测性",
+            "acceptance": "报告固定工作负载的扩展效率、吞吐、显存和通信占比；验证恢复训练与数据加载瓶颈。",
+            "topics": [
+              {
+                "title": "多机调度、扩展效率与资源利用率",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "单机/多机资源",
+                  "弱/强扩展",
+                  "吞吐与扩展效率",
+                  "设备利用率",
+                  "调度和成本"
+                ]
+              },
+              {
+                "title": "断点恢复、故障定位与训练稳定性",
+                "status": "未开始",
+                "focus": false,
+                "difficult": false,
+                "knowledge_points": [
+                  "保存/恢复状态",
+                  "随机数与数据位置",
+                  "故障注入",
+                  "恢复一致性",
+                  "稳定性排查"
+                ]
+              },
+              {
+                "title": "分布式数据管线与 IO 优化",
+                "status": "未开始",
+                "focus": false,
+                "difficult": false,
+                "knowledge_points": [
+                  "数据分片",
+                  "预取与缓存",
+                  "CPU解码/预处理",
+                  "存储IO",
+                  "输入管线与设备空转"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "delivery",
+        "name": "项目、竞赛与研究实习",
+        "priority": "贯穿全程 · 产出闭环",
+        "modules": [
+          {
+            "code": "E01",
+            "title": "工程交付与实验可信度",
+            "prerequisites": "从第24节项目开始持续执行",
+            "acceptance": "仓库含测试、依赖、环境、运行命令与结果；实验有基线、预热、重复测量、误差与局限。",
+            "topics": [
+              {
+                "title": "数据结构、算法复杂度与问题求解",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "数组/哈希/树/图",
+                  "复杂度分析",
+                  "贪心/动态规划",
+                  "性能与内存取舍",
+                  "限时问题求解"
+                ]
+              },
+              {
+                "title": "Git/CI、代码审查、文档与测试",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "测试与边界",
+                  "CI自动构建",
+                  "代码审查",
+                  "依赖/版本固定",
+                  "README与运行命令"
+                ]
+              },
+              {
+                "title": "实验设计、统计、消融与复现",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "公平基线",
+                  "控制变量",
+                  "预热/重复测量",
+                  "置信与波动",
+                  "消融、失败案例与复现"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "E02",
+            "title": "CANN主赛与软挑支线",
+            "prerequisites": "K01–K04；赛题以官方规则核验",
+            "acceptance": "CANN记录性能迭代和正确性；软挑仅在主线不延期时限时参加，保留提交与复盘。",
+            "topics": [
+              {
+                "title": "2027 CANN/Ascend 算子竞赛备赛",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "核对具体赛事与规则",
+                  "硬件/CANN版本",
+                  "正确性回归",
+                  "性能迭代日志",
+                  "参赛总结"
+                ]
+              },
+              {
+                "title": "2027 软件精英挑战赛（可选）",
+                "status": "未开始",
+                "focus": false,
+                "difficult": false,
+                "knowledge_points": [
+                  "算法与数据结构",
+                  "限时工程实现",
+                  "启发式与调参",
+                  "性能评测",
+                  "主线投入上限"
+                ]
+              },
+              {
+                "title": "开源阅读、Issue/PR 与技术表达",
+                "status": "未开始",
+                "focus": false,
+                "difficult": false,
+                "knowledge_points": [
+                  "阅读开源仓库",
+                  "最小可复现问题",
+                  "测试/文档贡献",
+                  "Issue与PR规范",
+                  "技术说明"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "E03",
+            "title": "雷达课题到系统研究",
+            "prerequisites": "课题基线可复现；模型与性能基础",
+            "acceptance": "固定数据划分与算法质量，测量雷达预处理→骨骼/生命体征模型→后处理；寻找可推广系统问题。",
+            "topics": [
+              {
+                "title": "骨骼/HR/RR模型基线与质量指标",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "雷达预处理与数据划分",
+                  "骨骼模型复现",
+                  "HR/RR参考与窗口",
+                  "精度指标",
+                  "可复现基线"
+                ]
+              },
+              {
+                "title": "流式窗口、动态shape与实时推理",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "预处理→模型→后处理时延",
+                  "流式窗口",
+                  "动态shape",
+                  "内存/融合/调度策略",
+                  "精度约束下系统收益"
+                ]
+              },
+              {
+                "title": "相关工作、创新假设、对照与论文写作",
+                "status": "未开始",
+                "focus": false,
+                "difficult": true,
+                "knowledge_points": [
+                  "相关工作矩阵",
+                  "可推广研究问题",
+                  "创新假设",
+                  "公平对照与消融",
+                  "局限、代码与论文稿"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "E04",
+            "title": "实习准备与岗位查缺",
+            "prerequisites": "两个可复现项目＋能解释优化依据",
+            "acceptance": "按目标JD整理技能证据；完成项目讲解与系统/编程模拟面试，再开始滚动申请。",
+            "topics": [
+              {
+                "title": "项目简历、性能报告与作品集",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "两个可复现项目",
+                  "优化前后证据",
+                  "个人贡献",
+                  "性能报告",
+                  "项目简历与讲解"
+                ]
+              },
+              {
+                "title": "C++/系统/算法/模型面试查缺",
+                "status": "未开始",
+                "focus": false,
+                "difficult": false,
+                "knowledge_points": [
+                  "C++与内存",
+                  "系统/并发/网络",
+                  "算法练习",
+                  "模型/算子数据流",
+                  "模拟面试与查缺"
+                ]
+              },
+              {
+                "title": "AI Infra/异构计算实习申请与复盘",
+                "status": "未开始",
+                "focus": false,
+                "difficult": false,
+                "knowledge_points": [
+                  "匹配JD与技能证据",
+                  "实习时间与岗位筛选",
+                  "申请记录",
+                  "面试复盘",
+                  "按反馈调整学习"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }
