@@ -57,14 +57,18 @@ def project_plan(value):
         domains.append({'id': clean(d.get('id'), 40), 'name': clean(d.get('name'), 100), 'priority': clean(d.get('priority'), 160), 'modules': modules})
     hardware = value.get('hardware')
     if isinstance(hardware, dict):
-        hardware = {'device': clean(hardware.get('device'), 400), 'environment_status': clean(hardware.get('environmentStatus'), 100), 'competition_target': clean(hardware.get('competitionTarget'), 240), 'submission_deadline': date_only(hardware.get('submissionDeadline'))}
+        hardware = {'device': clean(hardware.get('device'), 400), 'device_status': clean(hardware.get('deviceStatus'), 160), 'environment_status': clean(hardware.get('environmentStatus'), 100), 'competition_target': clean(hardware.get('competitionTarget'), 240), 'submission_deadline': date_only(hardware.get('submissionDeadline'))}
     else:
         hardware = None
     projects = []
     for p in value.get('projects', [])[:2]:
         stages = [{'code': clean(st.get('code'), 30), 'name': clean(st.get('name'), 180), 'status': clean(st.get('status'), 40), 'deliverable': clean(st.get('deliverable'), 800), 'acceptance': clean(st.get('acceptance'), 1000), 'transfer': clean(st.get('transfer'), 300)} for st in p.get('stages', [])[:10]]
+        guide = p.get('planning', {})
+        planning = {'preparation': clean(guide.get('preparation'), 800), 'start_window': clean(guide.get('startWindow'), 1000), 'duration': clean(guide.get('duration'), 600), 'flow_note': clean(guide.get('flowNote'), 1000), 'definition_of_done': [clean(c, 700) for c in guide.get('definitionOfDone', [])[:15]], 'prerequisites': [{'label': clean(r.get('label'), 240), 'before': clean(r.get('before'), 300), 'status': clean(r.get('status'), 80), 'basis': clean(r.get('basis'), 800), 'note': clean(r.get('note'), 800)} for r in guide.get('prerequisites', [])[:15]]}
+        for st, original in zip(stages, p.get('stages', [])[:10]):
+            st.update({'entry': clean(original.get('entry'), 1000), 'steps': [{'name': clean(step.get('name'), 240), 'action': clean(step.get('action'), 1600), 'artifact': clean(step.get('artifact'), 800)} for step in original.get('steps', [])[:10]], 'checklist': [clean(c, 800) for c in original.get('checklist', [])[:15]], 'troubleshooting': clean(original.get('troubleshooting'), 1200)})
         count = p.get('executionRecordCount', 0)
-        projects.append({'code': clean(p.get('code'), 20), 'name': clean(p.get('name'), 180), 'priority': clean(p.get('priority'), 80), 'status': clean(p.get('status'), 40), 'goal': clean(p.get('goal'), 800), 'mvp': clean(p.get('mvp'), 800), 'optional': clean(p.get('optional'), 600), 'next_step': clean(p.get('nextStep'), 800), 'repository_state': clean(p.get('repositoryState'), 100), 'updated_at': timestamp(p.get('updatedAt')), 'execution_record_count': count if type(count) is int and count >= 0 else 0, 'stages': stages})
+        projects.append({'code': clean(p.get('code'), 20), 'name': clean(p.get('name'), 180), 'priority': clean(p.get('priority'), 80), 'status': clean(p.get('status'), 40), 'goal': clean(p.get('goal'), 800), 'mvp': clean(p.get('mvp'), 800), 'optional': clean(p.get('optional'), 600), 'next_step': clean(p.get('nextStep'), 800), 'repository_state': clean(p.get('repositoryState'), 100), 'updated_at': timestamp(p.get('updatedAt')), 'execution_record_count': count if type(count) is int and count >= 0 else 0, 'first_execution_date': date_only(p.get('firstExecutionDate')), 'planning': planning, 'stages': stages})
     phases = [{'name': clean(p.get('name'), 240), 'time': clean(p.get('time'), 180), 'lane': clean(p.get('lane'), 80), 'learning': clean(p.get('learning'), 1000), 'deliverable': clean(p.get('deliverable'), 1000), 'gate': clean(p.get('gate'), 1000), 'budget': clean(p.get('budget'), 600)} for p in value.get('phases', [])[:20]]
     return {'version': clean(value.get('version'), 60), 'goal': clean(value.get('goal'), 400), 'policy': clean(value.get('policy'), 1000), 'hardware': hardware, 'projects': projects, 'phases': phases, 'domains': domains}
 
@@ -78,7 +82,7 @@ def project(source, synced_at):
     if len(lessons) != 48 or {l.get('number') for l in lessons} != set(range(1, 49)):
         raise ValueError('incomplete 48-lesson data')
     completed = {'已实践', '已实验通过', '已验收'}
-    courses = [{'number': l['number'], 'title': clean(l.get('title'), 160), 'status': clean(l.get('status'), 40), 'verification': clean(l.get('verification'), 800), 'review': clean(l.get('review'), 500)} for l in sorted(lessons, key=lambda x: x['number'])]
+    courses = [{'number': l['number'], 'title': clean(l.get('title'), 160), 'status': clean(l.get('status'), 40), 'verification': clean(l.get('verification'), 800), 'review': clean(l.get('review'), 700), 'experiments': [{'id': clean(e.get('id'), 30), 'title': clean(e.get('title'), 180), 'status': clean(e.get('status'), 40), 'evidence': clean(e.get('evidence'), 800), 'expected_only': clean(e.get('expectedOnly'), 500)} for e in l.get('experiments', [])[:15]]} for l in sorted(lessons, key=lambda x: x['number'])]
     current = next((l for l in courses if l['status'] not in completed), None)
     original_current = source.get('currentCppLesson')
     if (original_current.get('number') if original_current else None) != (current['number'] if current else None):
@@ -100,6 +104,8 @@ def markdown(data):
     lines += ['', '## 48 节课程状态']
     for l in data['cpp_lessons']:
         lines.append(f"- 第 {l['number']} 节｜{l['title']}｜{l['status']}" + ('｜复习：' + l['review'] if l['review'] else ''))
+        for e in l.get('experiments', []):
+            lines += ['  - ' + e['title'] + '｜' + e['status'] + '｜' + e['evidence'] + ('｜仅预期、尚未实测：' + e['expected_only'] if e['expected_only'] else '')]
 
     plan = data.get('learning_path')
     if plan:
@@ -109,8 +115,20 @@ def markdown(data):
             lines += ['', '## 设备与竞赛锚点', hardware['device'], '环境状态：' + hardware['environment_status'], '目标赛事：' + hardware['competition_target'], '正式提交截止T：' + (hardware['submission_deadline'] or '待核实；报名截止不作为T')]
         for p in plan.get('projects', []):
             lines += ['', '### ' + p['code'] + ' ' + p['name'] + '｜' + p['status'], p['goal'], 'MVP：' + p['mvp'], '可选增强：' + p['optional'], '下一步：' + p['next_step'], '仓库：' + p['repository_state'], '实际执行记录数：' + str(p['execution_record_count'])]
+            guide = p.get('planning', {})
+            if guide:
+                lines += ['准备窗口：' + guide.get('preparation', ''), '计划启动：' + guide.get('start_window', ''), '预计体量：' + guide.get('duration', ''), '实际首次执行日期：' + (p.get('first_execution_date') or '尚未开始')]
+                for r in guide.get('prerequisites', []):
+                    lines += ['- 前置：' + r['label'] + '｜' + r['status'] + '｜' + r['before'], '  依据：' + r['basis'], '  说明：' + r['note']]
+                lines += ['流程规则：' + guide.get('flow_note', '')]
             for st in p['stages']:
                 lines += ['- ' + st['code'] + ' ' + st['name'] + '｜' + st['status'], '  交付：' + st['deliverable'], '  验收：' + st['acceptance']]
+                for i, step in enumerate(st.get('steps', []), 1):
+                    lines += ['  ' + str(i) + '. ' + step['name'] + '：' + step['action'], '     交付：' + step['artifact']]
+                if st.get('checklist'):
+                    lines += ['  检查：' + '；'.join(st['checklist'])]
+                if st.get('troubleshooting'):
+                    lines += ['  排错：' + st['troubleshooting']]
         if plan.get('phases'):
             lines += ['', '## 学习与实践时间轴']
         for p in plan.get('phases', []):
