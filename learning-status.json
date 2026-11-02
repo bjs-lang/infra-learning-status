@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "data_version": 19,
-  "updated_at": "2026-11-01T14:44:31.917000Z",
+  "data_version": 21,
+  "updated_at": "2026-11-02T08:06:30.210000Z",
   "updated_at_note": "旧记录可能没有精确保存时间；空值不是同步失败。",
-  "synced_at": "2026-11-02T01:52:35.264872Z",
-  "last_learning_date": "2026-11-01",
+  "synced_at": "2026-11-02T08:45:06.714419Z",
+  "last_learning_date": "2026-11-02",
   "current_cpp_lesson": {
     "number": 22,
     "title": "关联容器",
