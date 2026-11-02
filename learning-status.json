@@ -1,18 +1,41 @@
 {
   "schema_version": 1,
-  "data_version": 23,
-  "updated_at": "2026-11-02T12:06:29.102000Z",
+  "data_version": 24,
+  "updated_at": "2026-11-02T15:00:24.003000Z",
   "updated_at_note": "旧记录可能没有精确保存时间；空值不是同步失败。",
-  "synced_at": "2026-11-02T12:06:49.563052Z",
+  "synced_at": "2026-11-02T15:00:32.143221Z",
   "last_learning_date": "2026-11-02",
   "current_cpp_lesson": {
-    "number": 23,
-    "title": "Lambda 表达式",
+    "number": 24,
+    "title": "阶段项目：数据处理工具",
     "status": "学习中",
-    "verification": "依据2026-11-02用户上传的教学记录摘要：Lambda第一个实验已验证，平方25，偶数判断1/0，偶数个数3，大于30个数3；[threshold]与[&threshold]的第二个对照实验仅布置，尚无运行输出，第23节不计完成。",
+    "verification": "2026-11-02：第24节实验1已验收，修正MaxMul为MatMul后，Add count2 avg0.16、MatMul count2 avg1.74、ReLU count1 avg0.09、Softmax count2 avg0.70 ms；这些是模拟延迟。实验2排行榜仅讲解/布置，预期输出不是实测；实验3未开始。",
     "review": "",
-    "goal": "捕获值/引用、mutable、泛型 lambda，配合 sort/count_if/transform。",
-    "acceptance": "按自定义规则排序结构体数组；辨别引用捕获导致的悬空风险。"
+    "experiments": [
+      {
+        "id": "24-1",
+        "title": "模拟算子平均延迟聚合",
+        "status": "已验收",
+        "evidence": "修正MatMul拼写后：Add 2/0.16，MatMul 2/1.74，ReLU 1/0.09，Softmax 2/0.70（count/模拟ms）。",
+        "expected_only": ""
+      },
+      {
+        "id": "24-2",
+        "title": "map→vector→sort+Lambda排行榜",
+        "status": "待运行",
+        "evidence": "尚无实际编译运行输出。",
+        "expected_only": "预测顺序MatMul→Softmax→Add→ReLU，不能当作实验结果。"
+      },
+      {
+        "id": "24-3",
+        "title": "慢算子阈值筛选",
+        "status": "未开始",
+        "evidence": "实验2通过后再实施；无输出。",
+        "expected_only": ""
+      }
+    ],
+    "goal": "串联 string、vector、map、算法、函数与基本异常输入处理。",
+    "acceptance": "完成 CSV/文本数据统计 CLI：读取→校验→统计→输出；提交 README、样例输入与至少 5 个边界测试。"
   },
   "cpp_lessons": [
     {
@@ -20,348 +43,447 @@
       "title": "环境与编译运行",
       "status": "已实践",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 2,
       "title": "变量与基本类型",
       "status": "已实践",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 3,
       "title": "函数与值传递",
       "status": "已实践",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 4,
       "title": "引用与 const",
       "status": "已实践",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 5,
       "title": "指针与地址",
       "status": "已实践",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 6,
       "title": "数组与动态内存",
       "status": "已实践",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 7,
       "title": "类与成员函数",
       "status": "已实践",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 8,
       "title": "构造与析构",
       "status": "已实践",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 9,
       "title": "RAII 与资源管理",
       "status": "已实践",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 10,
       "title": "智能指针入门",
       "status": "已实践",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 11,
       "title": "拷贝构造",
       "status": "已实践",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 12,
       "title": "拷贝赋值",
       "status": "已实践",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 13,
       "title": "移动构造",
       "status": "已实践",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 14,
       "title": "移动赋值与 Rule of Five",
       "status": "已实验通过",
       "verification": "日报有移动赋值与自移动两项终端输出；原值100的移动、自移动保护符合预期。主体完成，unique_ptr/Rule of Zero自测题待复习。",
-      "review": "unique_ptr 与 Rule of Zero 自测题待复习"
+      "review": "unique_ptr 与 Rule of Zero 自测题待复习",
+      "experiments": []
     },
     {
       "number": 15,
       "title": "基本类型与控制流程复核",
       "status": "已实验通过",
       "verification": "日报数组统计：Sum402、Max91、Average80.4、整数除法80；阈值80→90，Count3→1。",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 16,
       "title": "函数与参数设计",
       "status": "已实验通过",
       "verification": "日报含重载输出Int/Double，默认参数演示；increase(a)和increase(a,5)后Final a=36。",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 17,
       "title": "作用域与 const 正确性",
       "status": "已验收",
       "verification": "日报作用域输出10/25/10，引用问答30 20正确。用户后续确认17节验收，并回答：离开作用域后a没了，指针成为悬空指针。补充术语：p是指针，*p为未定义行为。",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 18,
       "title": "std::string 与 string_view",
       "status": "已验收",
       "verification": "实验A：s修改后FANN，copy仍CANN，view为FANN；实验B size=13、find=5，copy为operator、part为Operator；分词6词/CANN3次，追加后7词/4次；remove_prefix理解题通过。",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 19,
       "title": "std::vector 动态数组",
       "status": "已验收",
       "verification": "引用遍历得15 25 35 45，sum120；reserve后size3/capacity8，追加至9后capacity16（本机结果）；地址变化验证扩容且未访问失效ref；统计size7/capacity16/sum588/max93/count3/average84/reallocated=false。",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 20,
       "title": "std::array 与 std::span",
       "status": "已验收",
       "verification": "局部span修改array结果10 25 40 40；统一sumValues(span<const int>)结果array60/vector220/raw6，修改后vector230；追加后旧span长度仍3，扩容后重建span长度9、末项99；IntelliSense设c++20后诊断解决。",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 21,
       "title": "迭代器与 STL 算法",
       "status": "已验收",
       "verification": "sort后15 27 42 60 83，find42索引2，sum227；修改元素后10 25 30 40 50，find100返回end不解引用；扩容后重建迭代器；erase返回40，安全删除20倍数后10 50。四项实验通过验收。",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 22,
       "title": "关联容器",
       "status": "已验收",
       "verification": "依据2026-11-02用户上传的教学记录摘要：①map词频CANN3/kernel2/operator1，size3；②find不插入，[]插入CUDA0、更新为5、erase后size3；③map/unordered_map词频相同、遍历顺序不同，contains为1/0；④set对实际数据{CANN,CUDA,operator,CANN,kernel,CANN,kernel}去重4、删除CUDA后3。综合选择题未逐一提交，教学记录已确认第22节验收；不补写Tensor项。",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 23,
       "title": "Lambda 表达式",
-      "status": "学习中",
-      "verification": "依据2026-11-02用户上传的教学记录摘要：Lambda第一个实验已验证，平方25，偶数判断1/0，偶数个数3，大于30个数3；[threshold]与[&threshold]的第二个对照实验仅布置，尚无运行输出，第23节不计完成。",
-      "review": ""
+      "status": "已实践",
+      "verification": "依据2026-11-02用户上传的教学记录摘要：Lambda第一个实验已验证，平方25，偶数判断1/0，偶数个数3，大于30个数3；[threshold]与[&threshold]的第二个对照实验仅布置，尚无运行输出，第23节不计完成。\n\n2026-11-02续学：Lambda四个编程实验通过。基础25、1/0、3、3；阈值30→40时值捕获计数3→3、引用捕获3→1；mutable内部15→20而外部10，引用修改外部15；自定义sort得到MatMul38、Reduce25、Softmax25、Add12、ReLU8，慢算子数3，并正确解释return控制流。以上排序耗时为手工模拟数据，非GPU性能。泛型Lambda、transform、引用捕获悬空风险与两道概念题未专项验收。",
+      "review": "泛型Lambda、std::transform、引用捕获生命周期/悬空风险仍待专项练习；两道概念测验未提交。四项编程实验已通过，不阻止继续第24节。",
+      "experiments": [
+        {
+          "id": "23-1",
+          "title": "基础Lambda与count_if",
+          "status": "已通过",
+          "evidence": "平方25；偶数判断1/0；偶数个数3；大于30个数3。",
+          "expected_only": ""
+        },
+        {
+          "id": "23-2",
+          "title": "值捕获与引用捕获",
+          "status": "已通过",
+          "evidence": "threshold从30变40；Value count仍3，Reference count从3变1。",
+          "expected_only": ""
+        },
+        {
+          "id": "23-3",
+          "title": "mutable内部状态",
+          "status": "已通过",
+          "evidence": "内部副本15→20；外部值保持10，引用捕获后外部15。",
+          "expected_only": ""
+        },
+        {
+          "id": "23-4",
+          "title": "sort比较器与慢算子统计",
+          "status": "已通过",
+          "evidence": "模拟延迟排序MatMul38、Reduce25、Softmax25、Add12、ReLU8，慢算子数3；return控制流问答正确。",
+          "expected_only": ""
+        }
+      ]
     },
     {
       "number": 24,
       "title": "阶段项目：数据处理工具",
-      "status": "未开始",
-      "verification": "",
-      "review": ""
+      "status": "学习中",
+      "verification": "2026-11-02：第24节实验1已验收，修正MaxMul为MatMul后，Add count2 avg0.16、MatMul count2 avg1.74、ReLU count1 avg0.09、Softmax count2 avg0.70 ms；这些是模拟延迟。实验2排行榜仅讲解/布置，预期输出不是实测；实验3未开始。",
+      "review": "",
+      "experiments": [
+        {
+          "id": "24-1",
+          "title": "模拟算子平均延迟聚合",
+          "status": "已验收",
+          "evidence": "修正MatMul拼写后：Add 2/0.16，MatMul 2/1.74，ReLU 1/0.09，Softmax 2/0.70（count/模拟ms）。",
+          "expected_only": ""
+        },
+        {
+          "id": "24-2",
+          "title": "map→vector→sort+Lambda排行榜",
+          "status": "待运行",
+          "evidence": "尚无实际编译运行输出。",
+          "expected_only": "预测顺序MatMul→Softmax→Add→ReLU，不能当作实验结果。"
+        },
+        {
+          "id": "24-3",
+          "title": "慢算子阈值筛选",
+          "status": "未开始",
+          "evidence": "实验2通过后再实施；无输出。",
+          "expected_only": ""
+        }
+      ]
     },
     {
       "number": 25,
       "title": "函数模板与类模板",
       "status": "未开始",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 26,
       "title": "Rule of Zero 与 RAII",
       "status": "未开始",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 27,
       "title": "智能指针全景",
       "status": "未开始",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 28,
       "title": "移动语义进阶",
       "status": "未开始",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 29,
       "title": "异常与资源安全",
       "status": "未开始",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 30,
       "title": "constexpr 与程序组织",
       "status": "未开始",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 31,
       "title": "现代标准库类型",
       "status": "未开始",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 32,
       "title": "阶段项目：安全数据模块",
       "status": "未开始",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 33,
       "title": "头文件与多文件工程",
       "status": "未开始",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 34,
       "title": "CMake 工程化",
       "status": "未开始",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 35,
       "title": "Debug 与 Release",
       "status": "未开始",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 36,
       "title": "Sanitizer 与内存错误定位",
       "status": "未开始",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 37,
       "title": "LLDB 进阶调试",
       "status": "未开始",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 38,
       "title": "单元测试与 CTest",
       "status": "未开始",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 39,
       "title": "Git 与项目文档",
       "status": "未开始",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 40,
       "title": "阶段项目：模块化工程",
       "status": "未开始",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 41,
       "title": "内存布局与对齐",
       "status": "未开始",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 42,
       "title": "CPU Cache 与数据布局",
       "status": "未开始",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 43,
       "title": "Benchmark 方法",
       "status": "未开始",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 44,
       "title": "Profiling 入门",
       "status": "未开始",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 45,
       "title": "编译优化与向量化",
       "status": "未开始",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 46,
       "title": "线程基础",
       "status": "未开始",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 47,
       "title": "同步与原子操作",
       "status": "未开始",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     },
     {
       "number": 48,
       "title": "毕业项目：CPU 算子优化",
       "status": "未开始",
       "verification": "",
-      "review": ""
+      "review": "",
+      "experiments": []
     }
   ],
   "recent_learning": [
     {
       "date": "2026-11-02",
       "track": "C++",
-      "title": "第22节验收与第23节Lambda部分实验",
-      "summary": "关联容器选择、词频、find与[]、set；Lambda基础与捕获。",
-      "experiments_and_verification": "依据2026-11-02用户上传的教学记录摘要：①map词频CANN3/kernel2/operator1，size3；②find不插入，[]插入CUDA0、更新为5、erase后size3；③map/unordered_map词频相同、遍历顺序不同，contains为1/0；④set对实际数据{CANN,CUDA,operator,CANN,kernel,CANN,kernel}去重4、删除CUDA后3。综合选择题未逐一提交，教学记录已确认第22节验收；不补写Tensor项。\n依据2026-11-02用户上传的教学记录摘要：Lambda第一个实验已验证，平方25，偶数判断1/0，偶数个数3，大于30个数3；[threshold]与[&threshold]的第二个对照实验仅布置，尚无运行输出，第23节不计完成。",
-      "mastery": "第22节已验收；第23节学习中，捕获实验待验证。",
-      "open_questions": "第23节值捕获/引用捕获对照待运行；第14节unique_ptr/Rule of Zero待复习。",
-      "next_step": "继续第23节Lambda：运行[threshold]与[&threshold]捕获对照，解释阈值改变前后结果并提交真实输出；通过后再进入第24节数据处理项目。第14节unique_ptr/Rule of Zero自测题仍待复习。"
+      "title": "第23节四实验已实践，第24节实验1通过（保留第22节既有验收）",
+      "summary": "关联容器选择、词频、find与[]、set；Lambda基础与捕获。\n\n2026-11-02：第23节Lambda四项编程实验已实践通过；第24节模拟算子平均耗时统计实验1已验收，实验2排行榜待运行，实验3未开始。当天设备为MacBook Air M5，未做Jetson上机，未补录时长。",
+      "experiments_and_verification": "依据2026-11-02用户上传的教学记录摘要：①map词频CANN3/kernel2/operator1，size3；②find不插入，[]插入CUDA0、更新为5、erase后size3；③map/unordered_map词频相同、遍历顺序不同，contains为1/0；④set对实际数据{CANN,CUDA,operator,CANN,kernel,CANN,kernel}去重4、删除CUDA后3。综合选择题未逐一提交，教学记录已确认第22节验收；不补写Tensor项。\n依据2026-11-02用户上传的教学记录摘要：Lambda第一个实验已验证，平方25，偶数判断1/0，偶数个数3，大于30个数3；[threshold]与[&threshold]的第二个对照实验仅布置，尚无运行输出，第23节不计完成。\n\n2026-11-02续学：Lambda四个编程实验通过。基础25、1/0、3、3；阈值30→40时值捕获计数3→3、引用捕获3→1；mutable内部15→20而外部10，引用修改外部15；自定义sort得到MatMul38、Reduce25、Softmax25、Add12、ReLU8，慢算子数3，并正确解释return控制流。以上排序耗时为手工模拟数据，非GPU性能。泛型Lambda、transform、引用捕获悬空风险与两道概念题未专项验收。\n2026-11-02：第24节实验1已验收，修正MaxMul为MatMul后，Add count2 avg0.16、MatMul count2 avg1.74、ReLU count1 avg0.09、Softmax count2 avg0.70 ms；这些是模拟延迟。实验2排行榜仅讲解/布置，预期输出不是实测；实验3未开始。",
+      "mastery": "第22节沿用已验收；第23节四个编程实验已实践通过并保留专项复习；第24节学习中，实验1通过、实验2待运行、实验3未开始。",
+      "open_questions": "泛型Lambda、std::transform、引用捕获生命周期/悬空风险仍待专项练习；两道概念测验未提交。四项编程实验已通过，不阻止继续第24节。 第14节与Linux原待实操清单继续保留。",
+      "next_step": "第24节实验2：运行已有map→vector→sort + Lambda排行榜代码，提交实际终端输出，核对MatMul→Softmax→Add→ReLU排序、元素数与平均值；该顺序目前只是预期，尚未实测。通过后再做实验3阈值筛选。第23节泛型Lambda、transform与引用捕获生命周期及第14节unique_ptr/Rule of Zero保留专项复习。"
     },
     {
       "date": "2026-11-01",
@@ -394,16 +516,17 @@
       "next_step": "下一次从第18节 std::string 与 std::string_view 开始；另安排第14节 unique_ptr 与 Rule of Zero 复习题。"
     }
   ],
-  "verified_summary": "第1–13节主要练习沿用原进度。2026-10-31日报附有第14节移动赋值和自移动输出、第15节数组统计两组输出、第16节重载及引用增量输出、第17节作用域输出和引用语义问答。第17节随后由用户确认验收；生命周期回答指出局部对象离开作用域后消失、指针悬空，核心判断正确。\n\nLinux 2026-11-01：惠普光影精灵7，Windows + WSL Ubuntu，目录[本地路径已省略]。已验证grep/管道/wc/find/重定向、日志检查三分支、chmod755、bash与直接执行、位置参数及跨目录path_demo.sh。仅有主目录启动的一组路径输出；command -v bash在脚本内已验证。\n\n2026-11-01 C++：第18–21节已验收。string/view复制与观察、分词6/3→7/4；vector统计588/93/3/84与重分配检查；span三类容器求和与重建；STL排序/查找/求和、迭代器失效与erase安全删除均有日报实测依据。第1–17节沿用既有状态。\n\n2026-11-02：第22节四组关联容器实验据教学记录已验收；第23节Lambda首个实验输出25、1/0、3、3已验证，捕获对照仍待运行。",
-  "open_questions": "第14节：含 unique_ptr 成员且未自定义特殊成员函数的类，为何不能拷贝却可以移动？此自测题待复习。第17节生命周期题已验收，复习时注意 p 是指针，解引用悬空指针是未定义行为。\n\nLinux 待实操：sed修正errror后复测计数为2（未展示输出）；不传参数调用check_log.sh，验证默认文件名（未展示输出）；报错信息补充文件名后重新验证（未展示输出）；查看PATH并运行command -v code（待实操）；对比source/bash/直接执行及$0/BASH_SOURCE[0]（待实操）；补做从脚本所在目录启动的对照输出（尚缺一组）；Git/CMake/GDB小型C++项目综合实践（今日未开展）。\n\n第14节 unique_ptr/Rule of Zero题仍待复习；视图生命周期、扩容导致引用/span/迭代器失效、旧end失效及erase返回值需持续巩固。\n\n2026-11-02更新：第22节已验收；第23节[threshold]/[&threshold]对照尚未运行。第14节unique_ptr/Rule of Zero和Linux原待实操清单继续保留。Jetson型号/版本、CUDA/TensorRT环境与所有性能结果均待实机核验。",
-  "next_step": "继续第23节Lambda：运行[threshold]与[&threshold]捕获对照，解释阈值改变前后结果并提交真实输出；通过后再进入第24节数据处理项目。第14节unique_ptr/Rule of Zero自测题仍待复习。\n\nLinux：先用sed修正errror并复测，再验证无参数默认文件名和包含文件名的报错；随后补PATH、source和路径对照实验，再做Git/CMake/GDB小项目。C++现有接续点为第23节，每日Linux复习≤1小时。\n\nJetson副线：先只读记录设备与版本；不刷机/升级。P1优先，P2为第二项目；P1 Reduce/Softmax可独立实现和计时后启动Ascend C K01。",
+  "verified_summary": "第1–13节主要练习沿用原进度。2026-10-31日报附有第14节移动赋值和自移动输出、第15节数组统计两组输出、第16节重载及引用增量输出、第17节作用域输出和引用语义问答。第17节随后由用户确认验收；生命周期回答指出局部对象离开作用域后消失、指针悬空，核心判断正确。\n\nLinux 2026-11-01：惠普光影精灵7，Windows + WSL Ubuntu，目录[本地路径已省略]。已验证grep/管道/wc/find/重定向、日志检查三分支、chmod755、bash与直接执行、位置参数及跨目录path_demo.sh。仅有主目录启动的一组路径输出；command -v bash在脚本内已验证。\n\n2026-11-01 C++：第18–21节已验收。string/view复制与观察、分词6/3→7/4；vector统计588/93/3/84与重分配检查；span三类容器求和与重建；STL排序/查找/求和、迭代器失效与erase安全删除均有日报实测依据。第1–17节沿用既有状态。\n\n2026-11-02：第22节四组关联容器实验据教学记录已验收；第23节四项Lambda编程实验现已通过，专项复习仍保留。\n\n2026-11-02续学：Lambda四个编程实验通过。基础25、1/0、3、3；阈值30→40时值捕获计数3→3、引用捕获3→1；mutable内部15→20而外部10，引用修改外部15；自定义sort得到MatMul38、Reduce25、Softmax25、Add12、ReLU8，慢算子数3，并正确解释return控制流。以上排序耗时为手工模拟数据，非GPU性能。泛型Lambda、transform、引用捕获悬空风险与两道概念题未专项验收。\n2026-11-02：第24节实验1已验收，修正MaxMul为MatMul后，Add count2 avg0.16、MatMul count2 avg1.74、ReLU count1 avg0.09、Softmax count2 avg0.70 ms；这些是模拟延迟。实验2排行榜仅讲解/布置，预期输出不是实测；实验3未开始。",
+  "open_questions": "第14节：含 unique_ptr 成员且未自定义特殊成员函数的类，为何不能拷贝却可以移动？此自测题待复习。第17节生命周期题已验收，复习时注意 p 是指针，解引用悬空指针是未定义行为。\n\nLinux 待实操：sed修正errror后复测计数为2（未展示输出）；不传参数调用check_log.sh，验证默认文件名（未展示输出）；报错信息补充文件名后重新验证（未展示输出）；查看PATH并运行command -v code（待实操）；对比source/bash/直接执行及$0/BASH_SOURCE[0]（待实操）；补做从脚本所在目录启动的对照输出（尚缺一组）；Git/CMake/GDB小型C++项目综合实践（今日未开展）。\n\n第14节 unique_ptr/Rule of Zero题仍待复习；视图生命周期、扩容导致引用/span/迭代器失效、旧end失效及erase返回值需持续巩固。\n\n2026-11-02更新：第22节已验收；第23节捕获对照现已通过。第14节unique_ptr/Rule of Zero和Linux原待实操清单继续保留。Jetson型号/版本、CUDA/TensorRT环境与所有性能结果均待实机核验。\n\n泛型Lambda、std::transform、引用捕获生命周期/悬空风险仍待专项练习；两道概念测验未提交。四项编程实验已通过，不阻止继续第24节。 第24节实验2待运行、实验3未开始。",
+  "next_step": "第24节实验2：运行已有map→vector→sort + Lambda排行榜代码，提交实际终端输出，核对MatMul→Softmax→Add→ReLU排序、元素数与平均值；该顺序目前只是预期，尚未实测。通过后再做实验3阈值筛选。第23节泛型Lambda、transform与引用捕获生命周期及第14节unique_ptr/Rule of Zero保留专项复习。\n\nLinux：先用sed修正errror并复测，再验证无参数默认文件名和包含文件名的报错；随后补PATH、source和路径对照实验，再做Git/CMake/GDB小项目。C++现有接续点为第24节，每日Linux复习≤1小时。\n\nJetson副线：先只读记录设备与版本；不刷机/升级。P1优先，P2为第二项目；P1 Reduce/Softmax可独立实现和计时后启动Ascend C K01。",
   "linux_and_cann_plan": "保留既定 48 节 C++ 主线，不把未完成课程标记为已完成。\nLinux 复习每天 ≤ 1 小时，优先结合 C++ 工程。\n按C++阶段逐步细化并行实践，不再等第48节后才开始接触Ascend C；阶段项目仍按真实证据验收。\n长期目标：2027 CANN 算子竞赛 → 可复现 AI 系统研究 → AI Infra 实习。\n不编造时长、实验结果或掌握程度；实际赛程与投稿时间以官方公告为准。\n\n原48节编号不变；C++主线继续，Jetson恰好P1/P2两个实践副线。Linux每天≤1小时并入真实工程。P1 Reduce/Softmax可独立实现与公平计时后即启动Ascend C K01；不等两项目结束。正式提交截止T-8周冻结Jetson新需求，CANN投入70–80%。单台共享设备，实际版本与环境待核验。",
   "learning_path": {
-    "version": "2026-11-02-jetson-v1",
+    "version": "2026-11-02-jetson-detail-v2",
     "goal": "AI Infra工程师：CANN/Ascend算子竞赛为主目标，Jetson P1算子与P2推理两个实践副线，连接研究和实习。",
-    "policy": "原48节编号不变；C++主线继续，Jetson恰好P1/P2两个实践副线。Linux每天≤1小时并入真实工程。P1 Reduce/Softmax可独立实现与公平计时后即启动Ascend C K01；不等两项目结束。正式提交截止T-8周冻结Jetson新需求，CANN投入70–80%。单台共享设备，实际版本与环境待核验。",
+    "policy": "原48节编号不变；C++主线继续，Jetson恰好P1/P2两个实践副线。Linux每天≤1小时并入真实工程。P1 Reduce/Softmax可独立实现与公平计时后即启动Ascend C K01；不等两项目结束。正式提交截止T-8周冻结Jetson新需求，CANN投入70–80%。单台Jetson AGX Orin Developer Kit 64GB由用户确认，JetPack与环境待实机核验。",
     "hardware": {
-      "device": "实验室单台Jetson AGX Orin 64GB（依据附件，型号及配置待现场核对）",
+      "device": "NVIDIA Jetson AGX Orin Developer Kit 64GB",
+      "device_status": "用户于2026-11-02明确确认",
       "environment_status": "未核验",
       "competition_target": "2027 CANN/Ascend算子赛事，具体赛种/赛季待选定",
       "submission_deadline": null
@@ -417,10 +540,61 @@
         "goal": "建立带CPU参考、正确性测试、可重复基准、参数搜索与性能报告的GPU算子实验平台，为CANN训练可迁移的方法。",
         "mvp": "Vector Add + Reduce + 稳定Softmax + 可重复Benchmark + 自动调参小工具。",
         "optional": "LayerNorm、GEMM深度优化与更多算子；如影响CANN备赛，先冻结。",
-        "next_step": "先核对设备型号与已安装版本；在C++25–32阶段逐步建立P1-A/B，不提前假定CUDA已运行。",
+        "next_step": "设备型号已由用户确认。现在可准备只读版本盘点；第24节项目验收后，在C++25–32阶段逐步进入P1-A/B，真实开始日期待执行记录。",
         "repository_state": "尚未创建",
         "updated_at": "2026-11-02T12:06:29.102000Z",
         "execution_record_count": 0,
+        "first_execution_date": null,
+        "planning": {
+          "preparation": "2026-11-02起可预约只读盘点；实际执行看阶段记录。",
+          "start_window": "第24节项目验收后，在第25–32节窗口逐步进入P1-A/B；设备环境与基础满足后启动。",
+          "duration": "建议8–10周，跨C++多个阶段；学习进度和设备空闲变化时顺延。",
+          "flow_note": "先正确性，再公平计时和Profiling。失败返回对应实现/边界检查；参数搜索通过独立回归后才能缓存结果。",
+          "definition_of_done": [
+            "Add、Reduce、稳定Softmax均有CPU参考及多shape正确性测试",
+            "基准支持预热、同步、重复与median/p95；记录dtype/shape和设备条件",
+            "自动调参覆盖至少3类shape，报告搜索预算与独立测试shape",
+            "CSV/JSON、性能图、失败实验和CUDA→Ascend C迁移说明可复现",
+            "LayerNorm/GEMM深度优化可选，不阻塞CANN切换"
+          ],
+          "prerequisites": [
+            {
+              "label": "容器、引用与Lambda核心实践",
+              "before": "P1正式开发前",
+              "status": "已满足",
+              "basis": "第18节：已验收；第19节：已验收；第20节：已验收；第21节：已验收；第22节：已验收；第23节：已实践",
+              "note": "沿用原课表已实践/实验通过/验收；第23节专项复习继续保留。"
+            },
+            {
+              "label": "第24节统计工具全部实验与阶段验收",
+              "before": "P1-A/B主开发前",
+              "status": "待完成",
+              "basis": "第24节：学习中",
+              "note": "第24节需完成聚合、排行榜、阈值筛选并做阶段验收；各实验状态以原课表记录为准。"
+            },
+            {
+              "label": "目标板版本、权限与独立工作目录",
+              "before": "P1-A核函数运行前",
+              "status": "待实机核验",
+              "basis": "仅设备型号与64GB容量由用户确认；没有据此推定软件栈、权限或部署已就绪。",
+              "note": "型号/64GB已由用户确认；JetPack/L4T/CUDA/TensorRT、SSH、工具可用性仍要实际核验。"
+            },
+            {
+              "label": "模板/RAII与最小CMake工程",
+              "before": "P1按需补，C++25–40持续巩固",
+              "status": "待完成",
+              "basis": "第25节：未开始；第26节：未开始；第34节：未开始",
+              "note": "入门阶段可先使用小型模板工程；原课程编号不重排，工程与资源安全逐步补齐。"
+            },
+            {
+              "label": "Python/NumPy与浮点误差参考",
+              "before": "P1-C/D前补齐",
+              "status": "待补实验",
+              "basis": "容器、函数、迭代与异常：未开始；shape、stride、广播与向量化：未开始；FP32/FP16、误差与稳定性：未开始",
+              "note": "P1-A/B可先用C++ CPU参考；Softmax与自动调优阶段再扩展NumPy/PyTorch参考。"
+            }
+          ]
+        },
         "stages": [
           {
             "code": "P1-A",
@@ -428,7 +602,41 @@
             "status": "未开始",
             "deliverable": "只读盘点、deviceQuery、vectorAdd；CMake工程、CPU参考、CUDA Events计时。",
             "acceptance": "保存JetPack/L4T/CUDA/gcc、实际输入、误差与耗时；无输出保持待验证。",
-            "transfer": "环境、Host/Device与基准规范"
+            "transfer": "环境、Host/Device与基准规范",
+            "entry": "先完成第24节项目；准备阶段只读盘点可现在预约。未确认软件栈前不安装新版本。",
+            "steps": [
+              {
+                "name": "盘点并锁版本",
+                "action": "记录L4T/JetPack、aarch64、CUDA、编译器、TensorRT和可用内存；查询工具缺失也记录。只读查看功耗/频率/温度，不自行调整共享设备。",
+                "artifact": "docs/hardware.md与原始版本输出"
+              },
+              {
+                "name": "建立独立工程",
+                "action": "在管理者允许的目录创建个人工作区，准备CMake最小工程；记录兼容Samples的tag/commit，先构建Hello C++再编译CUDA样例。",
+                "artifact": "独立工程、编译命令、依赖版本与Git提交"
+              },
+              {
+                "name": "确认设备与向量计算",
+                "action": "运行兼容的deviceQuery和vectorAdd，保存实际设备信息、正确性输出及返回值；失败时不把样例状态标为通过。",
+                "artifact": "环境与样例执行日志"
+              },
+              {
+                "name": "接入CPU参考与校验",
+                "action": "同一输入、shape、dtype和随机种子，分别运行CPU参考和最朴素GPU实现；覆盖小尺寸及非整除边界。",
+                "artifact": "tests、容差定义与误差结果"
+              },
+              {
+                "name": "建立独立计时",
+                "action": "预热后用CUDA Events测核函数时间，并单独记录CPU/端到端时间；同步与数据搬运口径写清，重复运行输出原始记录。",
+                "artifact": "基准runner与CSV/JSON原始数据"
+              }
+            ],
+            "checklist": [
+              "实际板端版本与独立工作区已记录",
+              "样例和自写参考均有真实正确性输出",
+              "计时口径、预热/重复次数和设备条件可复现"
+            ],
+            "troubleshooting": "nvcc或库缺失先核对既有安装和管理员允许范围；ARM64包、CUDA版本或sm_87不兼容时固定兼容版本，不直接升级整机。"
           },
           {
             "code": "P1-B",
@@ -436,7 +644,41 @@
             "status": "未开始",
             "deliverable": "Vector Add与Reduce Sum/Max；比较Block Size、访存模式与归约方法。",
             "acceptance": "多shape含非整除边界，预热与重复运行，正确性全通过，提供对照。",
-            "transfer": "分核、访存、归约与尾块"
+            "transfer": "分核、访存、归约与尾块",
+            "entry": "P1-A环境/参考/计时通过；理解Grid/Block/Thread索引和基本同步。",
+            "steps": [
+              {
+                "name": "写朴素Add",
+                "action": "先实现一线程处理一个元素与边界保护，对齐CPU结果；把连续和非连续访问作为分开的配置。",
+                "artifact": "Add实现与不同N的正确性测试"
+              },
+              {
+                "name": "写朴素Reduce",
+                "action": "从Sum或Max一种归约开始，解释每一步索引、共享内存和同步；先正确处理非2次幂及尾块。",
+                "artifact": "Reduce实现、边界测试和归约图解"
+              },
+              {
+                "name": "一次只改一个因素",
+                "action": "选择若干合法Block大小或归约策略，保持输入、测量条件和版本一致；不要同时改变算法与测量口径。",
+                "artifact": "配置矩阵、原始数据与对照表"
+              },
+              {
+                "name": "观察瓶颈",
+                "action": "用兼容Nsight工具查看访存、计算与同步热点；把Profiling运行和最终独立计时分开。",
+                "artifact": "trace/报告及“证据→假设→改动”记录"
+              },
+              {
+                "name": "做回归与迁移笔记",
+                "action": "在未专门调参的shape上回归，记录退化案例；对照Ascend分核、搬运和尾块思想，注明API不同。",
+                "artifact": "回归结果与Ascend迁移说明"
+              }
+            ],
+            "checklist": [
+              "Add与Reduce多shape/边界正确",
+              "不同配置用同一基准公平比较",
+              "无收益/退化结果也保存"
+            ],
+            "troubleshooting": "结果漂移先查索引、竞争、同步和越界；只有修复正确性后才分析性能。小shape启动开销显著时也应如实报告。"
           },
           {
             "code": "P1-C",
@@ -444,7 +686,41 @@
             "status": "未开始",
             "deliverable": "稳定Softmax与FP32/FP16误差检查；LayerNorm/GEMM为增强项。",
             "acceptance": "对齐NumPy/PyTorch参考，报告容差、误差和延迟，不承诺超过成熟库。",
-            "transfer": "数值稳定性、归约与模型shape"
+            "transfer": "数值稳定性、归约与模型shape",
+            "entry": "P1-B通过；补NumPy/PyTorch参考和浮点误差。Reduce/Softmax可独立实现与公平计时后即可启动Ascend K01。",
+            "steps": [
+              {
+                "name": "建立稳定Softmax参考",
+                "action": "按行先减最大值，再exp、求和和归一化；用固定输入和极值验证稳定性，不把溢出结果当性能胜利。",
+                "artifact": "CPU/NumPy参考与数值测试"
+              },
+              {
+                "name": "实现GPU版本",
+                "action": "沿用归约方法与边界保护，标注行长、线程分工和临时存储；先FP32再扩展支持的低精度。",
+                "artifact": "GPU核函数与设计说明"
+              },
+              {
+                "name": "比较dtype与误差",
+                "action": "明确绝对/相对容差，检查Inf/NaN及输出性质；对不同shape分别比较参考和优化结果。",
+                "artifact": "shape/dtype/误差矩阵"
+              },
+              {
+                "name": "逐步优化和消融",
+                "action": "对搬运、复用或归约策略逐项修改，重复独立计时，解释大/小行长下不同收益。",
+                "artifact": "基线、改进、消融与局限"
+              },
+              {
+                "name": "控制范围并接入CANN",
+                "action": "MVP通过即记录K01启动条件；LayerNorm或GEMM只在不挤占CANN时做增强。",
+                "artifact": "MVP验收清单与K01准备记录"
+              }
+            ],
+            "checklist": [
+              "稳定Softmax多shape正确且容差明确",
+              "优化记录可复现且未预设加速比",
+              "已明确Ascend专项切换，不等P2全部结束"
+            ],
+            "troubleshooting": "误差过大先检查归约精度与指数范围；FP16并不保证无精度损失。"
           },
           {
             "code": "P1-D",
@@ -452,7 +728,36 @@
             "status": "未开始",
             "deliverable": "搜索合法Block/Tile参数，保存结果，按硬件与软件版本复用配置。",
             "acceptance": "至少3类shape，记录搜索预算/调优成本；回归独立测试shape，不只报最好一次。",
-            "transfer": "Tiling参数搜索与shape特化"
+            "transfer": "Tiling参数搜索与shape特化",
+            "entry": "至少Add/Reduce/Softmax参考与基准稳定；能够识别不合法配置和正确性失败。",
+            "steps": [
+              {
+                "name": "定义可控搜索空间",
+                "action": "枚举合法Block/Tile等参数，记录约束和搜索预算；不把无效配置或正确性失败列入最快候选。",
+                "artifact": "配置schema与搜索列表"
+              },
+              {
+                "name": "实现搜索runner",
+                "action": "每种配置先正确性、后预热与重复计时；超时/失败单独记录；最优依据用统一统计量。",
+                "artifact": "runner与每次尝试的结果日志"
+              },
+              {
+                "name": "缓存并验证",
+                "action": "缓存键包含设备、软件/核函数版本、shape、dtype；另设独立shape验证泛化，不只复测训练shape。",
+                "artifact": "最优配置缓存和独立回归"
+              },
+              {
+                "name": "报告成本与边界",
+                "action": "至少3类shape比较默认、手工与自动选择；同时报告搜索耗时和退化案例。",
+                "artifact": "调优结果图与成本/收益报告"
+              }
+            ],
+            "checklist": [
+              "正确性门槛在计时之前",
+              "至少3类shape且有独立测试",
+              "缓存可失效、成本和失败均可追溯"
+            ],
+            "troubleshooting": "不要选某次偶然最快的单样本；共享设备负载或温度变化时重测并记录条件。"
           },
           {
             "code": "P1-E",
@@ -460,7 +765,36 @@
             "status": "未开始",
             "deliverable": "CMake、测试矩阵、CSV/JSON、性能图、失败实验与迁移说明。",
             "acceptance": "按文档可复现；记录预热/重复/median/p95、温度/频率/功耗模式与局限。",
-            "transfer": "竞赛交付、复现与优化日志"
+            "transfer": "竞赛交付、复现与优化日志",
+            "entry": "MVP算子与搜索器已运行，准备进入维护或CANN冲刺。",
+            "steps": [
+              {
+                "name": "整理复现入口",
+                "action": "收敛构建、测试、基准和调优命令，固定必要依赖/提交；未创建仓库时只列拟定结构。",
+                "artifact": "README、CMake与配置样例"
+              },
+              {
+                "name": "归档结果与图表",
+                "action": "原始CSV/JSON保留，图表可从脚本重建；区分CPU、GPU核与端到端计时。",
+                "artifact": "results数据、绘图脚本和报告"
+              },
+              {
+                "name": "补失败与迁移说明",
+                "action": "整理边界问题、无收益方案和CUDA→Ascend的概念映射，明确不能复用API和调优参数。",
+                "artifact": "docs/lessons_for_ascendc.md"
+              },
+              {
+                "name": "验收并冻结范围",
+                "action": "从干净工作目录复现；核对正式T，T−8周后只修复和整理文档，不继续扩充算子清单。",
+                "artifact": "复现记录、MVP清单与维护计划"
+              }
+            ],
+            "checklist": [
+              "他人按文档能复现MVP",
+              "结果、环境和局限齐全",
+              "不以增强项延期CANN"
+            ],
+            "troubleshooting": "缺原始数据的图表重新生成；没有真实运行的命令和性能不要写成已完成成果。"
           }
         ]
       },
@@ -476,6 +810,58 @@
         "repository_state": "尚未创建",
         "updated_at": "2026-11-02T12:06:29.102000Z",
         "execution_record_count": 0,
+        "first_execution_date": null,
+        "planning": {
+          "preparation": "C++25–32阶段可在Mac/实验室PC准备授权样例、模型与Python基础；不计为板端部署成功。",
+          "start_window": "进入C++33–40阶段，具备Python/PyTorch/ONNX与最小工程能力、P1-A/B首轮基准通过后启动P2-A/B。",
+          "duration": "建议10–12周，与P1后半段适度重叠；P2-C及并发优化跨到C++41–48阶段。",
+          "flow_note": "先分别跑通视觉和时序单负载，再测双负载竞争；精度回归失败就返回预处理/导出检查，不能直接追求FPS。",
+          "definition_of_done": [
+            "YOLO/TensorRT单路视觉推理可运行，输入/预处理/任务质量口径固定",
+            "EEG或雷达时序模型可离线回放，PC参考与板端结果按容差核对",
+            "同一Benchmark统一采集预处理/前向/后处理/端到端耗时",
+            "单跑与双跑均有p50/p95、吞吐、超期/丢帧与资源曲线",
+            "一项热点优化有正确性不退化的前后对照；可选增强不阻塞MVP",
+            "部署说明、配置、日志和匿名/公开样例可复现；不公开原始可识别人体数据"
+          ],
+          "prerequisites": [
+            {
+              "label": "第24节数据处理与C++接口基础",
+              "before": "P2-A前",
+              "status": "待完成",
+              "basis": "第24节：学习中",
+              "note": "理解分组/排序、输入校验、引用和结构体，不把模拟延迟当真实性能。"
+            },
+            {
+              "label": "多文件工程、CMake、调试与测试",
+              "before": "P2-A/B阶段逐步具备",
+              "status": "待完成",
+              "basis": "第33节：未开始；第34节：未开始；第35节：未开始；第36节：未开始；第38节：未开始",
+              "note": "不要求等第40节结束才准备素材；实际工程依赖达到后再做板端部署。"
+            },
+            {
+              "label": "Python/PyTorch小模型和张量数据流",
+              "before": "模型导出前",
+              "status": "待补实验",
+              "basis": "容器、函数、迭代与异常：未开始；Tensor、device、autograd 与 nn.Module：未开始；DataLoader、优化器与训练循环：未开始",
+              "note": "能固定预处理、输入shape、dtype、eval模式；ONNX导出另做同输入回归。"
+            },
+            {
+              "label": "P1-A/B：板端正确性与基准经验",
+              "before": "P2主开发前",
+              "status": "待验收",
+              "basis": "P1-A：未开始；P1-B：未开始",
+              "note": "把已有环境、计时和结果存档复用到P2；不复用CUDA成绩作为TensorRT成绩。"
+            },
+            {
+              "label": "TensorRT/ONNX兼容环境与可用模型",
+              "before": "P2-A/B运行前",
+              "status": "待实机核验",
+              "basis": "仅设备型号与64GB容量由用户确认；没有据此推定软件栈、权限或部署已就绪。",
+              "note": "版本跟随板端栈；视觉样例用授权数据。EEG未就绪可选已有雷达轻量模型，仍属P2。"
+            }
+          ]
+        },
         "stages": [
           {
             "code": "P2-A",
@@ -483,7 +869,41 @@
             "status": "未开始",
             "deliverable": "视频/摄像头→YOLO检测→结果；建立TensorRT FP16单模型基线。",
             "acceptance": "实际演示，报告mAP或输出正确性、模型前向与端到端延迟/FPS。",
-            "transfer": "模型部署与推理基线"
+            "transfer": "模型部署与推理基线",
+            "entry": "C++33–40阶段逐步进入；Python/PyTorch基础及P1-A/B基准经验就绪，目标TensorRT环境待实际核对。",
+            "steps": [
+              {
+                "name": "选一个轻量视觉基线",
+                "action": "固定模型版本、授权样例和分辨率，先以视频文件回放，摄像头不是硬性前置。",
+                "artifact": "模型/数据来源与固定评测清单"
+              },
+              {
+                "name": "跑PC参考",
+                "action": "固定eval、预处理、后处理和输入，保存可比较的输出与任务质量；不直接拿别人宣传FPS当本机基线。",
+                "artifact": "PC参考输出与基线指标"
+              },
+              {
+                "name": "按目标栈导出和构建",
+                "action": "核对板端ONNX/TensorRT支持与版本；在兼容目标环境构建引擎，保存构建参数。",
+                "artifact": "ONNX、构建配置与构建日志"
+              },
+              {
+                "name": "跑板端单路",
+                "action": "检查输入布局/dtype/shape，先输出正确性再测FP32/FP16；分别记录预处理、前向和后处理。",
+                "artifact": "单路演示与分段耗时"
+              },
+              {
+                "name": "固定独立测量",
+                "action": "预热、重复回放并记录温度/资源；区分模型FPS与端到端FPS。",
+                "artifact": "单模型Benchmark原始结果"
+              }
+            ],
+            "checklist": [
+              "单路端到端流程真实可运行",
+              "同输入与PC参考可核对",
+              "模型版本和计时口径固定"
+            ],
+            "troubleshooting": "导出失败先定位不支持算子或动态shape；不要在未核对栈时直接升级TensorRT。"
           },
           {
             "code": "P2-B",
@@ -491,7 +911,41 @@
             "status": "未开始",
             "deliverable": "比较PyTorch、ONNX、TensorRT FP32/FP16；INT8为可选。",
             "acceptance": "同一数据划分和预处理，任务指标与数值回归；记录不支持算子/转换失败。",
-            "transfer": "模型编译与精度回归"
+            "transfer": "模型编译与精度回归",
+            "entry": "P2-A单路基线可运行；有固定测试数据和质量评价口径。",
+            "steps": [
+              {
+                "name": "冻结输入和评价",
+                "action": "保持数据切分、预处理、阈值和后处理相同，定义允许的数值误差与任务质量变化。",
+                "artifact": "评测配置与参考输出"
+              },
+              {
+                "name": "逐级对照",
+                "action": "用同一输入比较PyTorch、ONNX参考、TensorRT FP32/FP16，逐级定位差异。",
+                "artifact": "误差与任务指标对照表"
+              },
+              {
+                "name": "检查异常数值",
+                "action": "检查Inf/NaN、极端输入和敏感算子；必要时保留高精度路径，记录原因。",
+                "artifact": "失败输入、修复与回归结果"
+              },
+              {
+                "name": "可选INT8",
+                "action": "只在FP16基线稳定后尝试校准，校准/测试数据分开，测质量损失与性能取舍。",
+                "artifact": "若开展则保留校准配置，否则明确未开始"
+              },
+              {
+                "name": "确定部署配置",
+                "action": "选满足质量门槛的版本；重新测独立时延，保留不能转换或无收益的结果。",
+                "artifact": "可用配置、性能/质量报告"
+              }
+            ],
+            "checklist": [
+              "任务质量与数值误差分别核对",
+              "FP16/INT8未经实测不标通过",
+              "失败配置也可追溯"
+            ],
+            "troubleshooting": "先查布局、标准化、后处理和精度，再怀疑模型本身；不能预设导出后bitwise一致。"
           },
           {
             "code": "P2-C",
@@ -499,7 +953,41 @@
             "status": "未开始",
             "deliverable": "EEGNet/轻量CNN离线窗口；或按课题需要换成雷达轻量模型。",
             "acceptance": "授权数据回放，PC与板端输出一致性；模拟窗口只验证接口，不宣称真实识别。",
-            "transfer": "异构模型统一服务与时序计算"
+            "transfer": "异构模型统一服务与时序计算",
+            "entry": "视觉单路就绪；选择EEG或已有雷达轻量模型之一，数据与模型需实际可用。",
+            "steps": [
+              {
+                "name": "确定第二负载",
+                "action": "在EEGNet/轻量CNN和雷达时序模型中选一个；记录任务、授权数据、窗口长度与质量指标。",
+                "artifact": "负载规格与授权/公开数据说明"
+              },
+              {
+                "name": "准备离线回放",
+                "action": "固定分窗、标准化和采样方式，先用文件窗口回放；无真实模型时只验证接口并标模拟。",
+                "artifact": "回放器与固定输入样例"
+              },
+              {
+                "name": "建立PC参考并导出",
+                "action": "按P2-B同样路径对照质量与数值；记录时序模型不支持的算子及替代实现。",
+                "artifact": "参考输出、ONNX与转换日志"
+              },
+              {
+                "name": "接入统一插件",
+                "action": "统一输入/输出、配置、前后处理接口，保持任务专属质量指标独立。",
+                "artifact": "模型插件与接口测试"
+              },
+              {
+                "name": "验收单负载",
+                "action": "先分别测时序与视觉单跑延迟和资源；不能把模拟窗口称为真实情绪/生命体征识别。",
+                "artifact": "第二模型单跑基线与质量回归"
+              }
+            ],
+            "checklist": [
+              "只有一个时序插件，仍属于P2",
+              "PC/板端输出与任务质量可比较",
+              "单跑基线在并发前建立"
+            ],
+            "troubleshooting": "模型或数据未就绪就保留待验证；优先复用已有雷达课题，不额外创建第三主项目。"
           },
           {
             "code": "P2-D",
@@ -507,7 +995,41 @@
             "status": "未开始",
             "deliverable": "时序定时请求 + 连续视频，统一队列、可配置调度、背压与异步执行。",
             "acceptance": "先分别单跑再并跑，比较p50/p95、吞吐、超时/丢帧和共享内存/温度；不宣称硬实时。",
-            "transfer": "Runtime、调度与尾延迟"
+            "transfer": "Runtime、调度与尾延迟",
+            "entry": "两类负载分别单跑正确且有基线；掌握队列/线程/异步基础。",
+            "steps": [
+              {
+                "name": "定义统一请求",
+                "action": "请求含模型类型、输入、到达时间和可选截止需求；先用可重复回放产生负载。",
+                "artifact": "请求格式与回放配置"
+              },
+              {
+                "name": "实现队列与背压",
+                "action": "限制队列长度，定义拥塞时阻塞/丢弃/降级策略；记录超期和丢帧，避免只统计成功请求。",
+                "artifact": "队列实现与拥塞测试"
+              },
+              {
+                "name": "比较调度策略",
+                "action": "先FIFO，再尝试优先级或批处理；每次只改一个变量，异步Stream不等于硬实时或资源隔离。",
+                "artifact": "策略配置与单/双负载对照"
+              },
+              {
+                "name": "采集系统证据",
+                "action": "对比p50/p95、吞吐、超期/丢帧、共享DRAM/EMC与温度等条件。",
+                "artifact": "统一Benchmark、时间线与资源曲线"
+              },
+              {
+                "name": "确定可接受配置",
+                "action": "在固定质量门槛下比较延迟与吞吐取舍，保留失败或退化区间。",
+                "artifact": "资源竞争报告与推荐配置"
+              }
+            ],
+            "checklist": [
+              "单跑与双跑输入口径一致",
+              "失败/超时请求未从分母中消失",
+              "指标足以解释共享资源竞争"
+            ],
+            "troubleshooting": "尾延迟升高先区分排队、预处理、执行、温控和内存压力；不要直接归因于GPU算力不足。"
           },
           {
             "code": "P2-E",
@@ -515,7 +1037,36 @@
             "status": "未开始",
             "deliverable": "Profiling定位真实热点，选预处理、Batch、内存复用或Kernel中的一个优化点。",
             "acceptance": "精度不退化、真实前后对照和消融；最终耗时在非profiling运行中独立测量。",
-            "transfer": "算子与系统协同"
+            "transfer": "算子与系统协同",
+            "entry": "P2-D已有端到端基线与真实热点证据。",
+            "steps": [
+              {
+                "name": "从时间线定位瓶颈",
+                "action": "区分CPU等待、拷贝、预处理、模型前向和队列耗时，选最重要的一项可控问题。",
+                "artifact": "瓶颈证据与优化假设"
+              },
+              {
+                "name": "做一个小改动",
+                "action": "从内存复用、预处理、Batch、调度或自定义Kernel中择一，不同时混合多项改动。",
+                "artifact": "可单独开关的实现与配置"
+              },
+              {
+                "name": "质量与性能双回归",
+                "action": "同输入、同设备条件、同口径独立测量；Profiling结果不直接当最终耗时。",
+                "artifact": "前后对照、正确性结果与原始数据"
+              },
+              {
+                "name": "消融与局限",
+                "action": "开关改动验证因果，报告不适用的shape/负载；无收益也是有效结果。",
+                "artifact": "消融报告与适用边界"
+              }
+            ],
+            "checklist": [
+              "优化由真实热点驱动",
+              "质量不退化且测量可复现",
+              "明确端到端收益，不只报单核更快"
+            ],
+            "troubleshooting": "优化后变慢先复查测量噪声、异步同步点和负载变化；不预先承诺加速倍数。"
           },
           {
             "code": "P2-F",
@@ -523,7 +1074,36 @@
             "status": "未开始",
             "deliverable": "CLI/API、配置、结构化日志、示例输入、部署和准确率/延迟报告。",
             "acceptance": "可复现启动；不公开可识别人体原始数据；EEG输出只限研究用途。",
-            "transfer": "作品集、实验室工具与课题复用"
+            "transfer": "作品集、实验室工具与课题复用",
+            "entry": "P2 MVP运行、质量与资源竞争实验完成，准备维护/作品集。",
+            "steps": [
+              {
+                "name": "收敛部署入口",
+                "action": "统一CLI/API、配置、日志与模型插件入口，依赖按实际目标栈固定。",
+                "artifact": "部署文档、启动脚本与配置"
+              },
+              {
+                "name": "整理可分享样例",
+                "action": "使用公开或匿名输入，模型质量与性能报告分开；核对上游许可，不上传原始可识别人体数据。",
+                "artifact": "样例、许可证说明与测试步骤"
+              },
+              {
+                "name": "复现与稳定性验收",
+                "action": "从干净工作目录运行，按选定持续时段测稳定性并报告温度/错误率；未测试的时段不补造。",
+                "artifact": "复现记录、连续运行报告与故障清单"
+              },
+              {
+                "name": "归档并服务CANN/课题",
+                "action": "整理个人贡献、迁移经验和研究假设；T−8周之后仅维护，项目结果成熟后再用于实习或论文。",
+                "artifact": "技术报告、演示与后续维护清单"
+              }
+            ],
+            "checklist": [
+              "他人可按文档复现双负载MVP",
+              "样例与数据可合法分享",
+              "不因RTSP/DeepStream等增强项延期主线"
+            ],
+            "troubleshooting": "缺可用模型、测试输出或许可时明确列为未完成；不把计划写成简历实绩。"
           }
         ]
       }
@@ -542,9 +1122,9 @@
         "name": "C++23–24：Lambda与数据处理",
         "time": "当前课次 → 第24节",
         "lane": "主线",
-        "learning": "先补第23节值捕获/引用捕获对照，再交付第24节CLI；不重排48节编号。",
+        "learning": "第23节四项编程实验已实践，专项复习保留；按当前断点完成第24节排行榜、阈值筛选和阶段验收，不重排48节编号。",
         "deliverable": "Jetson只读环境盘点，随后在许可范围内验证SSH和Hello C++；这些均尚未实操。",
-        "gate": "Lambda实际输出与第24节边界测试；型号/JetPack未核验前不安装新栈。",
+        "gate": "Lambda实际输出与第24节边界测试；设备型号已由用户确认；JetPack/软件栈核验前不安装新栈。",
         "budget": "建议C++65% / Jetson25% / 复盘10%，不是实际学习时长"
       },
       {
@@ -2251,7 +2831,7 @@
                 "focus": true,
                 "difficult": false,
                 "knowledge_points": [
-                  "型号与64GB配置现场核对",
+                  "Jetson AGX Orin Developer Kit 64GB（用户确认）",
                   "L4T/JetPack/CUDA/TensorRT版本",
                   "uname -m与ARM64依赖",
                   "sm_87兼容构建",
