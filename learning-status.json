@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "data_version": 21,
-  "updated_at": "2026-11-02T08:06:30.210000Z",
+  "data_version": 23,
+  "updated_at": "2026-11-02T12:06:29.102000Z",
   "updated_at_note": "旧记录可能没有精确保存时间；空值不是同步失败。",
-  "synced_at": "2026-11-02T08:45:06.714419Z",
+  "synced_at": "2026-11-02T12:06:49.563052Z",
   "last_learning_date": "2026-11-02",
   "current_cpp_lesson": {
-    "number": 22,
-    "title": "关联容器",
-    "status": "未开始",
-    "verification": "",
+    "number": 23,
+    "title": "Lambda 表达式",
+    "status": "学习中",
+    "verification": "依据2026-11-02用户上传的教学记录摘要：Lambda第一个实验已验证，平方25，偶数判断1/0，偶数个数3，大于30个数3；[threshold]与[&threshold]的第二个对照实验仅布置，尚无运行输出，第23节不计完成。",
     "review": "",
-    "goal": "map、unordered_map、set 的常用操作，排序性、哈希与复杂度区别。",
-    "acceptance": "实现词频计数，比较 map 与 unordered_map 的输出顺序及适用场景。"
+    "goal": "捕获值/引用、mutable、泛型 lambda，配合 sort/count_if/transform。",
+    "acceptance": "按自定义规则排序结构体数组；辨别引用捕获导致的悬空风险。"
   },
   "cpp_lessons": [
     {
@@ -165,15 +165,15 @@
     {
       "number": 22,
       "title": "关联容器",
-      "status": "未开始",
-      "verification": "",
+      "status": "已验收",
+      "verification": "依据2026-11-02用户上传的教学记录摘要：①map词频CANN3/kernel2/operator1，size3；②find不插入，[]插入CUDA0、更新为5、erase后size3；③map/unordered_map词频相同、遍历顺序不同，contains为1/0；④set对实际数据{CANN,CUDA,operator,CANN,kernel,CANN,kernel}去重4、删除CUDA后3。综合选择题未逐一提交，教学记录已确认第22节验收；不补写Tensor项。",
       "review": ""
     },
     {
       "number": 23,
       "title": "Lambda 表达式",
-      "status": "未开始",
-      "verification": "",
+      "status": "学习中",
+      "verification": "依据2026-11-02用户上传的教学记录摘要：Lambda第一个实验已验证，平方25，偶数判断1/0，偶数个数3，大于30个数3；[threshold]与[&threshold]的第二个对照实验仅布置，尚无运行输出，第23节不计完成。",
       "review": ""
     },
     {
@@ -354,6 +354,16 @@
   ],
   "recent_learning": [
     {
+      "date": "2026-11-02",
+      "track": "C++",
+      "title": "第22节验收与第23节Lambda部分实验",
+      "summary": "关联容器选择、词频、find与[]、set；Lambda基础与捕获。",
+      "experiments_and_verification": "依据2026-11-02用户上传的教学记录摘要：①map词频CANN3/kernel2/operator1，size3；②find不插入，[]插入CUDA0、更新为5、erase后size3；③map/unordered_map词频相同、遍历顺序不同，contains为1/0；④set对实际数据{CANN,CUDA,operator,CANN,kernel,CANN,kernel}去重4、删除CUDA后3。综合选择题未逐一提交，教学记录已确认第22节验收；不补写Tensor项。\n依据2026-11-02用户上传的教学记录摘要：Lambda第一个实验已验证，平方25，偶数判断1/0，偶数个数3，大于30个数3；[threshold]与[&threshold]的第二个对照实验仅布置，尚无运行输出，第23节不计完成。",
+      "mastery": "第22节已验收；第23节学习中，捕获实验待验证。",
+      "open_questions": "第23节值捕获/引用捕获对照待运行；第14节unique_ptr/Rule of Zero待复习。",
+      "next_step": "继续第23节Lambda：运行[threshold]与[&threshold]捕获对照，解释阈值改变前后结果并提交真实输出；通过后再进入第24节数据处理项目。第14节unique_ptr/Rule of Zero自测题仍待复习。"
+    },
+    {
       "date": "2026-11-01",
       "track": "C++",
       "title": "C++ 第18–21节学习日报｜四节已验收",
@@ -384,14 +394,232 @@
       "next_step": "下一次从第18节 std::string 与 std::string_view 开始；另安排第14节 unique_ptr 与 Rule of Zero 复习题。"
     }
   ],
-  "verified_summary": "第1–13节主要练习沿用原进度。2026-10-31日报附有第14节移动赋值和自移动输出、第15节数组统计两组输出、第16节重载及引用增量输出、第17节作用域输出和引用语义问答。第17节随后由用户确认验收；生命周期回答指出局部对象离开作用域后消失、指针悬空，核心判断正确。\n\nLinux 2026-11-01：惠普光影精灵7，Windows + WSL Ubuntu，目录[本地路径已省略]。已验证grep/管道/wc/find/重定向、日志检查三分支、chmod755、bash与直接执行、位置参数及跨目录path_demo.sh。仅有主目录启动的一组路径输出；command -v bash在脚本内已验证。\n\n2026-11-01 C++：第18–21节已验收。string/view复制与观察、分词6/3→7/4；vector统计588/93/3/84与重分配检查；span三类容器求和与重建；STL排序/查找/求和、迭代器失效与erase安全删除均有日报实测依据。第1–17节沿用既有状态。",
-  "open_questions": "第14节：含 unique_ptr 成员且未自定义特殊成员函数的类，为何不能拷贝却可以移动？此自测题待复习。第17节生命周期题已验收，复习时注意 p 是指针，解引用悬空指针是未定义行为。\n\nLinux 待实操：sed修正errror后复测计数为2（未展示输出）；不传参数调用check_log.sh，验证默认文件名（未展示输出）；报错信息补充文件名后重新验证（未展示输出）；查看PATH并运行command -v code（待实操）；对比source/bash/直接执行及$0/BASH_SOURCE[0]（待实操）；补做从脚本所在目录启动的对照输出（尚缺一组）；Git/CMake/GDB小型C++项目综合实践（今日未开展）。\n\n第14节 unique_ptr/Rule of Zero题仍待复习；第22节仅布置map词频实验，未提交运行证据，不标记学习中或验收。视图生命周期、扩容导致引用/span/迭代器失效、旧end失效及erase返回值需持续巩固。",
-  "next_step": "第22节「关联容器」仍未开始：先运行 std::map<std::string,int> 词频统计实验并提交实际输出，再核对 ++counts[word]、结构化绑定、find、it->first / it->second 与 map.size()。随后按48节主线推进；第14节 unique_ptr / Rule of Zero 自测题继续待复习。\n\nLinux：先用sed修正errror并复测，再验证无参数默认文件名和包含文件名的报错；随后补PATH、source和路径对照实验，再做Git/CMake/GDB小项目。C++现有接续点为第22节，每日Linux复习≤1小时。",
-  "linux_and_cann_plan": "保留既定 48 节 C++ 主线，不把未完成课程标记为已完成。\nLinux 复习每天 ≤ 1 小时，优先结合 C++ 工程。\n第 48 节及阶段项目验收后，再依据笔记、代码、测试和 Benchmark 系统复盘，细化 Ascend C/CANN 课程。\n长期目标：2027 CANN 算子竞赛 → 可复现 AI 系统研究 → AI Infra 实习。\n不编造时长、实验结果或掌握程度；实际赛程与投稿时间以官方公告为准。",
+  "verified_summary": "第1–13节主要练习沿用原进度。2026-10-31日报附有第14节移动赋值和自移动输出、第15节数组统计两组输出、第16节重载及引用增量输出、第17节作用域输出和引用语义问答。第17节随后由用户确认验收；生命周期回答指出局部对象离开作用域后消失、指针悬空，核心判断正确。\n\nLinux 2026-11-01：惠普光影精灵7，Windows + WSL Ubuntu，目录[本地路径已省略]。已验证grep/管道/wc/find/重定向、日志检查三分支、chmod755、bash与直接执行、位置参数及跨目录path_demo.sh。仅有主目录启动的一组路径输出；command -v bash在脚本内已验证。\n\n2026-11-01 C++：第18–21节已验收。string/view复制与观察、分词6/3→7/4；vector统计588/93/3/84与重分配检查；span三类容器求和与重建；STL排序/查找/求和、迭代器失效与erase安全删除均有日报实测依据。第1–17节沿用既有状态。\n\n2026-11-02：第22节四组关联容器实验据教学记录已验收；第23节Lambda首个实验输出25、1/0、3、3已验证，捕获对照仍待运行。",
+  "open_questions": "第14节：含 unique_ptr 成员且未自定义特殊成员函数的类，为何不能拷贝却可以移动？此自测题待复习。第17节生命周期题已验收，复习时注意 p 是指针，解引用悬空指针是未定义行为。\n\nLinux 待实操：sed修正errror后复测计数为2（未展示输出）；不传参数调用check_log.sh，验证默认文件名（未展示输出）；报错信息补充文件名后重新验证（未展示输出）；查看PATH并运行command -v code（待实操）；对比source/bash/直接执行及$0/BASH_SOURCE[0]（待实操）；补做从脚本所在目录启动的对照输出（尚缺一组）；Git/CMake/GDB小型C++项目综合实践（今日未开展）。\n\n第14节 unique_ptr/Rule of Zero题仍待复习；视图生命周期、扩容导致引用/span/迭代器失效、旧end失效及erase返回值需持续巩固。\n\n2026-11-02更新：第22节已验收；第23节[threshold]/[&threshold]对照尚未运行。第14节unique_ptr/Rule of Zero和Linux原待实操清单继续保留。Jetson型号/版本、CUDA/TensorRT环境与所有性能结果均待实机核验。",
+  "next_step": "继续第23节Lambda：运行[threshold]与[&threshold]捕获对照，解释阈值改变前后结果并提交真实输出；通过后再进入第24节数据处理项目。第14节unique_ptr/Rule of Zero自测题仍待复习。\n\nLinux：先用sed修正errror并复测，再验证无参数默认文件名和包含文件名的报错；随后补PATH、source和路径对照实验，再做Git/CMake/GDB小项目。C++现有接续点为第23节，每日Linux复习≤1小时。\n\nJetson副线：先只读记录设备与版本；不刷机/升级。P1优先，P2为第二项目；P1 Reduce/Softmax可独立实现和计时后启动Ascend C K01。",
+  "linux_and_cann_plan": "保留既定 48 节 C++ 主线，不把未完成课程标记为已完成。\nLinux 复习每天 ≤ 1 小时，优先结合 C++ 工程。\n按C++阶段逐步细化并行实践，不再等第48节后才开始接触Ascend C；阶段项目仍按真实证据验收。\n长期目标：2027 CANN 算子竞赛 → 可复现 AI 系统研究 → AI Infra 实习。\n不编造时长、实验结果或掌握程度；实际赛程与投稿时间以官方公告为准。\n\n原48节编号不变；C++主线继续，Jetson恰好P1/P2两个实践副线。Linux每天≤1小时并入真实工程。P1 Reduce/Softmax可独立实现与公平计时后即启动Ascend C K01；不等两项目结束。正式提交截止T-8周冻结Jetson新需求，CANN投入70–80%。单台共享设备，实际版本与环境待核验。",
   "learning_path": {
-    "version": "2026-11-01-v1",
-    "goal": "AI Infra工程师：以Ascend/CANN算子优化为近期专业主线，拓展模型、推理与分布式系统。",
-    "policy": "保留原48节C++主线；Linux复习每天≤1小时；后续课程先完成前置与阶段验收；2027赛事日程待公告；软挑为限时可选支线；研究、实习以可复现项目为证据。",
+    "version": "2026-11-02-jetson-v1",
+    "goal": "AI Infra工程师：CANN/Ascend算子竞赛为主目标，Jetson P1算子与P2推理两个实践副线，连接研究和实习。",
+    "policy": "原48节编号不变；C++主线继续，Jetson恰好P1/P2两个实践副线。Linux每天≤1小时并入真实工程。P1 Reduce/Softmax可独立实现与公平计时后即启动Ascend C K01；不等两项目结束。正式提交截止T-8周冻结Jetson新需求，CANN投入70–80%。单台共享设备，实际版本与环境待核验。",
+    "hardware": {
+      "device": "实验室单台Jetson AGX Orin 64GB（依据附件，型号及配置待现场核对）",
+      "environment_status": "未核验",
+      "competition_target": "2027 CANN/Ascend算子赛事，具体赛种/赛季待选定",
+      "submission_deadline": null
+    },
+    "projects": [
+      {
+        "code": "P1",
+        "name": "Jetson Kernel Lab",
+        "priority": "P0 · 优先",
+        "status": "未开始",
+        "goal": "建立带CPU参考、正确性测试、可重复基准、参数搜索与性能报告的GPU算子实验平台，为CANN训练可迁移的方法。",
+        "mvp": "Vector Add + Reduce + 稳定Softmax + 可重复Benchmark + 自动调参小工具。",
+        "optional": "LayerNorm、GEMM深度优化与更多算子；如影响CANN备赛，先冻结。",
+        "next_step": "先核对设备型号与已安装版本；在C++25–32阶段逐步建立P1-A/B，不提前假定CUDA已运行。",
+        "repository_state": "尚未创建",
+        "updated_at": "2026-11-02T12:06:29.102000Z",
+        "execution_record_count": 0,
+        "stages": [
+          {
+            "code": "P1-A",
+            "name": "环境与基准",
+            "status": "未开始",
+            "deliverable": "只读盘点、deviceQuery、vectorAdd；CMake工程、CPU参考、CUDA Events计时。",
+            "acceptance": "保存JetPack/L4T/CUDA/gcc、实际输入、误差与耗时；无输出保持待验证。",
+            "transfer": "环境、Host/Device与基准规范"
+          },
+          {
+            "code": "P1-B",
+            "name": "访存与并行",
+            "status": "未开始",
+            "deliverable": "Vector Add与Reduce Sum/Max；比较Block Size、访存模式与归约方法。",
+            "acceptance": "多shape含非整除边界，预热与重复运行，正确性全通过，提供对照。",
+            "transfer": "分核、访存、归约与尾块"
+          },
+          {
+            "code": "P1-C",
+            "name": "模型高频算子",
+            "status": "未开始",
+            "deliverable": "稳定Softmax与FP32/FP16误差检查；LayerNorm/GEMM为增强项。",
+            "acceptance": "对齐NumPy/PyTorch参考，报告容差、误差和延迟，不承诺超过成熟库。",
+            "transfer": "数值稳定性、归约与模型shape"
+          },
+          {
+            "code": "P1-D",
+            "name": "自动调优",
+            "status": "未开始",
+            "deliverable": "搜索合法Block/Tile参数，保存结果，按硬件与软件版本复用配置。",
+            "acceptance": "至少3类shape，记录搜索预算/调优成本；回归独立测试shape，不只报最好一次。",
+            "transfer": "Tiling参数搜索与shape特化"
+          },
+          {
+            "code": "P1-E",
+            "name": "工程收尾",
+            "status": "未开始",
+            "deliverable": "CMake、测试矩阵、CSV/JSON、性能图、失败实验与迁移说明。",
+            "acceptance": "按文档可复现；记录预热/重复/median/p95、温度/频率/功耗模式与局限。",
+            "transfer": "竞赛交付、复现与优化日志"
+          }
+        ]
+      },
+      {
+        "code": "P2",
+        "name": "Jetson Edge Inference",
+        "priority": "P1 · 第二优先",
+        "status": "未开始",
+        "goal": "一个开源视觉基线 + 一个实验室时序模型，统一模型导出、调度、监控与评测；研究同板资源竞争和尾延迟。",
+        "mvp": "YOLO TensorRT单路推理 + EEG或雷达时序离线窗口 + 统一Benchmark + 单跑/双跑资源竞争实验。",
+        "optional": "INT8、多路摄像头、RTSP、DeepStream和大模型Agent接入；不作为MVP必需。",
+        "next_step": "先准备合法的视觉样例与小型时序基线；完成Python/PyTorch/ONNX前置后进入P2-A。",
+        "repository_state": "尚未创建",
+        "updated_at": "2026-11-02T12:06:29.102000Z",
+        "execution_record_count": 0,
+        "stages": [
+          {
+            "code": "P2-A",
+            "name": "视觉单模型",
+            "status": "未开始",
+            "deliverable": "视频/摄像头→YOLO检测→结果；建立TensorRT FP16单模型基线。",
+            "acceptance": "实际演示，报告mAP或输出正确性、模型前向与端到端延迟/FPS。",
+            "transfer": "模型部署与推理基线"
+          },
+          {
+            "code": "P2-B",
+            "name": "模型转换与精度",
+            "status": "未开始",
+            "deliverable": "比较PyTorch、ONNX、TensorRT FP32/FP16；INT8为可选。",
+            "acceptance": "同一数据划分和预处理，任务指标与数值回归；记录不支持算子/转换失败。",
+            "transfer": "模型编译与精度回归"
+          },
+          {
+            "code": "P2-C",
+            "name": "时序模型插件",
+            "status": "未开始",
+            "deliverable": "EEGNet/轻量CNN离线窗口；或按课题需要换成雷达轻量模型。",
+            "acceptance": "授权数据回放，PC与板端输出一致性；模拟窗口只验证接口，不宣称真实识别。",
+            "transfer": "异构模型统一服务与时序计算"
+          },
+          {
+            "code": "P2-D",
+            "name": "双模型调度",
+            "status": "未开始",
+            "deliverable": "时序定时请求 + 连续视频，统一队列、可配置调度、背压与异步执行。",
+            "acceptance": "先分别单跑再并跑，比较p50/p95、吞吐、超时/丢帧和共享内存/温度；不宣称硬实时。",
+            "transfer": "Runtime、调度与尾延迟"
+          },
+          {
+            "code": "P2-E",
+            "name": "热点优化",
+            "status": "未开始",
+            "deliverable": "Profiling定位真实热点，选预处理、Batch、内存复用或Kernel中的一个优化点。",
+            "acceptance": "精度不退化、真实前后对照和消融；最终耗时在非profiling运行中独立测量。",
+            "transfer": "算子与系统协同"
+          },
+          {
+            "code": "P2-F",
+            "name": "工程交付",
+            "status": "未开始",
+            "deliverable": "CLI/API、配置、结构化日志、示例输入、部署和准确率/延迟报告。",
+            "acceptance": "可复现启动；不公开可识别人体原始数据；EEG输出只限研究用途。",
+            "transfer": "作品集、实验室工具与课题复用"
+          }
+        ]
+      }
+    ],
+    "phases": [
+      {
+        "name": "Linux起步与环境搭建",
+        "time": "2026.10 · 已有记录",
+        "lane": "基础",
+        "learning": "保留Shell、权限、路径、Git与构建记录；每日复习≤1小时，逐步迁移到Jetson工程。",
+        "deliverable": "现有脚本与路径实验；继续sed、默认参数和source的待实操清单。",
+        "gate": "保留未验证边界，不因新计划标记已掌握。",
+        "budget": "已有时长沿用真实记录"
+      },
+      {
+        "name": "C++23–24：Lambda与数据处理",
+        "time": "当前课次 → 第24节",
+        "lane": "主线",
+        "learning": "先补第23节值捕获/引用捕获对照，再交付第24节CLI；不重排48节编号。",
+        "deliverable": "Jetson只读环境盘点，随后在许可范围内验证SSH和Hello C++；这些均尚未实操。",
+        "gate": "Lambda实际输出与第24节边界测试；型号/JetPack未核验前不安装新栈。",
+        "budget": "建议C++65% / Jetson25% / 复盘10%，不是实际学习时长"
+      },
+      {
+        "name": "RAII与张量桥接 + P1-A/B",
+        "time": "C++25–32阶段 · 按验收推进",
+        "lane": "主线",
+        "learning": "模板、RAII、智能指针；并行补Python/NumPy、张量shape、浮点误差和CUDA基础。",
+        "deliverable": "P1环境/基准→Vector Add→Reduce；CPU参考、CUDA Events、合法Block与边界测试。",
+        "gate": "P1-A/B有实测记录；先实现正确性，不预设性能提升或GPU已可用。",
+        "budget": "P1总量建议8–10周，可跨后续C++阶段；按设备空闲调整"
+      },
+      {
+        "name": "工程化 + P1-C/D + P2-A/B + K01",
+        "time": "C++33–40阶段 · 与项目适度并行",
+        "lane": "主线",
+        "learning": "CMake、测试、调试；补PyTorch/ONNX和轻量模型基础。",
+        "deliverable": "P1 Softmax与自动调优；P2 YOLO/TensorRT单模型；启动Ascend C K01。",
+        "gate": "一旦Reduce/Softmax可独立实现且公平计时，就进入K01；不等P2做完。",
+        "budget": "成熟期建议C++/系统40% / P1与P2合计40% / Ascend C20%"
+      },
+      {
+        "name": "CPU性能 + P1-E + P2-C/D/E/F + K02",
+        "time": "C++41–48阶段 · 项目收尾",
+        "lane": "主线",
+        "learning": "Cache、Benchmark、Profiling、并发和CPU算子；Ascend C Tiling/测试同步推进。",
+        "deliverable": "P1复现报告；P2时序插件、双负载竞争与一个热点优化；CANN云端Add/Reduce。",
+        "gate": "P1/P2分别按MVP验收；EEG可换为雷达插件，仍属P2；NPU成绩独立核验。",
+        "budget": "P2建议10–12周，与P1后半段适度并行；增强项可压缩"
+      },
+      {
+        "name": "冻结Jetson新增需求，CANN切换为主线",
+        "time": "正式提交截止日T - 8周 → 提交",
+        "lane": "竞赛支线",
+        "learning": "Ascend C语法、GM/Local Memory、Tiling、流水与真题，按官方目标硬件和版本训练。",
+        "deliverable": "真实性能、正确性回归、提交与复现；Jetson仅修复和文档整理。",
+        "gate": "正式T、目标赛季与硬件待对应公告确认；报名截止不能代替提交截止。",
+        "budget": "CANN建议70–80%或更高，优先压缩P2增强功能；软挑可选且不挤占"
+      },
+      {
+        "name": "推理引擎与模型体系继续深化",
+        "time": "P2基线成熟后 · 非竞赛冲刺期",
+        "lane": "拓展",
+        "learning": "保留Transformer/LLM、KV Cache、vLLM、量化和系统调度课程；从P2经验迁移到通用模型服务。",
+        "deliverable": "作为P2后续扩展，不增加第三个竞赛前核心项目。",
+        "gate": "先单模型再并发，有精度与端到端指标；比赛冲刺期间不扩新系统。",
+        "budget": "按阶段复盘和设备条件细化"
+      },
+      {
+        "name": "分布式训练与通信补全",
+        "time": "单卡训练稳定且资源可用后",
+        "lane": "拓展",
+        "learning": "DDP→FSDP/ZeRO→TP/PP；CPU/Gloo先验证机制，真实多卡再测扩展性。",
+        "deliverable": "依赖实际资源的课程实验；单台Jetson不当作多卡集群。",
+        "gate": "不以单卡或模拟结果声称完成多设备性能验收。",
+        "budget": "不阻塞CANN或已有项目实习申请"
+      },
+      {
+        "name": "EEG或雷达插件 → 可复现研究",
+        "time": "从P2时序基线启动 · 贯穿研究",
+        "lane": "研究支线",
+        "learning": "固定任务质量与数据切分，研究流式窗口、动态shape、内存/调度与端到端瓶颈。",
+        "deliverable": "课题负载纳入P2；公平基线、创新假设、消融、多场景与局限形成论文依据。",
+        "gate": "没有实测不宣称识别或医疗效果；系统提速本身不等于论文创新。",
+        "budget": "原雷达科研主线保留，按实验室实际模型选择插件"
+      },
+      {
+        "name": "两项目作品集与AI Infra实习",
+        "time": "P1/P2形成可复现MVP后 · 2027滚动准备",
+        "lane": "职业支线",
+        "learning": "C++/系统/算法/模型面试；讲清瓶颈、优化依据和CUDA到Ascend迁移边界。",
+        "deliverable": "P1算子/自动调优 + P2端到端推理，各有仓库、报告、贡献说明。",
+        "gate": "仓库尚未创建；有真实代码和结果后再写入简历，不预先保证论文或录用。",
+        "budget": "不必等所有拓展课学完；按JD反馈调整"
+      }
+    ],
     "domains": [
       {
         "id": "linux",
@@ -673,7 +901,7 @@
               },
               {
                 "title": "关联容器、Lambda 与阶段项目",
-                "status": "未开始",
+                "status": "进行中",
                 "focus": true,
                 "difficult": false,
                 "knowledge_points": [
@@ -1328,7 +1556,7 @@
           {
             "code": "K01",
             "title": "Ascend 编程模型与基础算子",
-            "prerequisites": "C++48阶段复盘；P02；S01–S02；环境可用",
+            "prerequisites": "C++25–40相关基础；P02与S01–S02逐步补；P1 Reduce/Softmax可独立实现及公平计时后启动，不等待P2结束",
             "acceptance": "搭建固定版本环境；实现 Add/广播/Reduce 并对齐 NumPy/PyTorch 的参考输出。",
             "topics": [
               {
@@ -2000,6 +2228,201 @@
                   "申请记录",
                   "面试复盘",
                   "按反馈调整学习"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "jetson",
+        "name": "Jetson / CUDA / TensorRT",
+        "priority": "实践副线 · 恰好两个核心项目",
+        "modules": [
+          {
+            "code": "J01",
+            "title": "共享设备、ARM64与版本盘点",
+            "prerequisites": "C++23–24；Linux基础",
+            "acceptance": "只读记录型号、L4T/JetPack、CUDA、编译器、可用内存与工具；获许可后再做SSH和独立工程，不刷机升级。",
+            "topics": [
+              {
+                "title": "Jetson环境与兼容版本",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "型号与64GB配置现场核对",
+                  "L4T/JetPack/CUDA/TensorRT版本",
+                  "uname -m与ARM64依赖",
+                  "sm_87兼容构建",
+                  "不直接安装最新版"
+                ]
+              },
+              {
+                "title": "SSH、Git与板端CMake工程",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "只读检查后确认访问许可",
+                  "Mac SSH与共享设备目录",
+                  "Git与独立工作目录",
+                  "板端Hello C++和CMake",
+                  "不覆盖实验室现有项目"
+                ]
+              },
+              {
+                "title": "共享DRAM、功耗与性能测量",
+                "status": "未开始",
+                "focus": false,
+                "difficult": true,
+                "knowledge_points": [
+                  "CPU/iGPU共享物理DRAM",
+                  "Device/Pinned/Managed缓存与同步",
+                  "tegrastats资源采样",
+                  "记录功耗模式/温度/频率",
+                  "零拷贝不预设更快"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "J02",
+            "title": "P1 CUDA Kernel Lab与自动调优",
+            "prerequisites": "C++25–32分步进入；Python/NumPy参考同步补；CMake/测试支撑",
+            "acceptance": "Vector Add + Reduce + 稳定Softmax + 可重复Benchmark + 自动调参小工具。；阶段A–E逐项验收。",
+            "topics": [
+              {
+                "title": "CUDA并行、访存与归约",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "Grid/Block/Thread与索引",
+                  "连续访存与同步",
+                  "Vector Add与Reduce Sum/Max",
+                  "尾块/边界/非整除shape",
+                  "CPU/NumPy参考"
+                ]
+              },
+              {
+                "title": "Softmax、参数搜索与正确性",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "稳定Softmax与FP32/FP16误差",
+                  "合法Block/Tile搜索空间",
+                  "至少3类shape",
+                  "调优耗时与独立测试集",
+                  "按硬件和版本缓存配置"
+                ]
+              },
+              {
+                "title": "Nsight、独立计时与复现报告",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "CUDA Events与同步",
+                  "Nsight Systems端到端时间线",
+                  "Nsight Compute单核瓶颈",
+                  "预热/重复/median/p95",
+                  "剖析和最终计时分开"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "J03",
+            "title": "P2 TensorRT双负载推理",
+            "prerequisites": "Python/PyTorch/ONNX小模型；C++33–40工程；先单路再双负载",
+            "acceptance": "YOLO TensorRT单路推理 + EEG或雷达时序离线窗口 + 统一Benchmark + 单跑/双跑资源竞争实验。；阶段A–F逐项验收，时序插件可选EEG或雷达，不新增第三主项目。",
+            "topics": [
+              {
+                "title": "YOLO导出、TensorRT与精度回归",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "PyTorch→ONNX→TensorRT",
+                  "目标板兼容栈构建引擎",
+                  "FP32/FP16任务指标回归",
+                  "固定预处理/后处理",
+                  "INT8为可选增强"
+                ]
+              },
+              {
+                "title": "EEG / 雷达时序插件",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "EEGNet或轻量1D-CNN",
+                  "离线分窗和标准化",
+                  "合法授权或公开数据",
+                  "雷达插件可替换EEG",
+                  "模拟窗口不等于真实结果"
+                ]
+              },
+              {
+                "title": "双负载调度、背压与尾延迟",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "视觉和时序单跑基线",
+                  "请求队列/优先级/背压",
+                  "异步并发与共享资源竞争",
+                  "p50/p95/吞吐/超期率",
+                  "不把Streams当硬实时保证"
+                ]
+              }
+            ]
+          },
+          {
+            "code": "J04",
+            "title": "CUDA到Ascend C迁移与竞赛切换",
+            "prerequisites": "P1 Reduce/Softmax能独立实现并公平计时；不等待P2结束",
+            "acceptance": "K01云上Add/Reduce正确性与K02 Tiling独立验收；T-8周冻结Jetson新需求。",
+            "topics": [
+              {
+                "title": "Block/Tile到Host Tiling映射",
+                "status": "未开始",
+                "focus": true,
+                "difficult": true,
+                "knowledge_points": [
+                  "Block/Tile与Host Tiling",
+                  "Shared Memory与GM/Local Memory差异",
+                  "搬运/归约/尾块/同步思想",
+                  "CUDA代码和参数不可直接复用",
+                  "昇腾独立精度与性能测试"
+                ]
+              },
+              {
+                "title": "Ascend C云端专项与真题",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "P1 Reduce/Softmax后启动K01",
+                  "云上Add/Reduce与CPU参考",
+                  "K02 Tiling/流水/多核",
+                  "官方硬件/版本/赛题核验",
+                  "未取得NPU不算上板通过"
+                ]
+              },
+              {
+                "title": "T-8周冻结、作品集与研究",
+                "status": "未开始",
+                "focus": true,
+                "difficult": false,
+                "knowledge_points": [
+                  "正式提交截止日T待确认",
+                  "T-8周停止Jetson新增需求",
+                  "CANN投入提高到70–80%",
+                  "P2附加功能优先压缩",
+                  "恰好两个核心项目与实习作品"
                 ]
               }
             ]
