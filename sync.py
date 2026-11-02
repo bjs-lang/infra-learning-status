@@ -55,7 +55,18 @@ def project_plan(value):
                 topics.append({'title': clean(t.get('title'), 180), 'status': clean(t.get('status'), 40), 'focus': t.get('focus') is True, 'difficult': t.get('difficult') is True, 'knowledge_points': [clean(k, 180) for k in t.get('knowledgePoints', [])[:20]]})
             modules.append({'code': clean(u.get('code'), 30), 'title': clean(u.get('title'), 180), 'prerequisites': clean(u.get('prerequisites'), 400), 'acceptance': clean(u.get('acceptance'), 700), 'topics': topics})
         domains.append({'id': clean(d.get('id'), 40), 'name': clean(d.get('name'), 100), 'priority': clean(d.get('priority'), 160), 'modules': modules})
-    return {'version': clean(value.get('version'), 60), 'goal': clean(value.get('goal'), 400), 'policy': clean(value.get('policy'), 1000), 'domains': domains}
+    hardware = value.get('hardware')
+    if isinstance(hardware, dict):
+        hardware = {'device': clean(hardware.get('device'), 400), 'environment_status': clean(hardware.get('environmentStatus'), 100), 'competition_target': clean(hardware.get('competitionTarget'), 240), 'submission_deadline': date_only(hardware.get('submissionDeadline'))}
+    else:
+        hardware = None
+    projects = []
+    for p in value.get('projects', [])[:2]:
+        stages = [{'code': clean(st.get('code'), 30), 'name': clean(st.get('name'), 180), 'status': clean(st.get('status'), 40), 'deliverable': clean(st.get('deliverable'), 800), 'acceptance': clean(st.get('acceptance'), 1000), 'transfer': clean(st.get('transfer'), 300)} for st in p.get('stages', [])[:10]]
+        count = p.get('executionRecordCount', 0)
+        projects.append({'code': clean(p.get('code'), 20), 'name': clean(p.get('name'), 180), 'priority': clean(p.get('priority'), 80), 'status': clean(p.get('status'), 40), 'goal': clean(p.get('goal'), 800), 'mvp': clean(p.get('mvp'), 800), 'optional': clean(p.get('optional'), 600), 'next_step': clean(p.get('nextStep'), 800), 'repository_state': clean(p.get('repositoryState'), 100), 'updated_at': timestamp(p.get('updatedAt')), 'execution_record_count': count if type(count) is int and count >= 0 else 0, 'stages': stages})
+    phases = [{'name': clean(p.get('name'), 240), 'time': clean(p.get('time'), 180), 'lane': clean(p.get('lane'), 80), 'learning': clean(p.get('learning'), 1000), 'deliverable': clean(p.get('deliverable'), 1000), 'gate': clean(p.get('gate'), 1000), 'budget': clean(p.get('budget'), 600)} for p in value.get('phases', [])[:20]]
+    return {'version': clean(value.get('version'), 60), 'goal': clean(value.get('goal'), 400), 'policy': clean(value.get('policy'), 1000), 'hardware': hardware, 'projects': projects, 'phases': phases, 'domains': domains}
 
 def project(source, synced_at):
     if source.get('schemaVersion') != 1:
@@ -93,6 +104,17 @@ def markdown(data):
     plan = data.get('learning_path')
     if plan:
         lines += ['', '## AI Infra全体系学习路线', plan['goal'], plan['policy'], '规划版本：' + plan['version']]
+        hardware = plan.get('hardware')
+        if hardware:
+            lines += ['', '## 设备与竞赛锚点', hardware['device'], '环境状态：' + hardware['environment_status'], '目标赛事：' + hardware['competition_target'], '正式提交截止T：' + (hardware['submission_deadline'] or '待核实；报名截止不作为T')]
+        for p in plan.get('projects', []):
+            lines += ['', '### ' + p['code'] + ' ' + p['name'] + '｜' + p['status'], p['goal'], 'MVP：' + p['mvp'], '可选增强：' + p['optional'], '下一步：' + p['next_step'], '仓库：' + p['repository_state'], '实际执行记录数：' + str(p['execution_record_count'])]
+            for st in p['stages']:
+                lines += ['- ' + st['code'] + ' ' + st['name'] + '｜' + st['status'], '  交付：' + st['deliverable'], '  验收：' + st['acceptance']]
+        if plan.get('phases'):
+            lines += ['', '## 学习与实践时间轴']
+        for p in plan.get('phases', []):
+            lines += ['- ' + p['time'] + '｜' + p['name'], '  学习：' + p['learning'], '  实践：' + p['deliverable'], '  门槛：' + p['gate'], '  建议投入：' + p['budget']]
         for d in plan['domains']:
             lines += ['', '### ' + d['name'] + '｜' + d['priority']]
             for u in d['modules']:
