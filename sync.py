@@ -57,7 +57,7 @@ def project_plan(value):
         domains.append({'id': clean(d.get('id'), 40), 'name': clean(d.get('name'), 100), 'priority': clean(d.get('priority'), 160), 'modules': modules})
     hardware = value.get('hardware')
     if isinstance(hardware, dict):
-        hardware = {'device': clean(hardware.get('device'), 400), 'device_status': clean(hardware.get('deviceStatus'), 160), 'environment_status': clean(hardware.get('environmentStatus'), 100), 'competition_target': clean(hardware.get('competitionTarget'), 240), 'submission_deadline': date_only(hardware.get('submissionDeadline'))}
+        hardware = {'device': clean(hardware.get('device'), 400), 'device_status': clean(hardware.get('deviceStatus'), 160), 'environment_status': clean(hardware.get('environmentStatus'), 100), 'preparation_status': clean(hardware.get('preparationStatus'), 180), 'preparation_window': clean(hardware.get('preparationWindow'), 250), 'first_connection_steps': [clean(t, 500) for t in hardware.get('firstConnectionSteps', [])[:10]], 'competition_target': clean(hardware.get('competitionTarget'), 240), 'submission_deadline': date_only(hardware.get('submissionDeadline'))}
     else:
         hardware = None
     projects = []
@@ -72,6 +72,19 @@ def project_plan(value):
     phases = [{'name': clean(p.get('name'), 240), 'time': clean(p.get('time'), 180), 'lane': clean(p.get('lane'), 80), 'learning': clean(p.get('learning'), 1000), 'deliverable': clean(p.get('deliverable'), 1000), 'gate': clean(p.get('gate'), 1000), 'budget': clean(p.get('budget'), 600)} for p in value.get('phases', [])[:20]]
     return {'version': clean(value.get('version'), 60), 'goal': clean(value.get('goal'), 400), 'policy': clean(value.get('policy'), 1000), 'hardware': hardware, 'projects': projects, 'phases': phases, 'domains': domains}
 
+def learning_focus(value):
+    if not isinstance(value, dict):
+        return None
+    return {
+        'priority': clean(value.get('priority'), 50),
+        'difficulty': clean(value.get('difficulty'), 600),
+        'method': clean(value.get('method'), 600),
+        'application': clean(value.get('application'), 700),
+        'planned_practice': clean(value.get('plannedPractice'), 700),
+        'review_tasks': [clean(t, 500) for t in value.get('reviewTasks', [])[:10]],
+        'verification_boundary': clean(value.get('verificationBoundary'), 600),
+    }
+
 def project(source, synced_at):
     if source.get('schemaVersion') != 1:
         raise ValueError('unsupported source schema')
@@ -82,7 +95,7 @@ def project(source, synced_at):
     if len(lessons) != 48 or {l.get('number') for l in lessons} != set(range(1, 49)):
         raise ValueError('incomplete 48-lesson data')
     completed = {'已实践', '已实验通过', '已验收'}
-    courses = [{'number': l['number'], 'title': clean(l.get('title'), 160), 'status': clean(l.get('status'), 40), 'verification': clean(l.get('verification'), 800), 'review': clean(l.get('review'), 700), 'experiments': [{'id': clean(e.get('id'), 30), 'title': clean(e.get('title'), 180), 'status': clean(e.get('status'), 40), 'evidence': clean(e.get('evidence'), 800), 'expected_only': clean(e.get('expectedOnly'), 500)} for e in l.get('experiments', [])[:15]]} for l in sorted(lessons, key=lambda x: x['number'])]
+    courses = [{'number': l['number'], 'title': clean(l.get('title'), 160), 'status': clean(l.get('status'), 40), 'verification': clean(l.get('verification'), 800), 'review': clean(l.get('review'), 1000), 'learning_focus': learning_focus(l.get('learningFocus')), 'experiments': [{'id': clean(e.get('id'), 30), 'title': clean(e.get('title'), 180), 'status': clean(e.get('status'), 40), 'evidence': clean(e.get('evidence'), 800), 'expected_only': clean(e.get('expectedOnly'), 500)} for e in l.get('experiments', [])[:15]]} for l in sorted(lessons, key=lambda x: x['number'])]
     current = next((l for l in courses if l['status'] not in completed), None)
     original_current = source.get('currentCppLesson')
     if (original_current.get('number') if original_current else None) != (current['number'] if current else None):
@@ -107,12 +120,18 @@ def markdown(data):
         for e in l.get('experiments', []):
             lines += ['  - ' + e['title'] + '｜' + e['status'] + '｜' + e['evidence'] + ('｜仅预期、尚未实测：' + e['expected_only'] if e['expected_only'] else '')]
 
+        focus = l.get('learning_focus')
+        if focus:
+            lines += ['  - 难点：' + focus['difficulty'], '    判断方法：' + focus['method'], '    实际用途：' + focus['application'], '    后续练习（未验收）：' + focus['planned_practice'], '    复习：' + '；'.join(focus['review_tasks']), '    验证边界：' + focus['verification_boundary']]
+
     plan = data.get('learning_path')
     if plan:
         lines += ['', '## AI Infra全体系学习路线', plan['goal'], plan['policy'], '规划版本：' + plan['version']]
         hardware = plan.get('hardware')
         if hardware:
             lines += ['', '## 设备与竞赛锚点', hardware['device'], '环境状态：' + hardware['environment_status'], '目标赛事：' + hardware['competition_target'], '正式提交截止T：' + (hardware['submission_deadline'] or '待核实；报名截止不作为T')]
+            lines += ['首次连接：' + hardware.get('preparation_status', ''), '准备窗口：' + hardware.get('preparation_window', '')]
+            lines += ['- ' + t for t in hardware.get('first_connection_steps', [])]
         for p in plan.get('projects', []):
             lines += ['', '### ' + p['code'] + ' ' + p['name'] + '｜' + p['status'], p['goal'], 'MVP：' + p['mvp'], '可选增强：' + p['optional'], '下一步：' + p['next_step'], '仓库：' + p['repository_state'], '实际执行记录数：' + str(p['execution_record_count'])]
             guide = p.get('planning', {})
