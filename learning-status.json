@@ -1,41 +1,20 @@
 {
   "schema_version": 1,
-  "data_version": 30,
-  "updated_at": "2026-11-03T07:50:42.171000Z",
+  "data_version": 32,
+  "updated_at": "2026-11-03T10:14:10.305000Z",
   "updated_at_note": "旧记录可能没有精确保存时间；空值不是同步失败。",
-  "synced_at": "2026-11-03T08:25:56.096488Z",
+  "synced_at": "2026-11-03T10:14:33.724366Z",
   "last_learning_date": "2026-11-03",
   "current_cpp_lesson": {
-    "number": 24,
-    "title": "阶段项目：数据处理工具",
-    "status": "学习中",
-    "verification": "2026-11-02：第24节实验1已验收，修正MaxMul为MatMul后，Add count2 avg0.16、MatMul count2 avg1.74、ReLU count1 avg0.09、Softmax count2 avg0.70 ms；这些是模拟延迟。实验2排行榜仅讲解/布置，预期输出不是实测；实验3未开始。",
+    "number": 29,
+    "title": "异常与资源安全",
+    "status": "未开始",
+    "verification": "",
     "review": "",
-    "experiments": [
-      {
-        "id": "24-1",
-        "title": "模拟算子平均延迟聚合",
-        "status": "已验收",
-        "evidence": "修正MatMul拼写后：Add 2/0.16，MatMul 2/1.74，ReLU 1/0.09，Softmax 2/0.70（count/模拟ms）。",
-        "expected_only": ""
-      },
-      {
-        "id": "24-2",
-        "title": "map→vector→sort+Lambda排行榜",
-        "status": "待运行",
-        "evidence": "尚无实际编译运行输出。",
-        "expected_only": "预测顺序MatMul→Softmax→Add→ReLU，不能当作实验结果。"
-      },
-      {
-        "id": "24-3",
-        "title": "慢算子阈值筛选",
-        "status": "未开始",
-        "evidence": "实验2通过后再实施；无输出。",
-        "expected_only": ""
-      }
-    ],
-    "goal": "串联 string、vector、map、算法、函数与基本异常输入处理。",
-    "acceptance": "完成 CSV/文本数据统计 CLI：读取→校验→统计→输出；提交 README、样例输入与至少 5 个边界测试。"
+    "learning_focus": null,
+    "experiments": [],
+    "goal": "try/catch、异常传播、RAII、noexcept、基本/强异常安全保证。",
+    "acceptance": "模拟函数中途抛异常，证明智能指针/vector 资源得到清理；给出失败路径测试。"
   },
   "cpp_lessons": [
     {
@@ -44,6 +23,7 @@
       "status": "已实践",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -52,6 +32,7 @@
       "status": "已实践",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -60,6 +41,7 @@
       "status": "已实践",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -68,6 +50,7 @@
       "status": "已实践",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -76,6 +59,7 @@
       "status": "已实践",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -84,6 +68,7 @@
       "status": "已实践",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -92,6 +77,7 @@
       "status": "已实践",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -100,6 +86,7 @@
       "status": "已实践",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -108,6 +95,7 @@
       "status": "已实践",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -116,6 +104,7 @@
       "status": "已实践",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -124,6 +113,7 @@
       "status": "已实践",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -132,6 +122,7 @@
       "status": "已实践",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -140,6 +131,7 @@
       "status": "已实践",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -148,6 +140,7 @@
       "status": "已实验通过",
       "verification": "日报有移动赋值与自移动两项终端输出；原值100的移动、自移动保护符合预期。主体完成，unique_ptr/Rule of Zero自测题待复习。",
       "review": "unique_ptr 与 Rule of Zero 自测题待复习",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -156,6 +149,7 @@
       "status": "已实验通过",
       "verification": "日报数组统计：Sum402、Max91、Average80.4、整数除法80；阈值80→90，Count3→1。",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -164,6 +158,7 @@
       "status": "已实验通过",
       "verification": "日报含重载输出Int/Double，默认参数演示；increase(a)和increase(a,5)后Final a=36。",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -172,6 +167,7 @@
       "status": "已验收",
       "verification": "日报作用域输出10/25/10，引用问答30 20正确。用户后续确认17节验收，并回答：离开作用域后a没了，指针成为悬空指针。补充术语：p是指针，*p为未定义行为。",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -180,6 +176,7 @@
       "status": "已验收",
       "verification": "实验A：s修改后FANN，copy仍CANN，view为FANN；实验B size=13、find=5，copy为operator、part为Operator；分词6词/CANN3次，追加后7词/4次；remove_prefix理解题通过。",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -188,6 +185,7 @@
       "status": "已验收",
       "verification": "引用遍历得15 25 35 45，sum120；reserve后size3/capacity8，追加至9后capacity16（本机结果）；地址变化验证扩容且未访问失效ref；统计size7/capacity16/sum588/max93/count3/average84/reallocated=false。",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -196,6 +194,7 @@
       "status": "已验收",
       "verification": "局部span修改array结果10 25 40 40；统一sumValues(span<const int>)结果array60/vector220/raw6，修改后vector230；追加后旧span长度仍3，扩容后重建span长度9、末项99；IntelliSense设c++20后诊断解决。",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -204,6 +203,7 @@
       "status": "已验收",
       "verification": "sort后15 27 42 60 83，find42索引2，sum227；修改元素后10 25 30 40 50，find100返回end不解引用；扩容后重建迭代器；erase返回40，安全删除20倍数后10 50。四项实验通过验收。",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -212,6 +212,7 @@
       "status": "已验收",
       "verification": "依据2026-11-02用户上传的教学记录摘要：①map词频CANN3/kernel2/operator1，size3；②find不插入，[]插入CUDA0、更新为5、erase后size3；③map/unordered_map词频相同、遍历顺序不同，contains为1/0；④set对实际数据{CANN,CUDA,operator,CANN,kernel,CANN,kernel}去重4、删除CUDA后3。综合选择题未逐一提交，教学记录已确认第22节验收；不补写Tensor项。",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -220,6 +221,7 @@
       "status": "已实践",
       "verification": "依据2026-11-02用户上传的教学记录摘要：Lambda第一个实验已验证，平方25，偶数判断1/0，偶数个数3，大于30个数3；[threshold]与[&threshold]的第二个对照实验仅布置，尚无运行输出，第23节不计完成。\n\n2026-11-02续学：Lambda四个编程实验通过。基础25、1/0、3、3；阈值30→40时值捕获计数3→3、引用捕获3→1；mutable内部15→20而外部10，引用修改外部15；自定义sort得到MatMul38、Reduce25、Softmax25、Add12、ReLU8，慢算子数3，并正确解释return控制流。以上排序耗时为手工模拟数据，非GPU性能。泛型Lambda、transform、引用捕获悬空风险与两道概念题未专项验收。",
       "review": "泛型Lambda、std::transform、引用捕获生命周期/悬空风险仍待专项练习；两道概念测验未提交。四项编程实验已通过，不阻止继续第24节。",
+      "learning_focus": null,
       "experiments": [
         {
           "id": "23-1",
@@ -254,9 +256,10 @@
     {
       "number": 24,
       "title": "阶段项目：数据处理工具",
-      "status": "学习中",
-      "verification": "2026-11-02：第24节实验1已验收，修正MaxMul为MatMul后，Add count2 avg0.16、MatMul count2 avg1.74、ReLU count1 avg0.09、Softmax count2 avg0.70 ms；这些是模拟延迟。实验2排行榜仅讲解/布置，预期输出不是实测；实验3未开始。",
-      "review": "",
+      "status": "已实践",
+      "verification": "2026-11-02：第24节实验1已验收，修正MaxMul为MatMul后，Add count2 avg0.16、MatMul count2 avg1.74、ReLU count1 avg0.09、Softmax count2 avg0.70 ms；这些是模拟延迟。实验2排行榜仅讲解/布置，预期输出不是实测；实验3未开始。\n\n2026-11-03日报明确汇总确认第1–28节完成；本次未附此节新增逐实验终端输出，不据此声称逐实验重新验收。",
+      "review": "本次仅有日报总体完成确认；需补存对应章节的逐实验输出以便复核，完成状态不等于新输出已补交。",
+      "learning_focus": null,
       "experiments": [
         {
           "id": "24-1",
@@ -268,15 +271,15 @@
         {
           "id": "24-2",
           "title": "map→vector→sort+Lambda排行榜",
-          "status": "待运行",
-          "evidence": "尚无实际编译运行输出。",
+          "status": "汇总确认完成·输出待补",
+          "evidence": "尚无实际编译运行输出。\n\n2026-11-03日报确认整节完成，但未补本实验实际输出；历史待运行说明保留作追溯。",
           "expected_only": "预测顺序MatMul→Softmax→Add→ReLU，不能当作实验结果。"
         },
         {
           "id": "24-3",
           "title": "慢算子阈值筛选",
-          "status": "未开始",
-          "evidence": "实验2通过后再实施；无输出。",
+          "status": "汇总确认完成·输出待补",
+          "evidence": "实验2通过后再实施；无输出。\n\n2026-11-03日报确认整节完成，但未补本实验实际输出；历史待运行说明保留作追溯。",
           "expected_only": ""
         }
       ]
@@ -284,34 +287,154 @@
     {
       "number": 25,
       "title": "函数模板与类模板",
-      "status": "未开始",
-      "verification": "",
-      "review": "",
+      "status": "已实践",
+      "verification": "2026-11-03日报明确汇总确认第1–28节完成；本次未附此节新增逐实验终端输出，不据此声称逐实验重新验收。",
+      "review": "本次仅有日报总体完成确认；需补存对应章节的逐实验输出以便复核，完成状态不等于新输出已补交。",
+      "learning_focus": null,
       "experiments": []
     },
     {
       "number": 26,
       "title": "Rule of Zero 与 RAII",
-      "status": "未开始",
-      "verification": "",
-      "review": "",
-      "experiments": []
+      "status": "已实验通过",
+      "verification": "4个实验完成。vector独立元素存储的输出沿用此前确认；unique_ptr移动后源为空/新对象值100；故意复制DataOwner得到隐式删除拷贝构造的编译错误（预期失败即通过）；新建资源拷贝100→200，原值100，Same address=false。",
+      "review": "画出 nums → 按值形参 values → 成员 data：左值传入哪里复制，哪里移动？\n不用提示解释：含 unique_ptr 的类为何可能不可复制但可移动？用户声明析构函数后要重新检查移动能力。\n写出“复制整数资源”和“移动独占所有权”的对照，并检查地址与源对象状态。",
+      "learning_focus": {
+        "priority": "重点难点",
+        "difficulty": "类的默认拷贝/移动能力取决于成员；“不用手写特殊成员”不代表“能复制”。还要分清复制指针、复制资源的值和转移所有权。",
+        "method": "先问谁拥有资源，再看成员支持什么操作。vector 的复制产生独立元素；unique_ptr 禁止复制、允许移动。按值形参先接收自己的对象，再决定如何初始化成员。",
+        "application": "P1 的输入/结果缓冲区、文件和资源句柄需要明确释放责任；优先让标准容器与资源包装类自动清理，减少错误路径上的泄漏或重复释放。",
+        "planned_practice": "后续实践：为 CPU 数据缓冲区写 RAII 包装，再按实际 CUDA API 配置适配的释放器。智能指针不会自动等待异步 GPU 工作完成，释放前仍需保证设备不再使用资源。",
+        "review_tasks": [
+          "画出 nums → 按值形参 values → 成员 data：左值传入哪里复制，哪里移动？",
+          "不用提示解释：含 unique_ptr 的类为何可能不可复制但可移动？用户声明析构函数后要重新检查移动能力。",
+          "写出“复制整数资源”和“移动独占所有权”的对照，并检查地址与源对象状态。"
+        ],
+        "verification_boundary": "4个实验完成；实验1沿用此前确认，实验3的预期编译失败属于验证通过。GPU资源包装仍未实现。"
+      },
+      "experiments": [
+        {
+          "id": "26-1",
+          "title": "vector默认复制与独立存储",
+          "status": "已验证（此前记录）",
+          "evidence": "Original first=10；Copied after set first=99；两个size均3。来源为日报明确引用的此前确认。",
+          "expected_only": ""
+        },
+        {
+          "id": "26-2",
+          "title": "unique_ptr移动所有权",
+          "status": "已验收",
+          "evidence": "Before move=100；Moved value=100；Original has data=false；Moved has data=true。",
+          "expected_only": ""
+        },
+        {
+          "id": "26-3",
+          "title": "验证unique_ptr禁止复制",
+          "status": "已验收（预期编译失败）",
+          "evidence": "call to implicitly-deleted copy constructor of DataOwner；1 error generated。该编译错误为本实验预期结果。",
+          "expected_only": ""
+        },
+        {
+          "id": "26-4",
+          "title": "复制资源值以获得独立所有权",
+          "status": "已验收",
+          "evidence": "Original=100；Copied=100；修改后Original=100、Copied=200；Same address=false。",
+          "expected_only": ""
+        }
+      ]
     },
     {
       "number": 27,
       "title": "智能指针全景",
-      "status": "未开始",
-      "verification": "",
-      "review": "",
-      "experiments": []
+      "status": "已实验通过",
+      "verification": "4个实验有本次终端输出。shared_ptr count 1→2→1且共享值200；weak lock期间count2、之后1、作用域后expired=true；A/B循环保持存活，手动断环后Destroy A/Destroy B；weak previous版本无需手动断环，A expired=true。",
+      "review": "逐行预测 shared_ptr 复制、作用域结束、weak_ptr::lock 后的 use_count 和析构时机。\n重新画 A/B 循环引用：外部拥有者消失后为什么还活着？把哪一条边改成弱观察？\n不用 expired() 后直接访问；用 if (auto p = weak.lock()) 分支处理失效对象。",
+      "learning_focus": {
+        "priority": "重点难点",
+        "difficulty": "shared_ptr 对象、它管理的 Node 对象与控制块不是同一个东西；局部指针销毁后，对象仍可能被环中的其他拥有者保留。",
+        "method": "独占用 unique_ptr，确有共享寿命需求再用 shared_ptr；观察关系用 weak_ptr。访问弱观察对象时检查 lock() 返回值；一次成功 lock 会暂时增加共享拥有者。",
+        "application": "P2 中多个请求可能共享只读模型/结果；回调或父子节点的反向关系可用弱观察避免所有权环。只借用对象的同步函数不必一律传 shared_ptr。",
+        "planned_practice": "后续实践：画“请求 → 任务 → 回调 → 请求”的所有权图，选一条观察边改为 weak_ptr；同时处理对象已释放的分支。shared_ptr 的引用计数机制不等于所指向数据自动线程安全。",
+        "review_tasks": [
+          "逐行预测 shared_ptr 复制、作用域结束、weak_ptr::lock 后的 use_count 和析构时机。",
+          "重新画 A/B 循环引用：外部拥有者消失后为什么还活着？把哪一条边改成弱观察？",
+          "不用 expired() 后直接访问；用 if (auto p = weak.lock()) 分支处理失效对象。"
+        ],
+        "verification_boundary": "4个实验有终端验证；析构输出证明本实验对象释放，不等同于完成内存分析工具或并发安全测试。"
+      },
+      "experiments": [
+        {
+          "id": "27-1",
+          "title": "共享所有权与计数",
+          "status": "已验收",
+          "evidence": "Initial count1；Shared count2；Value through a200；After scope count1；Final value200。",
+          "expected_only": ""
+        },
+        {
+          "id": "27-2",
+          "title": "weak_ptr与lock",
+          "status": "已验收",
+          "evidence": "Expired false；Value100；Count during lock2；Count after lock1；Expired after scope true；Resource released。",
+          "expected_only": ""
+        },
+        {
+          "id": "27-3",
+          "title": "循环引用与手动断环",
+          "status": "已验收",
+          "evidence": "A count2；B count2；A expired false；Destroy A；Destroy B；After break expired true。",
+          "expected_only": ""
+        },
+        {
+          "id": "27-4",
+          "title": "weak_ptr反向观察避免环",
+          "status": "已验收",
+          "evidence": "A count1；B count2；Previous node =A；Destroy A；Destroy B；A expired true。",
+          "expected_only": ""
+        }
+      ]
     },
     {
       "number": 28,
       "title": "移动语义进阶",
-      "status": "未开始",
-      "verification": "",
-      "review": "",
-      "experiments": []
+      "status": "已实验通过",
+      "verification": "3个实验有本次终端输出。reserve(4)后push/emplace：Copy count=1，Move count=2，size4；relay中命名形参直接传出总是左值，forward保留输入值类别；四次插入依次Copy A、Move B、Copy C、Move C，Size=4。已完成四路径讲解，但保留专项复习；没有实测性能收益。",
+      "review": "脱离答案，按五步写出下方四种调用的 T、形参、传出表达式与最终构造。\n解释为什么 std::string&& value 中的 value 仍是左值表达式；哪些 T&& 才是转发引用？\n补做 const 对象 move、vector 扩容和 noexcept 对照；这些反例尚未验收。",
+      "learning_focus": {
+        "priority": "优先复习",
+        "difficulty": "需要同时追踪实参值类别、T 的推导、形参引用折叠和函数体表达式类别。T&& 是形参声明的一部分；有名字的 value 作为表达式仍是左值。",
+        "method": "调用处 → 推导 T → 折叠 T&& → 判断传出的表达式 → 重载/构造函数。move/forward 是转换；是否真的移动，由最终选中的操作决定。",
+        "application": "P1/P2 的容器插入、任务队列和通用工厂要表达“保留原对象”还是“交出资源”，避免包装一层后意外复制大缓冲区；完美转发用于保留调用者的传参方式。",
+        "planned_practice": "后续实践：构建任务/缓冲区工厂，比较复制/移动次数，再用真实 Benchmark 判断收益。移动不是 Host→Device 搬运，emplace_back 也不是无条件更快。",
+        "review_tasks": [
+          "脱离答案，按五步写出下方四种调用的 T、形参、传出表达式与最终构造。",
+          "解释为什么 std::string&& value 中的 value 仍是左值表达式；哪些 T&& 才是转发引用？",
+          "补做 const 对象 move、vector 扩容和 noexcept 对照；这些反例尚未验收。"
+        ],
+        "verification_boundary": "3个实验与四路径讲解完成；用户曾明确反馈理解混乱，保留专项复习。计数实验采用 reserve 避免扩容干扰，不是性能加速证明。"
+      },
+      "experiments": [
+        {
+          "id": "28-1",
+          "title": "push_back与emplace_back构造对照",
+          "status": "已验收",
+          "evidence": "Copy A；Move A；Construct B/Move B；Construct C；Copy count1，Move count2，Data size4。reserve(4)控制扩容变量。",
+          "expected_only": ""
+        },
+        {
+          "id": "28-2",
+          "title": "relay保留实参值类别",
+          "status": "已验收",
+          "evidence": "左值CANN：Without/With forward均Lvalue；临时Ascend：Without为Lvalue，With为Rvalue。使用默认a.out输出名运行成功。",
+          "expected_only": ""
+        },
+        {
+          "id": "28-3",
+          "title": "vector插入四种转发路径",
+          "status": "已验收",
+          "evidence": "Construct A/Copy A；Construct B/Move B；Construct C/Copy C；Move C；Size4。四路径已经讲解，独立复述仍需巩固。",
+          "expected_only": ""
+        }
+      ]
     },
     {
       "number": 29,
@@ -319,6 +442,7 @@
       "status": "未开始",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -327,6 +451,7 @@
       "status": "未开始",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -335,6 +460,7 @@
       "status": "未开始",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -343,6 +469,7 @@
       "status": "未开始",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -351,6 +478,7 @@
       "status": "未开始",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -359,6 +487,7 @@
       "status": "未开始",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -367,6 +496,7 @@
       "status": "未开始",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -375,6 +505,7 @@
       "status": "未开始",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -383,6 +514,7 @@
       "status": "未开始",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -391,6 +523,7 @@
       "status": "未开始",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -399,6 +532,7 @@
       "status": "未开始",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -407,6 +541,7 @@
       "status": "未开始",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -415,6 +550,7 @@
       "status": "未开始",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -423,6 +559,7 @@
       "status": "未开始",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -431,6 +568,7 @@
       "status": "未开始",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -439,6 +577,7 @@
       "status": "未开始",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -447,6 +586,7 @@
       "status": "未开始",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -455,6 +595,7 @@
       "status": "未开始",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -463,6 +604,7 @@
       "status": "未开始",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     },
     {
@@ -471,10 +613,21 @@
       "status": "未开始",
       "verification": "",
       "review": "",
+      "learning_focus": null,
       "experiments": []
     }
   ],
   "recent_learning": [
+    {
+      "date": "2026-11-03",
+      "track": "C++",
+      "title": "第26–28节完成｜RAII、智能指针与完美转发难点复盘",
+      "summary": "C++主线28/48（58.3%），第26–28节课程实验完成，共11项：26节4项（实验1沿用此前确认），27节4项，28节3项。重点复习RAII/所有权、shared_ptr循环引用、值类别/引用折叠/forward；关联P1缓冲区与P2任务/回调的工程用途。下一节29尚未开始。Jetson待首次连接，未核验环境、未运行CUDA。",
+      "experiments_and_verification": "4个实验完成。vector独立元素存储的输出沿用此前确认；unique_ptr移动后源为空/新对象值100；故意复制DataOwner得到隐式删除拷贝构造的编译错误（预期失败即通过）；新建资源拷贝100→200，原值100，Same address=false。\n4个实验有本次终端输出。shared_ptr count 1→2→1且共享值200；weak lock期间count2、之后1、作用域后expired=true；A/B循环保持存活，手动断环后Destroy A/Destroy B；weak previous版本无需手动断环，A expired=true。\n3个实验有本次终端输出。reserve(4)后push/emplace：Copy count=1，Move count=2，size4；relay中命名形参直接传出总是左值，forward保留输入值类别；四次插入依次Copy A、Move B、Copy C、Move C，Size=4。已完成四路径讲解，但保留专项复习；没有实测性能收益。",
+      "mastery": "第26–28节11项课程实验完成；第26节实验1沿用此前确认。保留专项复习，尤其第28节四路径与反例；28/48，总体完成确认不补造24/25逐实验输出。Jetson待首次连接。",
+      "open_questions": "第26节：按值传vector的复制→移动链与默认特殊成员条件；第27节：所有权图、lock临时拥有者、循环引用；第28节优先：实参值类别→T推导→引用折叠→传出表达式→最终构造。const move、扩容/noexcept仍未补验。第24、25节依据日报汇总确认完成，尚缺本次新增逐实验输出。第23节既有专项复习继续；Linux原待实操保留。",
+      "next_step": "第29节「异常与资源安全」尚未开始：先复盘第26–28节的所有权和四条转发路径，再按原课表做异常/错误路径下的资源清理实验。复习不撤销已通过实践；未完成反例不得标为验收。"
+    },
     {
       "date": "2026-11-02",
       "track": "C++",
@@ -516,18 +669,27 @@
       "next_step": "下一次从第18节 std::string 与 std::string_view 开始；另安排第14节 unique_ptr 与 Rule of Zero 复习题。"
     }
   ],
-  "verified_summary": "第1–13节主要练习沿用原进度。2026-10-31日报附有第14节移动赋值和自移动输出、第15节数组统计两组输出、第16节重载及引用增量输出、第17节作用域输出和引用语义问答。第17节随后由用户确认验收；生命周期回答指出局部对象离开作用域后消失、指针悬空，核心判断正确。\n\nLinux 2026-11-01：惠普光影精灵7，Windows + WSL Ubuntu，目录[本地路径已省略]。已验证grep/管道/wc/find/重定向、日志检查三分支、chmod755、bash与直接执行、位置参数及跨目录path_demo.sh。仅有主目录启动的一组路径输出；command -v bash在脚本内已验证。\n\n2026-11-01 C++：第18–21节已验收。string/view复制与观察、分词6/3→7/4；vector统计588/93/3/84与重分配检查；span三类容器求和与重建；STL排序/查找/求和、迭代器失效与erase安全删除均有日报实测依据。第1–17节沿用既有状态。\n\n2026-11-02：第22节四组关联容器实验据教学记录已验收；第23节四项Lambda编程实验现已通过，专项复习仍保留。\n\n2026-11-02续学：Lambda四个编程实验通过。基础25、1/0、3、3；阈值30→40时值捕获计数3→3、引用捕获3→1；mutable内部15→20而外部10，引用修改外部15；自定义sort得到MatMul38、Reduce25、Softmax25、Add12、ReLU8，慢算子数3，并正确解释return控制流。以上排序耗时为手工模拟数据，非GPU性能。泛型Lambda、transform、引用捕获悬空风险与两道概念题未专项验收。\n2026-11-02：第24节实验1已验收，修正MaxMul为MatMul后，Add count2 avg0.16、MatMul count2 avg1.74、ReLU count1 avg0.09、Softmax count2 avg0.70 ms；这些是模拟延迟。实验2排行榜仅讲解/布置，预期输出不是实测；实验3未开始。",
-  "open_questions": "第14节：含 unique_ptr 成员且未自定义特殊成员函数的类，为何不能拷贝却可以移动？此自测题待复习。第17节生命周期题已验收，复习时注意 p 是指针，解引用悬空指针是未定义行为。\n\nLinux 待实操：sed修正errror后复测计数为2（未展示输出）；不传参数调用check_log.sh，验证默认文件名（未展示输出）；报错信息补充文件名后重新验证（未展示输出）；查看PATH并运行command -v code（待实操）；对比source/bash/直接执行及$0/BASH_SOURCE[0]（待实操）；补做从脚本所在目录启动的对照输出（尚缺一组）；Git/CMake/GDB小型C++项目综合实践（今日未开展）。\n\n第14节 unique_ptr/Rule of Zero题仍待复习；视图生命周期、扩容导致引用/span/迭代器失效、旧end失效及erase返回值需持续巩固。\n\n2026-11-02更新：第22节已验收；第23节捕获对照现已通过。第14节unique_ptr/Rule of Zero和Linux原待实操清单继续保留。Jetson型号/版本、CUDA/TensorRT环境与所有性能结果均待实机核验。\n\n泛型Lambda、std::transform、引用捕获生命周期/悬空风险仍待专项练习；两道概念测验未提交。四项编程实验已通过，不阻止继续第24节。 第24节实验2待运行、实验3未开始。",
-  "next_step": "第24节实验2：运行已有map→vector→sort + Lambda排行榜代码，提交实际终端输出，核对MatMul→Softmax→Add→ReLU排序、元素数与平均值；该顺序目前只是预期，尚未实测。通过后再做实验3阈值筛选。第23节泛型Lambda、transform与引用捕获生命周期及第14节unique_ptr/Rule of Zero保留专项复习。\n\nLinux：先用sed修正errror并复测，再验证无参数默认文件名和包含文件名的报错；随后补PATH、source和路径对照实验，再做Git/CMake/GDB小项目。C++现有接续点为第24节，每日Linux复习≤1小时。\n\nJetson副线：先只读记录设备与版本；不刷机/升级。P1优先，P2为第二项目；P1 Reduce/Softmax可独立实现和计时后启动Ascend C K01。",
+  "verified_summary": "第1–13节主要练习沿用原进度。2026-10-31日报附有第14节移动赋值和自移动输出、第15节数组统计两组输出、第16节重载及引用增量输出、第17节作用域输出和引用语义问答。第17节随后由用户确认验收；生命周期回答指出局部对象离开作用域后消失、指针悬空，核心判断正确。\n\nLinux 2026-11-01：惠普光影精灵7，Windows + WSL Ubuntu，目录[本地路径已省略]。已验证grep/管道/wc/find/重定向、日志检查三分支、chmod755、bash与直接执行、位置参数及跨目录path_demo.sh。仅有主目录启动的一组路径输出；command -v bash在脚本内已验证。\n\n2026-11-01 C++：第18–21节已验收。string/view复制与观察、分词6/3→7/4；vector统计588/93/3/84与重分配检查；span三类容器求和与重建；STL排序/查找/求和、迭代器失效与erase安全删除均有日报实测依据。第1–17节沿用既有状态。\n\n2026-11-02：第22节四组关联容器实验据教学记录已验收；第23节四项Lambda编程实验现已通过，专项复习仍保留。\n\n2026-11-02续学：Lambda四个编程实验通过。基础25、1/0、3、3；阈值30→40时值捕获计数3→3、引用捕获3→1；mutable内部15→20而外部10，引用修改外部15；自定义sort得到MatMul38、Reduce25、Softmax25、Add12、ReLU8，慢算子数3，并正确解释return控制流。以上排序耗时为手工模拟数据，非GPU性能。泛型Lambda、transform、引用捕获悬空风险与两道概念题未专项验收。\n2026-11-02：第24节实验1已验收，修正MaxMul为MatMul后，Add count2 avg0.16、MatMul count2 avg1.74、ReLU count1 avg0.09、Softmax count2 avg0.70 ms；这些是模拟延迟。实验2排行榜仅讲解/布置，预期输出不是实测；实验3未开始。\n\n2026-11-03：C++主线28/48（58.3%），第26–28节课程实验完成，共11项：26节4项（实验1沿用此前确认），27节4项，28节3项。重点复习RAII/所有权、shared_ptr循环引用、值类别/引用折叠/forward；关联P1缓冲区与P2任务/回调的工程用途。下一节29尚未开始。Jetson待首次连接，未核验环境、未运行CUDA。\n4个实验完成。vector独立元素存储的输出沿用此前确认；unique_ptr移动后源为空/新对象值100；故意复制DataOwner得到隐式删除拷贝构造的编译错误（预期失败即通过）；新建资源拷贝100→200，原值100，Same address=false。\n4个实验有本次终端输出。shared_ptr count 1→2→1且共享值200；weak lock期间count2、之后1、作用域后expired=true；A/B循环保持存活，手动断环后Destroy A/Destroy B；weak previous版本无需手动断环，A expired=true。\n3个实验有本次终端输出。reserve(4)后push/emplace：Copy count=1，Move count=2，size4；relay中命名形参直接传出总是左值，forward保留输入值类别；四次插入依次Copy A、Move B、Copy C、Move C，Size=4。已完成四路径讲解，但保留专项复习；没有实测性能收益。\n此前第14节unique_ptr/Rule of Zero疑问已由第26节实验覆盖，保留独立复述与反例复习。第24/25节本次为总体进度确认，没有新增逐实验终端证据。",
+  "open_questions": "当前专项复习：第26节：按值传vector的复制→移动链与默认特殊成员条件；第27节：所有权图、lock临时拥有者、循环引用；第28节优先：实参值类别→T推导→引用折叠→传出表达式→最终构造。const move、扩容/noexcept仍未补验。第24、25节依据日报汇总确认完成，尚缺本次新增逐实验输出。第23节既有专项复习继续；Linux原待实操保留。\n\n此前疑问留档（以下按日期追溯，当前状态以上方与课表为准）：\n第14节：含 unique_ptr 成员且未自定义特殊成员函数的类，为何不能拷贝却可以移动？此自测题待复习。第17节生命周期题已验收，复习时注意 p 是指针，解引用悬空指针是未定义行为。\n\nLinux 待实操：sed修正errror后复测计数为2（未展示输出）；不传参数调用check_log.sh，验证默认文件名（未展示输出）；报错信息补充文件名后重新验证（未展示输出）；查看PATH并运行command -v code（待实操）；对比source/bash/直接执行及$0/BASH_SOURCE[0]（待实操）；补做从脚本所在目录启动的对照输出（尚缺一组）；Git/CMake/GDB小型C++项目综合实践（今日未开展）。\n\n第14节 unique_ptr/Rule of Zero题仍待复习；视图生命周期、扩容导致引用/span/迭代器失效、旧end失效及erase返回值需持续巩固。\n\n2026-11-02更新：第22节已验收；第23节捕获对照现已通过。第14节unique_ptr/Rule of Zero和Linux原待实操清单继续保留。Jetson型号已确认；版本、环境与性能仍待实机核验。\n\n泛型Lambda、std::transform、引用捕获生命周期/悬空风险仍待专项练习；两道概念测验未提交。四项编程实验已通过，不阻止继续第24节。 第24节现由11-03日报汇总确认完成，新增逐实验输出仍待补。",
+  "next_step": "第29节「异常与资源安全」尚未开始：先复盘第26–28节的所有权和四条转发路径，再按原课表做异常/错误路径下的资源清理实验。复习不撤销已通过实践；未完成反例不得标为验收。\n\n工程价值：RAII用于缓冲区/资源释放，所有权图用于P2任务/回调，forward用于通用封装；这些项目应用尚未实作。\n\nLinux：先用sed修正errror并复测，再验证无参数默认文件名和包含文件名的报错；随后补PATH、source和路径对照实验，再做Git/CMake/GDB小项目。C++现有接续点为第29节，每日Linux复习≤1小时。\n\nJetson：第28节阶段准备，第29节前后首次连接；尚未进入终端。先确认权限和配件，成功登录后再只读采集系统/CUDA信息；P1/P2仍未开始。",
   "linux_and_cann_plan": "保留既定 48 节 C++ 主线，不把未完成课程标记为已完成。\nLinux 复习每天 ≤ 1 小时，优先结合 C++ 工程。\n按C++阶段逐步细化并行实践，不再等第48节后才开始接触Ascend C；阶段项目仍按真实证据验收。\n长期目标：2027 CANN 算子竞赛 → 可复现 AI 系统研究 → AI Infra 实习。\n不编造时长、实验结果或掌握程度；实际赛程与投稿时间以官方公告为准。\n\n原48节编号不变；C++主线继续，Jetson恰好P1/P2两个实践副线。Linux每天≤1小时并入真实工程。P1 Reduce/Softmax可独立实现与公平计时后即启动Ascend C K01；不等两项目结束。正式提交截止T-8周冻结Jetson新需求，CANN投入70–80%。单台共享设备，实际版本与环境待核验。",
   "learning_path": {
-    "version": "2026-11-02-jetson-detail-v2",
+    "version": "2026-11-03-cpp-ownership-focus-v1",
     "goal": "AI Infra工程师：CANN/Ascend算子竞赛为主目标，Jetson P1算子与P2推理两个实践副线，连接研究和实习。",
     "policy": "原48节编号不变；C++主线继续，Jetson恰好P1/P2两个实践副线。Linux每天≤1小时并入真实工程。P1 Reduce/Softmax可独立实现与公平计时后即启动Ascend C K01；不等两项目结束。正式提交截止T-8周冻结Jetson新需求，CANN投入70–80%。单台Jetson AGX Orin Developer Kit 64GB由用户确认，JetPack与环境待实机核验。",
     "hardware": {
       "device": "NVIDIA Jetson AGX Orin Developer Kit 64GB",
       "device_status": "用户于2026-11-02明确确认",
       "environment_status": "未核验",
+      "preparation_status": "准备开始／待首次连接（尚未进入Jetson终端）",
+      "preparation_window": "第28节阶段开始准备；第29节前后预约首次连接，实际日期未记录。",
+      "first_connection_steps": [
+        "先确认实验室使用权限、现有系统是否可用、配套电源与可用显示器/键盘鼠标；记录准备情况。",
+        "优先使用显示器与键鼠进入板端终端；如无显示器，再查该套件实际串口/初始化方式和线缆条件。不把USB-C当显示器或外接显卡。",
+        "获得管理员允许的登录方式；如要从Mac用SSH，先在板端确认网络、IP与SSH服务，再验证连接。当前尚未成功登录。",
+        "成功进入Jetson终端后逐条执行只读命令，保留原始输出；缺命令或文件也如实记录，未输出不填版本。",
+        "提交首连方式、命令、输出与问题，再推进P1-A；当前不刷机、不升级JetPack、不改变共享设备设置。"
+      ],
       "competition_target": "2027 CANN/Ascend算子赛事，具体赛种/赛季待选定",
       "submission_deadline": null
     },
@@ -546,7 +708,7 @@
         "execution_record_count": 0,
         "first_execution_date": null,
         "planning": {
-          "preparation": "2026-11-02起可预约只读盘点；实际执行看阶段记录。",
+          "preparation": "2026-11-03更新：第28节阶段开始准备，第29节前后预约首次连接；尚未进入Jetson终端，成功登录后再做只读盘点。",
           "start_window": "第24节项目验收后，在第25–32节窗口逐步进入P1-A/B；设备环境与基础满足后启动。",
           "duration": "建议8–10周，跨C++多个阶段；学习进度和设备空闲变化时顺延。",
           "flow_note": "先正确性，再公平计时和Profiling。失败返回对应实现/边界检查；参数搜索通过独立回归后才能缓存结果。",
@@ -568,8 +730,8 @@
             {
               "label": "第24节统计工具全部实验与阶段验收",
               "before": "P1-A/B主开发前",
-              "status": "待完成",
-              "basis": "第24节：学习中",
+              "status": "已满足",
+              "basis": "第24节：已实践",
               "note": "第24节需完成聚合、排行榜、阈值筛选并做阶段验收；各实验状态以原课表记录为准。"
             },
             {
@@ -583,7 +745,7 @@
               "label": "模板/RAII与最小CMake工程",
               "before": "P1按需补，C++25–40持续巩固",
               "status": "待完成",
-              "basis": "第25节：未开始；第26节：未开始；第34节：未开始",
+              "basis": "第25节：已实践；第26节：已实验通过；第34节：未开始",
               "note": "入门阶段可先使用小型模板工程；原课程编号不重排，工程与资源安全逐步补齐。"
             },
             {
@@ -828,8 +990,8 @@
             {
               "label": "第24节数据处理与C++接口基础",
               "before": "P2-A前",
-              "status": "待完成",
-              "basis": "第24节：学习中",
+              "status": "已满足",
+              "basis": "第24节：已实践",
               "note": "理解分组/排序、输入校验、引用和结构体，不把模拟延迟当真实性能。"
             },
             {
@@ -1120,9 +1282,9 @@
       },
       {
         "name": "C++23–24：Lambda与数据处理",
-        "time": "当前课次 → 第24节",
+        "time": "C++23–24阶段 · 已有学习记录",
         "lane": "主线",
-        "learning": "第23节四项编程实验已实践，专项复习保留；按当前断点完成第24节排行榜、阈值筛选和阶段验收，不重排48节编号。",
+        "learning": "第23节四项实验已实践并保留专项复习；11-03日报汇总确认第24节完成，本次未补其新增逐实验输出，保留证据边界。",
         "deliverable": "Jetson只读环境盘点，随后在许可范围内验证SSH和Hello C++；这些均尚未实操。",
         "gate": "Lambda实际输出与第24节边界测试；设备型号已由用户确认；JetPack/软件栈核验前不安装新栈。",
         "budget": "建议C++65% / Jetson25% / 复盘10%，不是实际学习时长"
@@ -1131,8 +1293,8 @@
         "name": "RAII与张量桥接 + P1-A/B",
         "time": "C++25–32阶段 · 按验收推进",
         "lane": "主线",
-        "learning": "模板、RAII、智能指针；并行补Python/NumPy、张量shape、浮点误差和CUDA基础。",
-        "deliverable": "P1环境/基准→Vector Add→Reduce；CPU参考、CUDA Events、合法Block与边界测试。",
+        "learning": "11-03记录：26–28节11项实验完成；优先复习所有权、值类别/引用折叠/forward。下一节29异常与资源安全；Python/NumPy与CUDA尚待实践。",
+        "deliverable": "第28节阶段准备、第29节前后预约Jetson首次连接；尚未进入终端。之后P1环境/基准→Vector Add→Reduce，实际运行另记。",
         "gate": "P1-A/B有实测记录；先实现正确性，不预设性能提升或GPU已可用。",
         "budget": "P1总量建议8–10周，可跨后续C++阶段；按设备空闲调整"
       },
@@ -1481,7 +1643,7 @@
               },
               {
                 "title": "关联容器、Lambda 与阶段项目",
-                "status": "进行中",
+                "status": "已实践",
                 "focus": true,
                 "difficult": false,
                 "knowledge_points": [
@@ -1502,7 +1664,7 @@
             "topics": [
               {
                 "title": "模板、constexpr 与标准库类型",
-                "status": "未开始",
+                "status": "进行中",
                 "focus": false,
                 "difficult": true,
                 "knowledge_points": [
@@ -1515,7 +1677,7 @@
               },
               {
                 "title": "Rule of Zero、智能指针与移动进阶",
-                "status": "未开始",
+                "status": "已实践",
                 "focus": true,
                 "difficult": true,
                 "knowledge_points": [
