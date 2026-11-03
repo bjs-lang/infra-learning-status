@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "data_version": 25,
-  "updated_at": "2026-11-02T15:10:02.099000Z",
+  "data_version": 26,
+  "updated_at": "2026-11-02T23:41:56.863000Z",
   "updated_at_note": "旧记录可能没有精确保存时间；空值不是同步失败。",
-  "synced_at": "2026-11-02T18:52:21.957011Z",
+  "synced_at": "2026-11-03T01:26:20.244918Z",
   "last_learning_date": "2026-11-02",
   "current_cpp_lesson": {
     "number": 24,
