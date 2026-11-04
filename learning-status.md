@@ -1,16 +1,23 @@
 # 学习进度只读镜像
 
-数据版本：33
-网站最后保存：2026-11-04T07:12:08.076000Z
-本次同步：2026-11-04T08:46:30.752776Z
-最近学习：2026-11-03
+数据版本：37
+网站最后保存：2026-11-04T15:54:47.603000Z
+本次同步：2026-11-04T15:55:27.885186Z
+最近学习：2026-11-04
 
 每次使用请检查同步时间和 GitHub Actions 最近一次运行结果；文件可读取不代表同步服务始终正常。
 
 ## 当前 C++ 起点
-第 29/48 节｜异常与资源安全｜未开始
+第 32/48 节｜阶段项目：安全数据模块｜学习中
 
 ## 已验证与记录边界
+2026-11-04新增验证：2026-11-04：C++第29–31节编程实验通过，主线31/48（64.6%）；第32节进行中，实验1配置查询通过。今日20项实验有运行/编译证据（6+6+7+1），包含预期失败和修复验证。第30节2道、第31节1道概念小测未提交。实际时长未提供；Jetson/CUDA没有新增实机实验。
+6/6编程实验通过。异常捕获后继续运行；栈展开按B→A析构（模拟资源日志）；直接修改后保留40，临时副本失败则原值10/20/30不变；本机vector扩容有noexcept时Move A、去掉后Copy A。非GPU实验。
+6/6编程实验通过。constexpr与static_assert、int/const/constexpr、运行期输入10→100；constexpr常量表达式故意编译失败为验证成功；多文件缺实现链接失败后修复输出25；-c目标文件108K/1.9K，链接运行输出25。末尾2道概念小测未提交；未实现CMake。
+7/7编程实验通过。optional/空值取值、variant三类型切换与get、visit、if constexpr/类型别名、any_cast/reset均有输出。末尾1道optional<double>概念小测未提交。MatMul38ms/GPU名称为模拟示例，非设备性能。
+实验1配置查询已验收：在cpp_lesson32正确目录重新编译运行，block_size=256、threshold=0.95、device=GPU、unknown: Not found。旧day1目录any程序的输出不是本节证据；实验2–5尚未运行。
+
+此前验证（保留原日期与证据）：
 第1–13节主要练习沿用原进度。2026-10-31日报附有第14节移动赋值和自移动输出、第15节数组统计两组输出、第16节重载及引用增量输出、第17节作用域输出和引用语义问答。第17节随后由用户确认验收；生命周期回答指出局部对象离开作用域后消失、指针悬空，核心判断正确。
 
 Linux 2026-11-01：惠普光影精灵7，Windows + WSL Ubuntu，目录[本地路径已省略]。已验证grep/管道/wc/find/重定向、日志检查三分支、chmod755、bash与直接执行、位置参数及跨目录path_demo.sh。仅有主目录启动的一组路径输出；command -v bash在脚本内已验证。
@@ -29,6 +36,10 @@ Linux 2026-11-01：惠普光影精灵7，Windows + WSL Ubuntu，目录[本地路
 此前第14节unique_ptr/Rule of Zero疑问已由第26节实验覆盖，保留独立复述与反例复习。第24/25节本次为总体进度确认，没有新增逐实验终端证据。
 
 ## 疑问与薄弱点
+当前复习与未完成项：优先巩固：编译期/运行期、局部变量与常量表达式、const/constexpr；声明/定义/编译/链接/-c/.o；Lambda与普通函数；using类型别名/class定义/template<class T>；optional/variant/any、visit运行期派发与if constexpr编译期分支；unordered_map的find与[]；void return;、nullopt与break；-Wall/-Wextra含义（用户选择不加做额外实验）。第30节末2道概念小测、第31节末1道小测尚未提交，不撤销编程通过状态。
+第28节const move与转发路径仍需巩固；扩容/noexcept对照已由第29节覆盖。第32节实验2–5尚未运行。
+
+既有专项复习与历史疑问（当前断点以上方为准）：
 当前专项复习：第26节：按值传vector的复制→移动链与默认特殊成员条件；第27节：所有权图、lock临时拥有者、循环引用；第28节优先：实参值类别→T推导→引用折叠→传出表达式→最终构造。const move、扩容/noexcept仍未补验。第24、25节依据日报汇总确认完成，尚缺本次新增逐实验输出。第23节既有专项复习继续；Linux原待实操保留。
 
 此前疑问留档（以下按日期追溯，当前状态以上方与课表为准）：
@@ -43,13 +54,11 @@ Linux 待实操：sed修正errror后复测计数为2（未展示输出）；不�
 泛型Lambda、std::transform、引用捕获生命周期/悬空风险仍待专项练习；两道概念测验未提交。四项编程实验已通过，不阻止继续第24节。 第24节现由11-03日报汇总确认完成，新增逐实验输出仍待补。
 
 ## 下一步
-第29节「异常与资源安全」尚未开始：先复盘第26–28节的所有权和四条转发路径，再按原课表做异常/错误路径下的资源清理实验。复习不撤销已通过实践；未完成反例不得标为验收。
+第32节实验2「类型安全读取与错误处理」：先简短回顾find与return;，然后一次只布置一个实验；测试正常值、键不存在、类型不符，提交实际终端输出后验收。实验1已经通过，不重复。之后依次参数合法性验证、安全更新、多文件与最小测试；这些后续步骤尚未运行。
 
-工程价值：RAII用于缓冲区/资源释放，所有权图用于P2任务/回调，forward用于通用封装；这些项目应用尚未实作。
+Linux：先用sed修正errror并复测，再验证无参数默认文件名和包含文件名的报错；随后补PATH、source和路径对照实验，再做Git/CMake/GDB小项目。C++现有接续点为第32节，每日Linux复习≤1小时。
 
-Linux：先用sed修正errror并复测，再验证无参数默认文件名和包含文件名的报错；随后补PATH、source和路径对照实验，再做Git/CMake/GDB小项目。C++现有接续点为第29节，每日Linux复习≤1小时。
-
-Jetson：第28节阶段准备，第29节前后首次连接；尚未进入终端。先确认权限和配件，成功登录后再只读采集系统/CUDA信息；P1/P2仍未开始。
+Jetson/CANN：本日没有新的板端实验；沿用现有设备环境与两个项目状态，继续2027 CANN优先主线。
 
 ## Linux / CANN 主线
 保留既定 48 节 C++ 主线，不把未完成课程标记为已完成。
@@ -61,6 +70,16 @@ Linux 复习每天 ≤ 1 小时，优先结合 C++ 工程。
 原48节编号不变；C++主线继续，Jetson恰好P1/P2两个实践副线。Linux每天≤1小时并入真实工程。P1 Reduce/Softmax可独立实现与公平计时后即启动Ascend C K01；不等两项目结束。正式提交截止T-8周冻结Jetson新需求，CANN投入70–80%。单台共享设备，实际版本与环境待核验。
 
 ## 最近学习摘要
+
+### 2026-11-04｜C++｜第29–31节编程通过，第32节实验1通过
+2026-11-04：C++第29–31节编程实验通过，主线31/48（64.6%）；第32节进行中，实验1配置查询通过。今日20项实验有运行/编译证据（6+6+7+1），包含预期失败和修复验证。第30节2道、第31节1道概念小测未提交。实际时长未提供；Jetson/CUDA没有新增实机实验。
+实验结论：6/6编程实验通过。异常捕获后继续运行；栈展开按B→A析构（模拟资源日志）；直接修改后保留40，临时副本失败则原值10/20/30不变；本机vector扩容有noexcept时Move A、去掉后Copy A。非GPU实验。
+6/6编程实验通过。constexpr与static_assert、int/const/constexpr、运行期输入10→100；constexpr常量表达式故意编译失败为验证成功；多文件缺实现链接失败后修复输出25；-c目标文件108K/1.9K，链接运行输出25。末尾2道概念小测未提交；未实现CMake。
+7/7编程实验通过。optional/空值取值、variant三类型切换与get、visit、if constexpr/类型别名、any_cast/reset均有输出。末尾1道optional<double>概念小测未提交。MatMul38ms/GPU名称为模拟示例，非设备性能。
+实验1配置查询已验收：在cpp_lesson32正确目录重新编译运行，block_size=256、threshold=0.95、device=GPU、unknown: Not found。旧day1目录any程序的输出不是本节证据；实验2–5尚未运行。
+掌握情况：第29节6/6、第30节6/6、第31节7/7编程实验通过；第32节仅实验1通过，2–5未运行。第30/31节共3道概念小测待补；31/48为编程实践口径。
+疑问：优先巩固：编译期/运行期、局部变量与常量表达式、const/constexpr；声明/定义/编译/链接/-c/.o；Lambda与普通函数；using类型别名/class定义/template<class T>；optional/variant/any、visit运行期派发与if constexpr编译期分支；unordered_map的find与[]；void return;、nullopt与break；-Wall/-Wextra含义（用户选择不加做额外实验）。第30节末2道概念小测、第31节末1道小测尚未提交，不撤销编程通过状态。
+下一步：第32节实验2「类型安全读取与错误处理」：先简短回顾find与return;，然后一次只布置一个实验；测试正常值、键不存在、类型不符，提交实际终端输出后验收。实验1已经通过，不重复。之后依次参数合法性验证、安全更新、多文件与最小测试；这些后续步骤尚未运行。
 
 ### 2026-11-03｜C++｜第26–28节完成｜RAII、智能指针与完美转发难点复盘
 C++主线28/48（58.3%），第26–28节课程实验完成，共11项：26节4项（实验1沿用此前确认），27节4项，28节3项。重点复习RAII/所有权、shared_ptr循环引用、值类别/引用折叠/forward；关联P1缓冲区与P2任务/回调的工程用途。下一节29尚未开始。Jetson待首次连接，未核验环境、未运行CUDA。
@@ -100,13 +119,6 @@ string/string_view拥有关系与切片；vector的size/capacity/reserve与扩�
 掌握情况：已展示终端输出的项目已验证；其余只讲解或待实操。学习时长未实测。
 疑问：误拼写errror导致计数1不是脚本失败。$0是脚本调用名/路径，$1是第一个传入参数。Shebang差异已讲解。尚待验证项目见复习清单。
 下一步：Linux：先用sed修正errror并复测，再验证无参数默认文件名和包含文件名的报错；随后补PATH、source和路径对照实验，再做Git/CMake/GDB小项目。C++现有接续点保持不变（当前为第18节），每日Linux复习≤1小时。
-
-### 2026-10-31｜C++｜C++ 第 14–17 节学习日报｜第 17 节已验收
-移动赋值与五法则/零法则；基本类型、auto、整数除法与范围 for；重载、默认参数、引用传递；作用域、生命周期、const 与悬空指针。
-实验结论：日报所附终端输出：移动后源为空、目标值100；自移动值100；数组统计402/91/3→1/80.4/80；引用增量后36；作用域10/25/10；引用问答30 20。用户补充作答：“因为离开作用域了，a没了，引用不到了，就变成悬空指针了”。判定：对象生命周期结束和悬空指针的核心判断正确。术语补充：p 是指针而非引用，离开作用域后解引用 *p 是未定义行为；不保证输出 100、0 或编译报错。
-掌握情况：第14–16节实验已验证；第17节已验收（用户补充确认）；第14节留一题待复习。
-疑问：第14节 unique_ptr/Rule of Zero 自测题待复习。第17节悬空指针题已回答并验收。
-下一步：下一次从第18节 std::string 与 std::string_view 开始；另安排第14节 unique_ptr 与 Rule of Zero 复习题。
 
 ## 48 节课程状态
 - 第 1 节｜环境与编译运行｜已实践
@@ -173,7 +185,7 @@ string/string_view拥有关系与切片；vector的size/capacity/reserve与扩�
     验证边界：4个实验有终端验证；析构输出证明本实验对象释放，不等同于完成内存分析工具或并发安全测试。
 - 第 28 节｜移动语义进阶｜已实验通过｜复习：脱离答案，按五步写出下方四种调用的 T、形参、传出表达式与最终构造。
 解释为什么 std::string&& value 中的 value 仍是左值表达式；哪些 T&& 才是转发引用？
-补做 const 对象 move、vector 扩容和 noexcept 对照；这些反例尚未验收。
+const对象move仍待补；vector扩容与noexcept对照已在2026-11-04第29节实验5/6通过，独立解释继续巩固。
   - push_back与emplace_back构造对照｜已验收｜Copy A；Move A；Construct B/Move B；Construct C；Copy count1，Move count2，Data size4。reserve(4)控制扩容变量。
   - relay保留实参值类别｜已验收｜左值CANN：Without/With forward均Lvalue；临时Ascend：Without为Lvalue，With为Rvalue。使用默认a.out输出名运行成功。
   - vector插入四种转发路径｜已验收｜Construct A/Copy A；Construct B/Move B；Construct C/Copy C；Move C；Size4。四路径已经讲解，独立复述仍需巩固。
@@ -183,10 +195,138 @@ string/string_view拥有关系与切片；vector的size/capacity/reserve与扩�
     后续练习（未验收）：后续实践：构建任务/缓冲区工厂，比较复制/移动次数，再用真实 Benchmark 判断收益。移动不是 Host→Device 搬运，emplace_back 也不是无条件更快。
     复习：脱离答案，按五步写出下方四种调用的 T、形参、传出表达式与最终构造。；解释为什么 std::string&& value 中的 value 仍是左值表达式；哪些 T&& 才是转发引用？；补做 const 对象 move、vector 扩容和 noexcept 对照；这些反例尚未验收。
     验证边界：3个实验与四路径讲解完成；用户曾明确反馈理解混乱，保留专项复习。计数实验采用 reserve 避免扩容干扰，不是性能加速证明。
-- 第 29 节｜异常与资源安全｜未开始
-- 第 30 节｜constexpr 与程序组织｜未开始
-- 第 31 节｜现代标准库类型｜未开始
-- 第 32 节｜阶段项目：安全数据模块｜未开始
+- 第 29 节｜异常与资源安全｜已实验通过｜复习：复述异常传播、B→A析构、外层catch的先后关系；区分资源清理与外部状态回滚。
+解释本机29-5/6为什么分别出现 Move A 与 Copy A，不把构造顺序当作所有标准库的保证。
+在第32节失败更新实验中检查原配置完全不变，并审查提交操作的异常条件。
+  - try/throw/catch｜已验收｜Start process: 10
+Result = 20
+Start process: -5
+Caught exception: Negative value
+Program continues
+  - 异常栈展开与RAII｜已验收｜Program start
+Acquire A
+Acquire B
+Start processing
+Release B
+Release A
+Caught: Processing failed
+Program end
+  - 直接修改外部vector后的异常状态｜已验收｜Before: 10 20 30
+Inside process: 10 20 30 40
+Caught: Processing failed
+After: 10 20 30 40
+  - 副本修改与swap提交的失败路径｜已验收｜Before: 10 20 30
+Temp: 10 20 30 40
+Caught: Processing failed
+After: 10 20 30
+  - noexcept移动构造与扩容｜已验收｜---First insert---
+Construct :A
+Size = 1
+Capacity = 1
+---Second insert---
+Construct :B
+Move A
+Size = 2
+Capacity = 2
+  - 移除noexcept后的扩容对照｜已验收｜---First insert---
+Construct :A
+Size = 1
+Capacity = 1
+---Second insert---
+Construct :B
+Copy A
+Size = 2
+Capacity = 2
+  - 难点：异常会跨函数改变控制流；局部对象按逆序析构，但已经修改的外部状态不会自动回滚。noexcept 还会影响本例 vector 扩容时的拷贝/移动选择。
+    判断方法：分开检查资源清理和状态保证。直接修改、临时副本、提交点分别画清；为 noexcept 提供真实保证，不能只为减少一次复制就添加。
+    实际用途：缓冲区、文件、任务和配置更新需要在失败路径保持有效状态；大对象放入容器时，需要同时考虑移动成本与异常保证。
+    后续练习（未验收）：第32节安全更新将用“副本修改 → 验证 → 安全提交”复用本节方法。GPU异步生命周期与CUDA专用释放器尚未实现。
+    复习：复述异常传播、B→A析构、外层catch的先后关系；区分资源清理与外部状态回滚。；解释本机29-5/6为什么分别出现 Move A 与 Copy A，不把构造顺序当作所有标准库的保证。；在第32节失败更新实验中检查原配置完全不变，并审查提交操作的异常条件。
+    验证边界：6/6编程实验通过。Acquire/Release是模拟资源日志；noexcept对照是Mac标准库上的实际观察，非GPU性能测量。
+- 第 30 节｜constexpr 与程序组织｜已实验通过｜复习：末尾2道概念小测尚未提交，保留可选复习。
+解释constexpr函数为什么能运行期调用；const运行期输入为何不能用于constexpr初始化。
+画出源码 → 目标文件 → 可执行文件；区分声明、定义和链接。用户选择不加做Wall/Wextra额外实验。
+  - constexpr函数与static_assert｜已验收｜Compile-time a = 25
+Runtime b = 100
+Static assert passed
+  - int/const/constexpr对照｜已验收｜Result 1 = 49
+Result 2 = 100
+Result 3 = 400
+  - const接收运行时输入｜已验收｜Enter a number : 10
+a = 10
+Result = 100
+  - 故意触发constexpr编译错误｜已验收｜main.cpp:19:19: error: constexpr variable 'b' must be initialized by a constant expression
+main.cpp:19:30: note: initializer of 'a' is not a constant expression
+main.cpp:13:15: note: declared here
+1 error generated.
+预期编译失败=验证通过；完整诊断见章节原文。
+  - 多文件链接失败与修复｜已验收｜Undefined symbols for architecture arm64:
+  "square(int)", referenced from:
+      _main in main-7a7479.o
+ld: symbol(s) not found for architecture arm64
+clang++: error: linker command failed with exit code 1 (use -v to see invocation)
+修复：把math_utils.cpp加入编译/链接；实际输出Result = 25。
+  - 分离编译与链接｜已验收｜-c main.cpp -o main.o；ls显示108K
+-c math_utils.cpp -o math_utils.o；ls显示1.9K
+clang++ main.o math_utils.o -o main
+./main输出Result = 25
+以上大小来自本次记录，不推断性能。
+  - 难点：作用域、const和常量表达式容易混淆；头文件声明不等于实现已经链接，编译错误与链接错误发生在不同环节。
+    判断方法：先判断值何时可得，再判断语境是否要求常量表达式；遇到构建失败，先区分编译器诊断和链接器缺符号，再核对输入文件。
+    实际用途：为静态参数做编译期检查；搭建多文件工程，定位C++与后续CUDA联合构建中的缺少定义或目标文件问题。
+    后续练习（未验收）：本日已用-c生成main.o/math_utils.o并链接；CMake仍是后续里程碑。目标文件大小与程序运行性能分别判断。
+    复习：末尾2道概念小测尚未提交，保留可选复习。；解释constexpr函数为什么能运行期调用；const运行期输入为何不能用于constexpr初始化。；画出源码 → 目标文件 → 可执行文件；区分声明、定义和链接。用户选择不加做Wall/Wextra额外实验。
+    验证边界：6/6编程实验通过；constexpr故意编译失败、缺少math_utils.cpp的链接失败与修复均有证据。概念小测未验收，CMake未实现。
+- 第 31 节｜现代标准库类型｜已实验通过｜复习：末尾1道optional<double>概念小测尚未提交，保留可选复习。
+区分optional无值、variant类型不符、any_cast不符；避免对空optional解引用。
+复述Lambda与普通函数、using T与class、visit与if constexpr的区别。
+  - optional查询｜已验收｜MatMul latency = 38ms
+Unknown operator not found
+  - optional取值与空值｜已验收｜A value_or = 38
+B value_or = -1
+A dereference = 38
+A has value : true
+B has value : false
+  - variant类型切换｜已验收｜Int value = 256
+Double value = 0.95
+String value = GPU
+  - variant活动类型与get｜已验收｜Current type: int / Value = 256
+double / 0.95
+string / GPU
+Is int? false
+  - visit与泛型Lambda｜已验收｜Value = 256
+Value = 0.95
+Value = GPU
+  - if constexpr与类型别名｜已验收｜Block size = 256
+Threshold = 0.95
+Device = GPU
+  - any与any_cast/reset｜已验收｜Int value = 256
+String value = GPU
+Has value = true
+After reset = false
+  - 难点：无值、活动类型和类型擦除是三类问题；visit按当前variant类型运行期派发，if constexpr按编译期条件选分支。using别名、class定义与模板class T也不同。
+    判断方法：先明确接口允许哪些类型、是否允许无值，再选optional/variant/any；访问前核对有值与类型。Lambda的捕获和就地传递服务于接口组织，不推定更快。
+    实际用途：为算子配置与任务参数建立明确的类型边界；用optional表达查不到，用variant约束候选值，避免把不存在或类型错误混为正常值。
+    后续练习（未验收）：第32节已把unordered_map、optional与variant组合为配置查询；下一步补缺失键和类型不符的不同错误路径。any不是无需类型检查的万能容器。
+    复习：末尾1道optional<double>概念小测尚未提交，保留可选复习。；区分optional无值、variant类型不符、any_cast不符；避免对空optional解引用。；复述Lambda与普通函数、using T与class、visit与if constexpr的区别。
+    验证边界：7/7编程实验通过。MatMul38ms、GPU名称和阈值是手工模拟示例；概念小测没有作答记录。
+- 第 32 节｜阶段项目：安全数据模块｜学习中｜复习：开始前简短回顾find、operator[]与return;的区别，不重复实验1。
+实验2分别测试正常值、缺失键和类型不符，先定义返回/错误语义。
+在正确的cpp_lesson32工作目录编译运行；编译失败后核对旧可执行文件，避免拿旧程序输出验收。
+  - 配置查询模块｜已验收｜block_size = 256
+threshold = 0.95
+device = GPU
+unknown: Not found
+  - 类型安全读取与错误处理｜未开始｜仅规划/布置，尚无实际编译运行输出。
+  - 参数合法性验证｜未开始｜仅规划/布置，尚无实际编译运行输出。
+  - 强异常安全配置更新｜未开始｜仅规划/布置，尚无实际编译运行输出。
+  - 多文件与最小测试｜未开始｜仅规划/布置，尚无实际编译运行输出。
+  - 难点：需要把容器查询、可选返回值、候选类型、参数约束与失败后状态保证串起来；find只查询，非const映射的[]在缺键时可能插入。
+    判断方法：先查询键，再检查类型，再验证取值，最后提交更新。void函数的return;只结束函数；返回nullopt表达无查询结果，break退出循环或switch。
+    实际用途：建立类型安全的算子配置/任务配置入口，为之后CPU算子与Jetson项目准备可解释的错误处理和测试接口。
+    后续练习（未验收）：当前仅配置查询通过；类型安全读取、参数校验、强异常安全更新和多文件测试尚待逐步运行。设备字符串GPU不代表已经调用CUDA。
+    复习：开始前简短回顾find、operator[]与return;的区别，不重复实验1。；实验2分别测试正常值、缺失键和类型不符，先定义返回/错误语义。；在正确的cpp_lesson32工作目录编译运行；编译失败后核对旧可执行文件，避免拿旧程序输出验收。
+    验证边界：实验1通过：block_size=256、threshold=0.95、device=GPU、unknown: Not found。整节未完成；实验2–5未运行。
 - 第 33 节｜头文件与多文件工程｜未开始
 - 第 34 节｜CMake 工程化｜未开始
 - 第 35 节｜Debug 与 Release｜未开始
@@ -207,7 +347,7 @@ string/string_view拥有关系与切片；vector的size/capacity/reserve与扩�
 ## AI Infra全体系学习路线
 AI Infra工程师：CANN/Ascend算子竞赛为主目标，Jetson P1算子与P2推理两个实践副线，连接研究和实习。
 原48节编号不变；C++主线继续，Jetson恰好P1/P2两个实践副线。Linux每天≤1小时并入真实工程。P1 Reduce/Softmax可独立实现与公平计时后即启动Ascend C K01；不等两项目结束。正式提交截止T-8周冻结Jetson新需求，CANN投入70–80%。单台Jetson AGX Orin Developer Kit 64GB由用户确认，JetPack与环境待实机核验。
-规划版本：2026-11-03-cpp-ownership-focus-v1
+规划版本：2026-11-04-cpp-safe-config-v1
 
 ## 设备与竞赛锚点
 NVIDIA Jetson AGX Orin Developer Kit 64GB
@@ -447,7 +587,7 @@ MVP：YOLO TensorRT单路推理 + EEG或雷达时序离线窗口 + 统一Benchma
   门槛：Lambda实际输出与第24节边界测试；设备型号已由用户确认；JetPack/软件栈核验前不安装新栈。
   建议投入：建议C++65% / Jetson25% / 复盘10%，不是实际学习时长
 - C++25–32阶段 · 按验收推进｜RAII与张量桥接 + P1-A/B
-  学习：11-03记录：26–28节11项实验完成；优先复习所有权、值类别/引用折叠/forward。下一节29异常与资源安全；Python/NumPy与CUDA尚待实践。
+  学习：11-04记录：29–31节19项编程实验通过，32节配置查询通过，接续实验2类型安全读取；第30/31节概念小测待补。优先巩固constexpr、编译链接、类型分发；Python/NumPy与CUDA尚待实践。
   实践：第28节阶段准备、第29节前后预约Jetson首次连接；尚未进入终端。之后P1环境/基准→Vector Add→Reduce，实际运行另记。
   门槛：P1-A/B有实测记录；先实现正确性，不预设性能提升或GPU已可用。
   建议投入：P1总量建议8–10周，可跨后续C++阶段；按设备空闲调整
@@ -554,11 +694,11 @@ MVP：YOLO TensorRT单路推理 + EEG或雷达时序离线窗口 + 统一Benchma
 #### C03 泛型与现代 C++
 前置：C02；原25–32节
 验收：安全数据模块通过拷贝/移动/异常边界测试；解释 unique_ptr、shared_ptr 与 Rule of Zero 的取舍。
-- 模板、constexpr 与标准库类型｜进行中｜▲难点
+- 模板、constexpr 与标准库类型｜已实践｜▲难点
   学习范围：函数/类模板；类型推导与约束入门；constexpr；optional / variant等类型；程序组织
 - Rule of Zero、智能指针与移动进阶｜已实践｜★重点｜▲难点
   学习范围：unique_ptr / shared_ptr / weak_ptr；Rule of Zero；值语义与所有权；移动语义进阶；循环引用
-- 异常安全与安全数据模块｜未开始｜★重点
+- 异常安全与安全数据模块｜进行中｜★重点
   学习范围：异常传播；基本/强异常保证；RAII清理；边界测试；安全数据模块
 
 #### C04 构建、调试与测试工程
