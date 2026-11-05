@@ -1,16 +1,23 @@
 # 学习进度只读镜像
 
-数据版本：41
-网站最后保存：2026-11-05T09:38:03.289000Z
-本次同步：2026-11-05T09:49:13.064116Z
+数据版本：42
+网站最后保存：2026-11-05T13:10:06.998000Z
+本次同步：2026-11-05T13:10:55.790558Z
 最近学习：2026-11-05
 
 每次使用请检查同步时间和 GitHub Actions 最近一次运行结果；文件可读取不代表同步服务始终正常。
 
 ## 当前 C++ 起点
-第 32/48 节｜阶段项目：安全数据模块｜学习中
+第 35/48 节｜Debug 与 Release｜已讲解
 
 ## 已验证与记录边界
+C++ 第32–34节结课，累计34/48（70.8%），剩余14节。11月5日新验收12项实验：第32节3项、第33节4项、第34节5项。第33节实验2已讲解，按用户要求跳过实操。第35节已讲解，实验1待实操。
+11-05 结课。11-04 已通过配置查询。11-05 验收实验2–4：合法更新为512，类型不符、缺键、负数均拒绝。模拟异常保持256/0.95，成功提交后为512/0.85。错误get<int>触发bad_variant_access，原配置保持512/0.85。
+多文件编译、CMake、静态库、增量构建四项通过。对齐声明和定义的参数类型后解决arm64链接报错，IntelliSense改为C++20后红线消失。实验2头文件保护已讲解，用户跳过实操。
+五项通过：规范目录与PUBLIC使用要求。故意改PRIVATE复现config.h缺失。生成约110KB的dylib。otool -L显示@rpath/libconfig_lib.dylib。otool -l显示LC_RPATH指向build目录。
+已讲解Debug/Release、-g、-O0/-O2/-O3、NDEBUG和CMAKE_BUILD_TYPE。实验1已布置，待确认目录和源码后进行两套构建，尚缺实际输出。
+
+此前验证：
 2026-11-04新增验证：2026-11-04：C++第29–31节编程实验通过，主线31/48（64.6%）；第32节进行中，实验1配置查询通过。今日20项实验有运行/编译证据（6+6+7+1），包含预期失败和修复验证。第30节2道、第31节1道概念小测未提交。实际时长未提供；Jetson/CUDA没有新增实机实验。
 6/6编程实验通过。异常捕获后继续运行；栈展开按B→A析构（模拟资源日志）；直接修改后保留40，临时副本失败则原值10/20/30不变；本机vector扩容有noexcept时Move A、去掉后Copy A。非GPU实验。
 6/6编程实验通过。constexpr与static_assert、int/const/constexpr、运行期输入10→100；constexpr常量表达式故意编译失败为验证成功；多文件缺实现链接失败后修复输出25；-c目标文件108K/1.9K，链接运行输出25。末尾2道概念小测未提交；未实现CMake。
@@ -30,12 +37,12 @@ Linux 2026-11-01：惠普光影精灵7，Windows + WSL Ubuntu，目录[本地路
 2026-11-02：第24节实验1已验收，修正MaxMul为MatMul后，Add count2 avg0.16、MatMul count2 avg1.74、ReLU count1 avg0.09、Softmax count2 avg0.70 ms；这些是模拟延迟。实验2排行榜仅讲解/布置，预期输出不是实测；实验3未开始。
 
 2026-11-03：C++主线28/48（58.3%），第26–28节课程实验完成，共11项：26节4项（实验1沿用此前确认），27节4项，28节3项。重点复习RAII/所有权、shared_ptr循环引用、值类别/引用折叠/forward；关联P1缓冲区与P2任务/回调的工程用途。下一节29尚未开始。Jetson待首次连接，未核验环境、未运行CUDA。
-4个实验完成。vector独立元素存储的输出沿用此前确认；unique_ptr移动后源为空/新对象值100；故意复制DataOwner得到隐式删除拷贝构造的编译错误（预期失败即通过）；新建资源拷贝100→200，原值100，Same address=false。
-4个实验有本次终端输出。shared_ptr count 1→2→1且共享值200；weak lock期间count2、之后1、作用域后expired=true；A/B循环保持存活，手动断环后Destroy A/Destroy B；weak previous版本无需手动断环，A expired=true。
-3个实验有本次终端输出。reserve(4)后push/emplace：Copy count=1，Move count=2，size4；relay中命名形参直接传出总是左值，forward保留输入值类别；四次插入依次Copy A、Move B、Copy C、Move C，Size=4。已完成四路径讲解，但保留专项复习；没有实测性能收益。
-此前第14节unique_ptr/Rule of Zero疑问已由第26节实验覆盖，保留独立复述与反例复习。第24/25节本次为总体进度确认，没有新增逐实验终端证据。
+4个实验完成。vector独立元素存储的输出沿用此前确认；unique_ptr
 
 ## 疑问与薄弱点
+复习 optional→variant→visit 的取值顺序、字符串字面量与const引用、类型检查和副本提交。对照声明与定义的函数签名、编译/链接/运行三个阶段、CMake的PUBLIC/PRIVATE/INTERFACE与增量依赖。第33节头文件保护已讲解并跳过实操，第35节实验1待运行。
+
+此前复习记录：
 当前复习与未完成项：优先巩固：编译期/运行期、局部变量与常量表达式、const/constexpr；声明/定义/编译/链接/-c/.o；Lambda与普通函数；using类型别名/class定义/template<class T>；optional/variant/any、visit运行期派发与if constexpr编译期分支；unordered_map的find与[]；void return;、nullopt与break；-Wall/-Wextra含义（用户选择不加做额外实验）。第30节末2道概念小测、第31节末1道小测尚未提交，不撤销编程通过状态。
 第28节const move与转发路径仍需巩固；扩容/noexcept对照已由第29节覆盖。第32节实验2–5尚未运行。
 
@@ -54,11 +61,11 @@ Linux 待实操：sed修正errror后复测计数为2（未展示输出）；不�
 泛型Lambda、std::transform、引用捕获生命周期/悬空风险仍待专项练习；两道概念测验未提交。四项编程实验已通过，不阻止继续第24节。 第24节现由11-03日报汇总确认完成，新增逐实验输出仍待补。
 
 ## 下一步
-第32节实验2「类型安全读取与错误处理」：先简短回顾find与return;，然后一次只布置一个实验；测试正常值、键不存在、类型不符，提交实际终端输出后验收。实验1已经通过，不重复。之后依次参数合法性验证、安全更新、多文件与最小测试；这些后续步骤尚未运行。
+从第35节实验1「Debug/Release 双构建」继续。先确认 cpp_lesson35 工程和源码，分别构建 Debug 与 Release，对比编译 flags，运行两个版本并保存终端输出。之后再做 assert 与 NDEBUG 对照。
 
-Linux：先用sed修正errror并复测，再验证无参数默认文件名和包含文件名的报错；随后补PATH、source和路径对照实验，再做Git/CMake/GDB小项目。C++现有接续点为第32节，每日Linux复习≤1小时。
+Linux：先用sed修正errror并复测，再验证无参数默认文件名和包含文件名的报错；随后补PATH、source和路径对照实验，再做Git/CMake/GDB小项目。C++现有接续点为第35节，每日Linux复习≤1小时。
 
-Jetson/CANN：本日没有新的板端实验；沿用现有设备环境与两个项目状态，继续2027 CANN优先主线。
+Jetson：本日转入环境配置，刷机与 WSL 排障另记，实际日志和板端状态待补充。
 
 ## Linux / CANN 主线
 保留既定 48 节 C++ 主线，不把未完成课程标记为已完成。
@@ -70,6 +77,16 @@ Linux 复习每天 ≤ 1 小时，优先结合 C++ 工程。
 原48节编号不变；C++主线继续，Jetson恰好P1/P2两个实践副线。Linux每天≤1小时并入真实工程。P1 Reduce/Softmax可独立实现与公平计时后即启动Ascend C K01；不等两项目结束。正式提交截止T-8周冻结Jetson新需求，CANN投入70–80%。单台共享设备，实际版本与环境待核验。
 
 ## 最近学习摘要
+
+### 2026-11-05｜C++｜第32–34节结课，第35节实验1待实操
+C++ 第32–34节结课，累计34/48（70.8%），剩余14节。11月5日新验收12项实验：第32节3项、第33节4项、第34节5项。第33节实验2已讲解，按用户要求跳过实操。第35节已讲解，实验1待实操。
+实验结论：11-05 结课。11-04 已通过配置查询。11-05 验收实验2–4：合法更新为512，类型不符、缺键、负数均拒绝。模拟异常保持256/0.95，成功提交后为512/0.85。错误get<int>触发bad_variant_access，原配置保持512/0.85。
+多文件编译、CMake、静态库、增量构建四项通过。对齐声明和定义的参数类型后解决arm64链接报错，IntelliSense改为C++20后红线消失。实验2头文件保护已讲解，用户跳过实操。
+五项通过：规范目录与PUBLIC使用要求。故意改PRIVATE复现config.h缺失。生成约110KB的dylib。otool -L显示@rpath/libconfig_lib.dylib。otool -l显示LC_RPATH指向build目录。
+已讲解Debug/Release、-g、-O0/-O2/-O3、NDEBUG和CMAKE_BUILD_TYPE。实验1已布置，待确认目录和源码后进行两套构建，尚缺实际输出。
+掌握情况：C++ 第32–34节结课，累计34/48（70.8%），剩余14节。11月5日新验收12项实验：第32节3项、第33节4项、第34节5项。第33节实验2已讲解，按用户要求跳过实操。第35节已讲解，实验1待实操。
+疑问：复习 optional→variant→visit 的取值顺序、字符串字面量与const引用、类型检查和副本提交。对照声明与定义的函数签名、编译/链接/运行三个阶段、CMake的PUBLIC/PRIVATE/INTERFACE与增量依赖。第33节头文件保护已讲解并跳过实操，第35节实验1待运行。
+下一步：从第35节实验1「Debug/Release 双构建」继续。先确认 cpp_lesson35 工程和源码，分别构建 Debug 与 Release，对比编译 flags，运行两个版本并保存终端输出。之后再做 assert 与 NDEBUG 对照。
 
 ### 2026-11-04｜C++｜第29–31节编程通过，第32节实验1通过
 2026-11-04：C++第29–31节编程实验通过，主线31/48（64.6%）；第32节进行中，实验1配置查询通过。今日20项实验有运行/编译证据（6+6+7+1），包含预期失败和修复验证。第30节2道、第31节1道概念小测未提交。实际时长未提供；Jetson/CUDA没有新增实机实验。
@@ -112,13 +129,6 @@ string/string_view拥有关系与切片；vector的size/capacity/reserve与扩�
 掌握情况：第18、19、20、21节已验收；第22节未开始／实验待运行；学习时长未实测。
 疑问：第14节 unique_ptr/Rule of Zero题仍待复习；第22节仅布置map词频实验，未提交运行证据，不标记学习中或验收。视图生命周期、扩容导致引用/span/迭代器失效、旧end失效及erase返回值需持续巩固。
 下一步：第22节「关联容器」仍未开始：先运行 std::map<std::string,int> 词频统计实验并提交实际输出，再核对 ++counts[word]、结构化绑定、find、it->first / it->second 与 map.size()。随后按48节主线推进；第14节 unique_ptr / Rule of Zero 自测题继续待复习。
-
-### 2026-11-01｜Linux｜Linux 复习｜Shell、权限、位置参数与脚本路径
-文件与文本处理、grep/管道/wc/find/重定向；Shell文件检查、权限755、位置参数、Shebang及脚本路径。设备：惠普光影精灵7，Windows + WSL Ubuntu；目录[本地路径已省略]。
-实验结论：grep错误行2条；find找到app.log；覆盖/追加输出hello与world。check_log.sh错误数1（errror误拼写）、无错误0、文件不存在分支均有输出。权限644→755；args.sh参数hello/123/2；跨目录path_demo.sh输出PWD=[本地路径已省略] path=/usr/bin/bash。
-掌握情况：已展示终端输出的项目已验证；其余只讲解或待实操。学习时长未实测。
-疑问：误拼写errror导致计数1不是脚本失败。$0是脚本调用名/路径，$1是第一个传入参数。Shebang差异已讲解。尚待验证项目见复习清单。
-下一步：Linux：先用sed修正errror并复测，再验证无参数默认文件名和包含文件名的报错；随后补PATH、source和路径对照实验，再做Git/CMake/GDB小项目。C++现有接续点保持不变（当前为第18节），每日Linux复习≤1小时。
 
 ## 48 节课程状态
 - 第 1 节｜环境与编译运行｜已实践
@@ -310,26 +320,91 @@ After reset = false
     后续练习（未验收）：第32节已把unordered_map、optional与variant组合为配置查询；下一步补缺失键和类型不符的不同错误路径。any不是无需类型检查的万能容器。
     复习：末尾1道optional<double>概念小测尚未提交，保留可选复习。；区分optional无值、variant类型不符、any_cast不符；避免对空optional解引用。；复述Lambda与普通函数、using T与class、visit与if constexpr的区别。
     验证边界：7/7编程实验通过。MatMul38ms、GPU名称和阈值是手工模拟示例；概念小测没有作答记录。
-- 第 32 节｜阶段项目：安全数据模块｜学习中｜复习：开始前简短回顾find、operator[]与return;的区别，不重复实验1。
-实验2分别测试正常值、缺失键和类型不符，先定义返回/错误语义。
-在正确的cpp_lesson32工作目录编译运行；编译失败后核对旧可执行文件，避免拿旧程序输出验收。
+- 第 32 节｜阶段项目：安全数据模块｜已实验通过｜复习：复述 optional → variant → visit 的调用顺序。
+比较模拟异常与 bad_variant_access 两次失败后原配置的值。
+区分字符串字面量、临时 std::string 和 const 引用。
   - 配置查询模块｜已验收｜block_size = 256
 threshold = 0.95
 device = GPU
 unknown: Not found
-  - 类型安全读取与错误处理｜未开始｜仅规划/布置，尚无实际编译运行输出。
-  - 参数合法性验证｜未开始｜仅规划/布置，尚无实际编译运行输出。
-  - 强异常安全配置更新｜未开始｜仅规划/布置，尚无实际编译运行输出。
-  - 多文件与最小测试｜未开始｜仅规划/布置，尚无实际编译运行输出。
-  - 难点：需要把容器查询、可选返回值、候选类型、参数约束与失败后状态保证串起来；find只查询，非const映射的[]在缺键时可能插入。
-    判断方法：先查询键，再检查类型，再验证取值，最后提交更新。void函数的return;只结束函数；返回nullopt表达无查询结果，break退出循环或switch。
-    实际用途：建立类型安全的算子配置/任务配置入口，为之后CPU算子与Jetson项目准备可解释的错误处理和测试接口。
-    后续练习（未验收）：当前仅配置查询通过；类型安全读取、参数校验、强异常安全更新和多文件测试尚待逐步运行。设备字符串GPU不代表已经调用CUDA。
-    复习：开始前简短回顾find、operator[]与return;的区别，不重复实验1。；实验2分别测试正常值、缺失键和类型不符，先定义返回/错误语义。；在正确的cpp_lesson32工作目录编译运行；编译失败后核对旧可执行文件，避免拿旧程序输出验收。
-    验证边界：实验1通过：block_size=256、threshold=0.95、device=GPU、unknown: Not found。整节未完成；实验2–5未运行。
-- 第 33 节｜头文件与多文件工程｜未开始
-- 第 34 节｜CMake 工程化｜未开始
-- 第 35 节｜Debug 与 Release｜未开始
+  - 类型检查及安全修改｜已验收｜----Before----
+block_size = 256
+----Result----
+Result1 = true
+Result2 = false
+Result3 = false
+Result4 = false
+----After modified----
+New value:
+block_size = 512
+threshold = 0.95
+  - Copy-and-Swap 与强异常安全｜已验收｜----Before----
+block_size = 256
+threshold = 0.95
+-----First try-----
+Caught : Simulate failure
+----After true----
+block_size = 256
+threshold = 0.95
+-----Second try-----
+block_size = 512
+threshold = 0.85
+  - bad_variant_access 与原配置保护｜已验收｜-----Wrong type test-----
+Temp block_size value changed to 1024
+Caught type error : bad_variant_access
+-----After type error-----
+block_size = 512
+threshold = 0.85
+  - 难点：optional、variant、visit 分别处理有无结果、候选类型和实际取值。直接更新前要检查键、类型与取值，批量更新还要选定提交点。
+    判断方法：读取时先检查 optional，再取出 variant 交给 visit。更新时先验证，再在副本上操作，通过后一次提交。
+    实际用途：为算子和推理任务配置提供类型检查与安全更新，防止失败时留下部分修改。
+    后续练习（未验收）：第33节已把配置模块拆分为头文件、实现文件与调用端。
+    复习：复述 optional → variant → visit 的调用顺序。；比较模拟异常与 bad_variant_access 两次失败后原配置的值。；区分字符串字面量、临时 std::string 和 const 引用。
+    验证边界：4项实验均有通过记录。实验1在11月4日完成，实验2–4在11月5日通过。
+- 第 33 节｜头文件与多文件工程｜已实践｜复习：对照 std::string 按值与 const std::string& 两种签名。
+说明只改实现文件与改公共头文件时，为什么重编译范围不同。
+  - 头文件、实现与调用拆分｜已验收｜arm64 链接报错涉及 getConfig 和 updateIntConfig。对齐声明与定义的参数类型后成功编译。日报所列结果：初始 block_size = 128、threshold = 0.95、device = GPU。Update success = true。修改后 block_size = 512。未知键未找到。
+  - pragma once 与 Include Guard｜已讲解，跳过实操｜已讲解两种头文件保护写法。用户要求跳过本实验并继续。
+  - CMake 自动构建｜已验收｜cmake -S . -B build 和 cmake --build build 成功。分别编译 main.cpp.o 和 config.cpp.o，链接后 config_app 正常运行。
+  - CMake 静态库｜已验收｜生成 libconfig_lib.a。构建日志出现 Built target config_lib 和 Built target config_app，程序正常运行。
+  - 增量构建与依赖｜已验收｜无修改时两个目标直接显示 Built target。touch config.cpp 后只重编 config.cpp.o 并重链接。touch config.h 后两个 .o 都重编，再链接。
+  - 难点：声明与定义的签名差异会影响链接。编辑器的语言标准提示、实际编译诊断、链接器的缺符号各有判断依据。
+    判断方法：缺符号时同时核对源文件是否参与链接、声明与定义的参数是否一致。依据构建输出判断哪些目标重新编译。
+    实际用途：拆分 C++、CUDA 和 TensorRT 工程，复用静态库，定位构建失败并减少无关文件的重编译。
+    后续练习（未验收）：本次观察了 config.cpp 与 config.h 各自变化后的重编译范围。
+    复习：对照 std::string 按值与 const std::string& 两种签名。；说明只改实现文件与改公共头文件时，为什么重编译范围不同。
+    验证边界：多文件编译、CMake、静态库、增量构建四项通过。头文件保护已讲解，按用户要求跳过实操。
+- 第 34 节｜CMake 工程化｜已实验通过｜复习：解释库的 PUBLIC include 与应用 PRIVATE 链接如何同时成立。
+把 otool -L 的 @rpath 依赖与 LC_RPATH 的目录对应起来。
+  - 工程目录与 PUBLIC 使用要求｜已验收｜include/config.h、src/config.cpp、app/main.cpp 分离，PUBLIC include 路径传给 config_app。配置、编译、运行通过。
+  - PUBLIC 改 PRIVATE 的错误对照｜已验收｜[ 50%] Built target config_lib
+[ 75%] Building CXX object .../app/main.cpp.o
+fatal error: 'config.h' file not found
+故意触发的缺头文件错误验证通过。之后恢复 PUBLIC。
+  - SHARED 动态库｜已验收｜build/libconfig_lib.dylib，约 110 KB。程序正常运行。
+  - otool -L 查看动态链接依赖｜已验收｜./build/config_app:
+    @rpath/libconfig_lib.dylib (compatibility version 0.0.0, current version 0.0.0)
+    /usr/lib/libc++.1.dylib (compatibility version 1.0.0, current version 2100.43.0)
+    /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1356.0.0)
+  - LC_RPATH 与运行时搜索路径｜已验收｜cmd LC_RPATH
+cmdsize 48
+path [本地路径已省略] (offset 12)
+Load command 17
+家目录在此写作 ~。
+  - 难点：include 路径的传播、目标链接依赖和程序运行时查找动态库分属不同环节。
+    判断方法：先判断错误出在编译、链接还是运行。核对 PUBLIC/PRIVATE/INTERFACE 使用要求，再用 otool 查看依赖与 LC_RPATH。
+    实际用途：组织 Jetson/CUDA/TensorRT 的多目录工程，复用库并排查部署时的头文件、链接或缺库问题。
+    后续练习（未验收）：本次验证 macOS 的 .dylib、@rpath 与 LC_RPATH。迁移到 Jetson Linux 时按实际系统检查库和搜索路径。
+    复习：解释库的 PUBLIC include 与应用 PRIVATE 链接如何同时成立。；把 otool -L 的 @rpath 依赖与 LC_RPATH 的目录对应起来。
+    验证边界：5项实验通过，包含 PUBLIC 改 PRIVATE 的故意失败对照。
+- 第 35 节｜Debug 与 Release｜已讲解｜复习：回顾 -g、优化级别、NDEBUG 与 CMAKE_BUILD_TYPE 的作用。
+  - Debug/Release 双构建与编译参数对照｜待实操｜已讲解并布置。工程目录、双构建、编译 flags 和两份可执行程序的输出均待用户实际操作确认。
+  - 难点：CMAKE_BUILD_TYPE 是配置选择，编译器实际收到的 flags 要从构建记录核对。调试信息、优化与断言是不同属性。
+    判断方法：确认工程目录，用同一份源码分别构建 Debug 和 Release，对比 flags 后运行两份程序。
+    实际用途：为故障定位和性能测量准备各自可复现的构建配置。
+    后续练习（未验收）：按第35节笔记执行实验1，保存两套构建和运行输出，再开展 assert 与 NDEBUG 对照。
+    复习：回顾 -g、优化级别、NDEBUG 与 CMAKE_BUILD_TYPE 的作用。
+    验证边界：本节已讲解。实验1已布置，目录创建、构建与运行结果待实操确认。
 - 第 36 节｜Sanitizer 与内存错误定位｜未开始
 - 第 37 节｜LLDB 进阶调试｜未开始
 - 第 38 节｜单元测试与 CTest｜未开始
@@ -347,7 +422,7 @@ unknown: Not found
 ## AI Infra全体系学习路线
 AI Infra工程师：CANN/Ascend算子竞赛为主目标，Jetson P1算子与P2推理两个实践副线，连接研究和实习。
 原48节编号不变；C++主线继续，Jetson恰好P1/P2两个实践副线。Linux每天≤1小时并入真实工程。P1 Reduce/Softmax可独立实现与公平计时后即启动Ascend C K01；不等两项目结束。正式提交截止T-8周冻结Jetson新需求，CANN投入70–80%。单台Jetson AGX Orin Developer Kit 64GB由用户确认，JetPack与环境待实机核验。
-规划版本：2026-11-04-cpp-safe-config-v1
+规划版本：2026-11-05-cpp-build-v1
 
 ## 设备与竞赛锚点
 NVIDIA Jetson AGX Orin Developer Kit 64GB
@@ -382,8 +457,8 @@ MVP：Vector Add + Reduce + 稳定Softmax + 可重复Benchmark + 自动调参小
 - 前置：目标板版本、权限与独立工作目录｜待实机核验｜P1-A核函数运行前
   依据：仅设备型号与64GB容量由用户确认；没有据此推定软件栈、权限或部署已就绪。
   说明：型号/64GB已由用户确认；JetPack/L4T/CUDA/TensorRT、SSH、工具可用性仍要实际核验。
-- 前置：模板/RAII与最小CMake工程｜待完成｜P1按需补，C++25–40持续巩固
-  依据：第25节：已实践；第26节：已实验通过；第34节：未开始
+- 前置：模板/RAII与最小CMake工程｜已满足｜P1按需补，C++25–40持续巩固
+  依据：第25节：已实践；第26节：已实验通过；第34节：已实验通过
   说明：入门阶段可先使用小型模板工程；原课程编号不重排，工程与资源安全逐步补齐。
 - 前置：Python/NumPy与浮点误差参考｜待补实验｜P1-C/D前补齐
   依据：容器、函数、迭代与异常：未开始；shape、stride、广播与向量化：未开始；FP32/FP16、误差与稳定性：未开始
@@ -476,7 +551,7 @@ MVP：YOLO TensorRT单路推理 + EEG或雷达时序离线窗口 + 统一Benchma
   依据：第24节：已实践
   说明：理解分组/排序、输入校验、引用和结构体，不把模拟延迟当真实性能。
 - 前置：多文件工程、CMake、调试与测试｜待完成｜P2-A/B阶段逐步具备
-  依据：第33节：未开始；第34节：未开始；第35节：未开始；第36节：未开始；第38节：未开始
+  依据：第33节：已实践；第34节：已实验通过；第35节：已讲解；第36节：未开始；第38节：未开始
   说明：不要求等第40节结束才准备素材；实际工程依赖达到后再做板端部署。
 - 前置：Python/PyTorch小模型和张量数据流｜待补实验｜模型导出前
   依据：容器、函数、迭代与异常：未开始；Tensor、device、autograd 与 nn.Module：未开始；DataLoader、优化器与训练循环：未开始
@@ -587,12 +662,12 @@ MVP：YOLO TensorRT单路推理 + EEG或雷达时序离线窗口 + 统一Benchma
   门槛：Lambda实际输出与第24节边界测试；设备型号已由用户确认；JetPack/软件栈核验前不安装新栈。
   建议投入：建议C++65% / Jetson25% / 复盘10%，不是实际学习时长
 - C++25–32阶段 · 按验收推进｜RAII与张量桥接 + P1-A/B
-  学习：11-04记录：29–31节19项编程实验通过，32节配置查询通过，接续实验2类型安全读取；第30/31节概念小测待补。优先巩固constexpr、编译链接、类型分发；Python/NumPy与CUDA尚待实践。
+  学习：第32节安全数据模块4项实验通过。11月4日完成配置查询，11月5日验证类型检查、Copy-and-Swap 与 bad_variant_access。第30和31节概念小测待复习。
   实践：第28节阶段准备、第29节前后预约Jetson首次连接；尚未进入终端。之后P1环境/基准→Vector Add→Reduce，实际运行另记。
   门槛：P1-A/B有实测记录；先实现正确性，不预设性能提升或GPU已可用。
   建议投入：P1总量建议8–10周，可跨后续C++阶段；按设备空闲调整
 - C++33–40阶段 · 与项目适度并行｜工程化 + P1-C/D + P2-A/B + K01
-  学习：CMake、测试、调试；补PyTorch/ONNX和轻量模型基础。
+  学习：第33–34节完成多文件构建、静态库、动态库和运行时搜索路径。第35节已讲解，接续 Debug/Release 双构建实验。后续补测试、调试和模型部署基础。
   实践：P1 Softmax与自动调优；P2 YOLO/TensorRT单模型；启动Ascend C K01。
   门槛：一旦Reduce/Softmax可独立实现且公平计时，就进入K01；不等P2做完。
   建议投入：成熟期建议C++/系统40% / P1与P2合计40% / Ascend C20%
@@ -698,13 +773,13 @@ MVP：YOLO TensorRT单路推理 + EEG或雷达时序离线窗口 + 统一Benchma
   学习范围：函数/类模板；类型推导与约束入门；constexpr；optional / variant等类型；程序组织
 - Rule of Zero、智能指针与移动进阶｜已实践｜★重点｜▲难点
   学习范围：unique_ptr / shared_ptr / weak_ptr；Rule of Zero；值语义与所有权；移动语义进阶；循环引用
-- 异常安全与安全数据模块｜进行中｜★重点
+- 异常安全与安全数据模块｜已实践｜★重点
   学习范围：异常传播；基本/强异常保证；RAII清理；边界测试；安全数据模块
 
 #### C04 构建、调试与测试工程
 前置：C03；原33–40节
 验收：多文件工程可从干净目录构建；CTest 通过；用 Sanitizer/调试器定位一个真实错误。
-- 头文件、CMake、Debug / Release｜未开始｜★重点
+- 头文件、CMake、Debug / Release｜进行中｜★重点
   学习范围：头文件与编译单元；链接与ODR；CMake target；Debug/Release编译选项；多文件工程
 - Sanitizer、LLDB 与单元测试｜未开始｜★重点
   学习范围：LLDB断点/观察/调用栈；AddressSanitizer / UBSan；内存错误定位；单元测试；CTest
