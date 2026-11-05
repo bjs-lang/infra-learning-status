@@ -12,6 +12,8 @@ concurrency:
   cancel-in-progress: false
 jobs:
   sync:
+    outputs:
+      artifact_name: ${{ steps.pages_artifact.outputs.name }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
@@ -38,8 +40,12 @@ jobs:
           mkdir _site
           cp learning-status.json learning-status.md index.html _site/
           touch _site/.nojekyll
+      - name: Name the Pages artifact for this attempt
+        id: pages_artifact
+        run: echo "name=github-pages-${GITHUB_RUN_ATTEMPT}" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-pages-artifact@v3
         with:
+          name: ${{ steps.pages_artifact.outputs.name }}
           path: _site
           retention-days: 1
   deploy:
@@ -57,3 +63,5 @@ jobs:
       - name: Publish verified current summary
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: ${{ needs.sync.outputs.artifact_name }}
