@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "data_version": 43,
-  "updated_at": "2026-11-06T07:51:46.948000Z",
+  "data_version": 44,
+  "updated_at": "2026-11-06T09:00:10.371000Z",
   "updated_at_note": "旧记录可能没有精确保存时间；空值不是同步失败。",
-  "synced_at": "2026-11-06T07:55:12.905808Z",
+  "synced_at": "2026-11-06T09:01:10.858445Z",
   "last_learning_date": "2026-11-05",
   "current_cpp_lesson": {
     "number": 35,
@@ -1014,12 +1014,12 @@
   ],
   "verified_summary": "C++ 第32–34节结课，累计34/48（70.8%），剩余14节。11月5日新验收12项实验：第32节3项、第33节4项、第34节5项。第33节实验2已讲解，按用户要求跳过实操。第35节已讲解，实验1待实操。\n11-05 结课。11-04 已通过配置查询。11-05 验收实验2–4：合法更新为512，类型不符、缺键、负数均拒绝。模拟异常保持256/0.95，成功提交后为512/0.85。错误get<int>触发bad_variant_access，原配置保持512/0.85。\n多文件编译、CMake、静态库、增量构建四项通过。对齐声明和定义的参数类型后解决arm64链接报错，IntelliSense改为C++20后红线消失。实验2头文件保护已讲解，用户跳过实操。\n五项通过：规范目录与PUBLIC使用要求。故意改PRIVATE复现config.h缺失。生成约110KB的dylib。otool -L显示@rpath/libconfig_lib.dylib。otool -l显示LC_RPATH指向build目录。\n已讲解Debug/Release、-g、-O0/-O2/-O3、NDEBUG和CMAKE_BUILD_TYPE。实验1已布置，待确认目录和源码后进行两套构建，尚缺实际输出。\n\n此前验证：\n2026-11-04新增验证：2026-11-04：C++第29–31节编程实验通过，主线31/48（64.6%）；第32节进行中，实验1配置查询通过。今日20项实验有运行/编译证据（6+6+7+1），包含预期失败和修复验证。第30节2道、第31节1道概念小测未提交。实际时长未提供；Jetson/CUDA没有新增实机实验。\n6/6编程实验通过。异常捕获后继续运行；栈展开按B→A析构（模拟资源日志）；直接修改后保留40，临时副本失败则原值10/20/30不变；本机vector扩容有noexcept时Move A、去掉后Copy A。非GPU实验。\n6/6编程实验通过。constexpr与static_assert、int/const/constexpr、运行期输入10→100；constexpr常量表达式故意编译失败为验证成功；多文件缺实现链接失败后修复输出25；-c目标文件108K/1.9K，链接运行输出25。末尾2道概念小测未提交；未实现CMake。\n7/7编程实验通过。optional/空值取值、variant三类型切换与get、visit、if constexpr/类型别名、any_cast/reset均有输出。末尾1道optional<double>概念小测未提交。MatMul38ms/GPU名称为模拟示例，非设备性能。\n实验1配置查询已验收：在cpp_lesson32正确目录重新编译运行，block_size=256、threshold=0.95、device=GPU、unknown: Not found。旧day1目录any程序的输出不是本节证据；实验2–5尚未运行。\n\n此前验证（保留原日期与证据）：\n第1–13节主要练习沿用原进度。2026-10-31日报附有第14节移动赋值和自移动输出、第15节数组统计两组输出、第16节重载及引用增量输出、第17节作用域输出和引用语义问答。第17节随后由用户确认验收；生命周期回答指出局部对象离开作用域后消失、指针悬空，核心判断正确。\n\nLinux 2026-11-01：惠普光影精灵7，Windows + WSL Ubuntu，目录[本地路径已省略]。已验证grep/管道/wc/find/重定向、日志检查三分支、chmod755、bash与直接执行、位置参数及跨目录path_demo.sh。仅有主目录启动的一组路径输出；command -v bash在脚本内已验证。\n\n2026-11-01 C++：第18–21节已验收。string/view复制与观察、分词6/3→7/4；vector统计588/93/3/84与重分配检查；span三类容器求和与重建；STL排序/查找/求和、迭代器失效与erase安全删除均有日报实测依据。第1–17节沿用既有状态。\n\n2026-11-02：第22节四组关联容器实验据教学记录已验收；第23节四项Lambda编程实验现已通过，专项复习仍保留。\n\n2026-11-02续学：Lambda四个编程实验通过。基础25、1/0、3、3；阈值30→40时值捕获计数3→3、引用捕获3→1；mutable内部15→20而外部10，引用修改外部15；自定义sort得到MatMul38、Reduce25、Softmax25、Add12、ReLU8，慢算子数3，并正确解释return控制流。以上排序耗时为手工模拟数据，非GPU性能。泛型Lambda、transform、引用捕获悬空风险与两道概念题未专项验收。\n2026-11-02：第24节实验1已验收，修正MaxMul为MatMul后，Add count2 avg0.16、MatMul count2 avg1.74、ReLU count1 avg0.09、Softmax count2 avg0.70 ms；这些是模拟延迟。实验2排行榜仅讲解/布置，预期输出不是实测；实验3未开始。\n\n2026-11-03：C++主线28/48（58.3%），第26–28节课程实验完成，共11项：26节4项（实验1沿用此前确认），27节4项，28节3项。重点复习RAII/所有权、shared_ptr循环引用、值类别/引用折叠/forward；关联P1缓冲区与P2任务/回调的工程用途。下一节29尚未开始。Jetson待首次连接，未核验环境、未运行CUDA。\n4个实验完成。vector独立元素存储的输出沿用此前确认；unique_ptr",
   "open_questions": "复习 optional→variant→visit 的取值顺序、字符串字面量与const引用、类型检查和副本提交。对照声明与定义的函数签名、编译/链接/运行三个阶段、CMake的PUBLIC/PRIVATE/INTERFACE与增量依赖。第33节头文件保护已讲解并跳过实操，第35节实验1待运行。\n\n此前复习记录：\n当前复习与未完成项：优先巩固：编译期/运行期、局部变量与常量表达式、const/constexpr；声明/定义/编译/链接/-c/.o；Lambda与普通函数；using类型别名/class定义/template<class T>；optional/variant/any、visit运行期派发与if constexpr编译期分支；unordered_map的find与[]；void return;、nullopt与break；-Wall/-Wextra含义（用户选择不加做额外实验）。第30节末2道概念小测、第31节末1道小测尚未提交，不撤销编程通过状态。\n第28节const move与转发路径仍需巩固；扩容/noexcept对照已由第29节覆盖。第32节实验2–5尚未运行。\n\n既有专项复习与历史疑问（当前断点以上方为准）：\n当前专项复习：第26节：按值传vector的复制→移动链与默认特殊成员条件；第27节：所有权图、lock临时拥有者、循环引用；第28节优先：实参值类别→T推导→引用折叠→传出表达式→最终构造。const move、扩容/noexcept仍未补验。第24、25节依据日报汇总确认完成，尚缺本次新增逐实验输出。第23节既有专项复习继续；Linux原待实操保留。\n\n此前疑问留档（以下按日期追溯，当前状态以上方与课表为准）：\n第14节：含 unique_ptr 成员且未自定义特殊成员函数的类，为何不能拷贝却可以移动？此自测题待复习。第17节生命周期题已验收，复习时注意 p 是指针，解引用悬空指针是未定义行为。\n\nLinux 待实操：sed修正errror后复测计数为2（未展示输出）；不传参数调用check_log.sh，验证默认文件名（未展示输出）；报错信息补充文件名后重新验证（未展示输出）；查看PATH并运行command -v code（待实操）；对比source/bash/直接执行及$0/BASH_SOURCE[0]（待实操）；补做从脚本所在目录启动的对照输出（尚缺一组）；Git/CMake/GDB小型C++项目综合实践（今日未开展）。\n\n第14节 unique_ptr/Rule of Zero题仍待复习；视图生命周期、扩容导致引用/span/迭代器失效、旧end失效及erase返回值需持续巩固。\n\n2026-11-02更新：第22节已验收；第23节捕获对照现已通过。第14节unique_ptr/Rule of Zero和Linux原待实操清单继续保留。\n\n泛型Lambda、std::transform、引用捕获生命周期/悬空风险仍待专项练习；两道概念测验未提交。四项编程实验已通过，不阻止继续第24节。 第24节现由11-03日报汇总确认完成，新增逐实验输出仍待补。",
-  "next_step": "从第35节实验1「Debug/Release 双构建」继续。先确认 cpp_lesson35 工程和源码，分别构建 Debug 与 Release，对比编译 flags，运行两个版本并保存终端输出。之后再做 assert 与 NDEBUG 对照。\n\nLinux：先用sed修正errror并复测，再验证无参数默认文件名和包含文件名的报错；随后补PATH、source和路径对照实验，再做Git/CMake/GDB小项目。C++现有接续点为第35节，每日Linux复习≤1小时。\n\nCANN 入门可与 C++ 第 35–40 节并行。先读社区教程的 NPU 架构与 Add 示例，有匹配的 CANNLab 环境后记录版本并运行样例。\n\n每日算法练习从 Hot 100 开始。下一道待记录题为 #1 两数之和（哈希）。",
-  "linux_and_cann_plan": "沿用 48 节 C++ 课表。每次先完成当前实验，再做一道 C++ Hot 100 题或复做一道错题，建议留 20–40 分钟。\nLinux 复习融入实际构建和排错，每天最多 1 小时。C++ 第 35–40 节期间可开始 CANN 社区入门，随后按算子验收进入赛题。\nAscend C 实践顺序为社区教程 → Add / Reduce 基线 → 往届赛题复现 → 天梯赛。设备与工具版本按题面核对，正式赛程以官方公告为准。\nJetson 两个项目归入历史。长期优先级为 2027 CANN 算子竞赛 → 可复现系统研究 → AI Infra 实习，软挑按时间选做。",
+  "next_step": "1. 先练 1–2 道 Hot 100。下一道待记录题为 #1 两数之和（哈希）。\n\n2. 做一项 CANN 小实战。CANN 入门可与 C++ 第 35–40 节并行。先读社区教程的 NPU 架构与 Add 示例，有匹配的 CANNLab 环境后记录版本并运行样例。\n\n3. 接续正课。从第35节实验1「Debug/Release 双构建」继续。先确认 cpp_lesson35 工程和源码，分别构建 Debug 与 Release，对比编译 flags，运行两个版本并保存终端输出。之后再做 assert 与 NDEBUG 对照。\n\nLinux：先用sed修正errror并复测，再验证无参数默认文件名和包含文件名的报错；随后补PATH、source和路径对照实验，再做Git/CMake/GDB小项目。C++现有接续点为第35节，每日Linux复习≤1小时。",
+  "linux_and_cann_plan": "每个学习日的顺序是 Hot 100（1–2 道） → CANN 小实战 → 当前正课。Hot 100 继续用 C++，可做新题或复做错题。CANN 每次只安排一项小任务。当前正课是 48 节 C++，以后进入 Python 或其他正课时也沿用这个顺序。\nLinux 复习融入实际构建和排错，每天最多 1 小时。C++ 第 35–40 节期间可开始 CANN 社区入门，随后按算子验收进入赛题。\nAscend C 实践顺序为社区教程 → Add / Reduce 基线 → 往届赛题复现 → 天梯赛。设备与工具版本按题面核对，正式赛程以官方公告为准。\nJetson 两个项目归入历史。长期优先级为 2027 CANN 算子竞赛 → 可复现系统研究 → AI Infra 实习，软挑按时间选做。",
   "learning_path": {
-    "version": "2026-11-06-cann-hot100-v1",
+    "version": "2026-11-06-cann-hot100-v2",
     "goal": "AI Infra 工程师 · 以 CANN / Ascend C 算子开发与竞赛为专业主线，连接推理系统、可复现研究与实习。",
-    "policy": "沿用 48 节 C++ 课表。每次先完成当前实验，再做一道 C++ Hot 100 题或复做一道错题，建议留 20–40 分钟。\nLinux 复习融入实际构建和排错，每天最多 1 小时。C++ 第 35–40 节期间可开始 CANN 社区入门，随后按算子验收进入赛题。\nAscend C 实践顺序为社区教程 → Add / Reduce 基线 → 往届赛题复现 → 天梯赛。设备与工具版本按题面核对，正式赛程以官方公告为准。\nJetson 两个项目归入历史。长期优先级为 2027 CANN 算子竞赛 → 可复现系统研究 → AI Infra 实习，软挑按时间选做。",
+    "policy": "每个学习日的顺序是 Hot 100（1–2 道） → CANN 小实战 → 当前正课。Hot 100 继续用 C++，可做新题或复做错题。CANN 每次只安排一项小任务。当前正课是 48 节 C++，以后进入 Python 或其他正课时也沿用这个顺序。\nLinux 复习融入实际构建和排错，每天最多 1 小时。C++ 第 35–40 节期间可开始 CANN 社区入门，随后按算子验收进入赛题。\nAscend C 实践顺序为社区教程 → Add / Reduce 基线 → 往届赛题复现 → 天梯赛。设备与工具版本按题面核对，正式赛程以官方公告为准。\nJetson 两个项目归入历史。长期优先级为 2027 CANN 算子竞赛 → 可复现系统研究 → AI Infra 实习，软挑按时间选做。",
     "hardware": {
       "device": "本地 CPU 参考与匹配的昇腾 NPU 环境",
       "device_status": "具体 NPU 型号和 CANN 版本以实际练习或评测环境为准",
@@ -1110,10 +1110,10 @@
         "name": "工程化 + Hot 100 + CANN 入门",
         "time": "当前 · C++ 第 35–40 节",
         "lane": "主线",
-        "learning": "接续第 35 节 Debug / Release 双构建，再学调试、测试与工程交付。每日用 C++ 做一道 Hot 100 题或复做错题。",
-        "deliverable": "先本地完成构建实验。有余力时读社区 NPU 基础和 Add 示例，确认 CANNLab 环境后运行样例。",
+        "learning": "每天先练 1–2 道 Hot 100，做一项 CANN 小实战，再上正课。当前从第 35 节 Debug / Release 双构建继续，再学调试、测试与工程交付。",
+        "deliverable": "CANN 小实战从社区 Add 样例起步。核对环境并记录运行结果，之后在正课完成本地构建实验。",
         "gate": "第 40 节按原课表验收。CANN 入门单独记录编译与参考输出对照。",
-        "budget": "C++ 为主，算法建议 20–40 分钟，CANN 入门按余力"
+        "budget": "Hot 100 1–2 道 → CANN 小实战 1 项 → C++ 正课"
       },
       {
         "name": "CPU 性能与 Ascend C 算子基线",
