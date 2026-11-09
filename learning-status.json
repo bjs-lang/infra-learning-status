@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "data_version": 50,
-  "updated_at": "2026-11-08T23:52:57.316000Z",
+  "data_version": 52,
+  "updated_at": "2026-11-09T04:41:08.457000Z",
   "updated_at_note": "旧记录可能没有精确保存时间；空值不是同步失败。",
-  "synced_at": "2026-11-08T23:54:51.176899Z",
-  "last_learning_date": "2026-11-08",
+  "synced_at": "2026-11-09T04:57:13.755283Z",
+  "last_learning_date": "2026-11-09",
   "current_cpp_lesson": {
     "number": 35,
     "title": "Debug 与 Release",
