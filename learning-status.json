@@ -1,40 +1,11 @@
 {
   "schema_version": 1,
-  "data_version": 63,
-  "updated_at": "2026-11-13T01:48:09.897000Z",
+  "data_version": 65,
+  "updated_at": "2026-11-13T14:01:25.372000Z",
   "updated_at_note": "旧记录可能没有精确保存时间；空值不是同步失败。",
-  "synced_at": "2026-11-13T12:47:33.816110Z",
+  "synced_at": "2026-11-13T20:06:28.046902Z",
   "last_learning_date": "2026-11-13",
-  "current_cpp_lesson": {
-    "number": 45,
-    "title": "编译优化与向量化",
-    "status": "已讲解",
-    "verification": "已讲解 SIMD 和 CPU Add 实验的设计。用户本机的 -O2/-O3 向量化报告、最大误差和耗时待补录。",
-    "review": "说明 out[i] = x[i] + y[i] 为什么适合按相邻元素分组。\n解释 4,000,003 项在宽度 4 下的尾部处理。",
-    "learning_focus": {
-      "priority": "编译器报告与容差",
-      "difficulty": "一个文件里的初始化、求和和校验循环可能各有诊断，需把 remark 定位到真正的 add 循环。",
-      "method": "找到 add 循环对应的报告，先验证逐项绝对误差，再比较优化等级、向量宽度与耗时。",
-      "application": "为 CANN Add 和后续 CPU 算子构建精度可校验的 SIMD 基线，检查向量宽度和尾部元素。",
-      "planned_practice": "先完成 CPU Add 的 -O2/-O3 对照，再比较循环写法对向量化的影响。",
-      "review_tasks": [
-        "说明 out[i] = x[i] + y[i] 为什么适合按相邻元素分组。",
-        "解释 4,000,003 项在宽度 4 下的尾部处理。"
-      ],
-      "verification_boundary": "本次状态为已讲解，本机实测报告、误差与耗时等待提交。"
-    },
-    "experiments": [
-      {
-        "id": "45-1",
-        "title": "CPU Add 的 -O2 与 -O3 向量化对照",
-        "status": "待实操",
-        "evidence": "已给出 CPU Add 示例、编译命令和逐项校验方式。",
-        "expected_only": "运行 4,000,003 项的 float Add，用 double golden 逐项校验绝对误差 ≤ 1e-6。记录 add 循环的 remark、向量宽度、Max error 与 Add time。"
-      }
-    ],
-    "goal": "-O2/-O3、循环重排、自动向量化、SIMD/ARM NEON 基础与报告解读。",
-    "acceptance": "比较优化选项与循环写法；确保数值误差满足容差，记录向量化证据。"
-  },
+  "current_cpp_lesson": null,
   "cpp_lessons": [
     {
       "number": 1,
@@ -1099,60 +1070,172 @@
     {
       "number": 45,
       "title": "编译优化与向量化",
-      "status": "已讲解",
-      "verification": "已讲解 SIMD 和 CPU Add 实验的设计。用户本机的 -O2/-O3 向量化报告、最大误差和耗时待补录。",
-      "review": "说明 out[i] = x[i] + y[i] 为什么适合按相邻元素分组。\n解释 4,000,003 项在宽度 4 下的尾部处理。",
+      "status": "已验收",
+      "verification": "已讲解 SIMD 和 CPU Add 实验的设计。\n\nMac 上用 -O2 与 -O3 编译 CPU Add，两版 add 内层均报告向量宽度 4、交错组数 4，逐项校验通过。两种 -O3 循环写法各跑三次，六次 PASS，最大绝对误差均为 1.19209e-07。",
+      "review": "说明 out[i] = x[i] + y[i] 为什么适合按相邻元素分组。\n解释 4,000,003 项在宽度 4 下的尾部处理。\n\n解释 4 组各处理 4 项和单个向量宽度 4 的关系。\n用 x[i] 与 *(x + i) 解释两种遍历访问的地址。",
       "learning_focus": {
-        "priority": "编译器报告与容差",
-        "difficulty": "一个文件里的初始化、求和和校验循环可能各有诊断，需把 remark 定位到真正的 add 循环。",
-        "method": "找到 add 循环对应的报告，先验证逐项绝对误差，再比较优化等级、向量宽度与耗时。",
-        "application": "为 CANN Add 和后续 CPU 算子构建精度可校验的 SIMD 基线，检查向量宽度和尾部元素。",
-        "planned_practice": "先完成 CPU Add 的 -O2/-O3 对照，再比较循环写法对向量化的影响。",
+        "priority": "先校验再测性能",
+        "difficulty": "同一文件有多个循环诊断，相同的向量宽度与交错组数也可能对应不同的执行开销。",
+        "method": "按源码行定位 add 循环，记录 width、interleave 和最大绝对误差，再用同条件多轮计时比较。",
+        "application": "建立可复现的 CPU Add 基线，给 CANN 算子的输出和尾部处理提供对拍依据。",
+        "planned_practice": "第 48 节用同样的报告与校验方法比较矩阵乘法循环。",
         "review_tasks": [
-          "说明 out[i] = x[i] + y[i] 为什么适合按相邻元素分组。",
-          "解释 4,000,003 项在宽度 4 下的尾部处理。"
+          "解释 4 组各处理 4 项和单个向量宽度 4 的关系。",
+          "用 x[i] 与 *(x + i) 解释两种遍历访问的地址。"
         ],
-        "verification_boundary": "本次状态为已讲解，本机实测报告、误差与耗时等待提交。"
+        "verification_boundary": "本机编译报告和逐项校验已核对。耗时样本支持本次记录中的中位数。"
       },
       "experiments": [
         {
           "id": "45-1",
           "title": "CPU Add 的 -O2 与 -O3 向量化对照",
-          "status": "待实操",
-          "evidence": "已给出 CPU Add 示例、编译命令和逐项校验方式。",
-          "expected_only": "运行 4,000,003 项的 float Add，用 double golden 逐项校验绝对误差 ≤ 1e-6。记录 add 循环的 remark、向量宽度、Max error 与 Add time。"
+          "status": "已实验通过",
+          "evidence": "已给出 CPU Add 示例、编译命令和逐项校验方式。\n\nadd 循环均为 width 4、interleaved 4，4,000,003 项逐项校验通过。单次耗时分别为 1.24817 ms 和 0.612333 ms。",
+          "expected_only": ""
+        },
+        {
+          "id": "45-2",
+          "title": "下标与指针遍历的 -O3 对照",
+          "status": "已实验通过",
+          "evidence": "两种写法的 add 循环均为 width 4、interleaved 4。下标与指针版的三次中位耗时为 0.630084 和 0.942416 ms，逐轮快慢有波动。",
+          "expected_only": ""
         }
       ]
     },
     {
       "number": 46,
       "title": "线程基础",
-      "status": "未开始",
-      "verification": "",
-      "review": "",
-      "learning_focus": null,
-      "experiments": []
+      "status": "已验收",
+      "verification": "std::thread 显式 join 与 std::jthread 作用域自动等待均通过。两档输入在两版中各跑三轮。4,003 项的串行和双线程结果均为 198003，4,000,003 项均为 198000003，共 12 组 PASS。",
+      "review": "用 5 个元素画出两个半开区间。\n说明 return 放在内层作用域外的作用。",
+      "learning_focus": {
+        "priority": "等待后再合并",
+        "difficulty": "两个线程要覆盖奇数长度的全部元素，主线程读取部分和时两个写入都必须已完成。",
+        "method": "用 [0, mid) 与 [mid, n) 分段，各写自己的部分和。显式 join 或在内层作用域析构 jthread，之后才读 left 和 right。",
+        "application": "并行归约、数据预处理和批量统计按任务规模选择线程划分。",
+        "planned_practice": "第 47 节把各自累加后合并的做法用于共享计数器。",
+        "review_tasks": [
+          "用 5 个元素画出两个半开区间。",
+          "说明 return 放在内层作用域外的作用。"
+        ],
+        "verification_boundary": "本机两种等待方式的正确性已验证。耗时包含创建和等待，串行固定先测。"
+      },
+      "experiments": [
+        {
+          "id": "46-1",
+          "title": "std::thread 分段求和与 join",
+          "status": "已实验通过",
+          "evidence": "两档均三次通过。4,003 项串行和双线程中位耗时为 0.416、53.833 μs。4,000,003 项为 0.957250、0.259792 ms。",
+          "expected_only": ""
+        },
+        {
+          "id": "46-2",
+          "title": "std::jthread 的作用域与自动等待",
+          "status": "已实验通过",
+          "evidence": "内层作用域结束后合并部分和。两档均三次通过。4,003 项中位耗时为 0.500、64.584 μs。4,000,003 项为 0.327666、0.302542 ms。",
+          "expected_only": ""
+        }
+      ]
     },
     {
       "number": 47,
       "title": "同步与原子操作",
-      "status": "未开始",
-      "verification": "",
-      "review": "",
-      "learning_focus": null,
-      "experiments": []
+      "status": "已验收",
+      "verification": "mutex 与 atomic 两种共享计数器各通过三轮，均为 200000。扫描 2,000,000 项统计 >=50，两种合并方式六次均为 1000000。共享原子逐项更新与局部累加后合并的中位耗时为 4.278460 和 0.333791 ms，约 12.82 倍。",
+      "review": "解释 guard 构造和析构何时加锁和释放。\n区分可并发只读的 nums 与两个线程都要修改的 total。",
+      "learning_focus": {
+        "priority": "数据竞争与争用",
+        "difficulty": "两个线程各有自己的 guard 和 local，却访问同一个 m 或 total。锁和原子操作都能保证指定计数正确，争用仍会影响吞吐。",
+        "method": "多步共享更新用同一 mutex 保护临界区。独立计数可用 fetch_add，先在线程内部累计能降低共享更新频次。",
+        "application": "优化任务处理计数、并行归约和多线程统计，减少热路径上的共享写入。",
+        "planned_practice": "把每项更新改为每线程一次合并，记录结果与耗时，作为后续并行算子的对照。",
+        "review_tasks": [
+          "解释 guard 构造和析构何时加锁和释放。",
+          "区分可并发只读的 nums 与两个线程都要修改的 total。"
+        ],
+        "verification_boundary": "两种同步写法和两种计数合并方式均有本机 PASS，普通 int 无同步的情况在对话中推演。"
+      },
+      "experiments": [
+        {
+          "id": "47-1",
+          "title": "mutex、lock_guard 与 atomic 计数",
+          "status": "已实验通过",
+          "evidence": "两次 runTwoThreads 顺序执行，每次各启动两个线程。每线程加 100,000 次，mutex 和 atomic 版三轮均输出 200000、PASS。",
+          "expected_only": ""
+        },
+        {
+          "id": "47-2",
+          "title": "减少共享原子更新",
+          "status": "已实验通过",
+          "evidence": "逐项原子加一共 1,000,000 次，分段局部统计后每线程只执行一次 fetch_add。六轮都 PASS，局部合并版中位耗时约为逐项更新版的 1/12.82。",
+          "expected_only": ""
+        }
+      ]
     },
     {
       "number": 48,
       "title": "毕业项目：CPU 算子优化",
-      "status": "未开始",
-      "verification": "",
-      "review": "",
-      "learning_focus": null,
-      "experiments": []
+      "status": "已验收",
+      "verification": "MacBook Air M5、C++20、-O3。IJK/IKJ 小矩阵和 512 × 512 的两种构建均通过。原目录加速比为 12.16× / 2.74×。提交 e97b459 干净克隆复测两种构建各通过 1 个小矩阵与 6 轮大矩阵逐项校验，加速比为 12.14× / 2.73×。",
+      "review": "解释 IKJ 中每个输出格仍要沿 p 累加 512 次。\n比较 IJK 的跨行读与 IKJ 的连续读写，说明为何相同 SIMD 分组会有不同收益。",
+      "learning_focus": {
+        "priority": "从正确性到性能证据",
+        "difficulty": "IJK 和 IKJ 做同样数量的乘加，但向量化的方向不同，向量宽度与交错组数不足以推断耗时。",
+        "method": "先比对小矩阵预期与大矩阵逐项结果，再固定输入、-O3 和轮次，交替测序比较两种构建。结合 B、C 的步长与归约开销解释。",
+        "application": "给后续算子开发建立行主序 GEMM 基线，练习读编译报告、设置公平对照和交付可复现结果。",
+        "planned_practice": "复用 README 中的校验与基准流程，为 Python / NumPy 参考实现及 Ascend C 算子准备对照。",
+        "review_tasks": [
+          "解释 IKJ 中每个输出格仍要沿 p 累加 512 次。",
+          "比较 IJK 的跨行读与 IKJ 的连续读写，说明为何相同 SIMD 分组会有不同收益。"
+        ],
+        "verification_boundary": "已在同一台 Mac 干净克隆复测正确性和性能。报告给出编译诊断，实际运行路径及缓存的单独贡献需另做实验。"
+      },
+      "experiments": [
+        {
+          "id": "48-1",
+          "title": "IJK 与 IKJ 正确性及基准",
+          "status": "已实验通过",
+          "evidence": "2×3 乘 3×2 得到 [58,64,139,154]。默认 -O3 交替测序六轮均 PASS，中位耗时 88.865550 / 7.308315 ms，IKJ 约快 12.16 倍。",
+          "expected_only": ""
+        },
+        {
+          "id": "48-2",
+          "title": "向量化报告与关闭自动向量化对照",
+          "status": "已实验通过",
+          "evidence": "两个内层均有 width 4 / interleaved 4 报告，IJK 另有成本模型放弃的报告。关闭循环和 SLP 向量化后六轮均 PASS，中位耗时 89.103100 / 32.539100 ms，IKJ 约快 2.74 倍。",
+          "expected_only": ""
+        },
+        {
+          "id": "48-3",
+          "title": "提交与干净克隆复现",
+          "status": "已实验通过",
+          "evidence": "e97b459 提交含 main.cpp 与 README.md。干净克隆后两种构建分别通过小矩阵和六轮逐项对照，默认及关闭向量化的加速比为 12.14 倍与 2.73 倍。",
+          "expected_only": ""
+        }
+      ]
     }
   ],
   "recent_learning": [
+    {
+      "date": "2026-11-13",
+      "track": "C++",
+      "title": "C++ 第 45–48 节验收 · CPU 算子毕业项目复现",
+      "summary": "读 CPU Add 向量化报告，用 thread 和 jthread 分段求和，用 mutex 与 atomic 保护共享计数，再用局部计数减少共享写入。最后完成矩阵乘法循环重排与 Git 干净克隆复现。",
+      "experiments_and_verification": "第 45 节逐项校验最大绝对误差 1.19209e-07。第 46 节两种线程写法的两档输入各跑三轮通过。第 47 节同步计数均为 200000，局部合并约快 12.82 倍。第 48 节从 e97b459 干净克隆后，两种构建各通过小矩阵和六轮校验，IKJ 分别快 12.14 倍、2.73 倍。",
+      "mastery": "第 45–48 节已验收，毕业项目已从干净克隆复现。",
+      "open_questions": "复盘同样的向量宽度为何带来不同收益、何时应先在局部累加再合并，以及 C 每个格子为何仍需沿 p 累加 K 次。",
+      "next_step": "C++ 48 节主线已完成。先复盘第 48 节的矩阵乘法正确性和性能对照，再按既定路线进入 Python / NumPy，从数组 Add 的参考实现与 C++ 对拍开始。"
+    },
+    {
+      "date": "2026-11-13",
+      "track": "算法 / Hot 100",
+      "title": "Hot 100 #239 · 双端队列与滑动窗口最大值",
+      "summary": "用 deque 保存候选下标，队尾淘汰、队首过期，取队首对应值。",
+      "experiments_and_verification": "已有 C++ 代码。手推 [1,3,2,5,4,6,3,7,2,8] 与 k=5 得 [5,6,6,7,7,8]，力扣提交结果待补录。",
+      "mastery": "已编码，力扣提交结果待补录。",
+      "open_questions": "在哪种输入上会执行 pop_front？相同的值为什么可以保留较新的下标？",
+      "next_step": "用递减、全相等与 k=1 的输入独立复做，再补平台结果。"
+    },
     {
       "date": "2026-11-12",
       "track": "C++",
@@ -1182,36 +1265,16 @@
       "mastery": "应用复习有记录",
       "open_questions": "继续区分数据结构分配成本、每次循环工作量和短耗时测量波动。\n\n解释为什么 i>0 必须在 && 左侧，为什么 unordered_set 的第 i 项需要迭代走 i 步。",
       "next_step": "C++ 正课接续第 41 节内存布局与对齐。\n\n第 41 节继续做 sizeof、alignof 与字段偏移对照，把边界和数据布局结合起来。"
-    },
-    {
-      "date": "2026-11-10",
-      "track": "算法 / Hot 100",
-      "title": "Hot 100 · #438 定长滑窗、#15 三数之和、#42 接雨水",
-      "summary": "DS07 定长滑窗。differ 维护非零字母种数，missing 维护总缺字数；相同进出字母直接跳过更新。\n\n续练 DS01 #15 排序和相向双指针、#42 最高柱分界与两侧扫描。",
-      "experiments_and_verification": "用户贴出 differ 版本并确认运行报错已解决。两种计数容器在 5,000 个随机用例的输出相同。性能数字来自助手本地 g++ 对照。\n\n#15、#42 均有本人代码。修正版由助手分别完成 11 个固定与 5,000 个随机用例对拍，开启 UBSan 和下标断言。平台提交结果待补录。",
-      "mastery": "已编码，平台验收待补录",
-      "open_questions": "能否独立复述移出用 <=0、移入用 <0，以及为什么长度固定时 missing=0 足以判定匹配。\n\n#15 复述两级去重的顺序与 break 保留答案；#42 说明一个全局峰能分割左右水量，以及多峰怎样覆盖。",
-      "next_step": "独立复做 #438，用重复字母、p 长于 s、进出同字母三类输入验收并记录提交结果。\n\n独立复做 #15 和 #42，测试全相等、单调数组、峰位于边界等输入，再补平台结果。"
-    },
-    {
-      "date": "2026-11-09",
-      "track": "C++",
-      "title": "第 36–40 节验收 · 从排错到模块化工程",
-      "summary": "Sanitizer 报告定位、LLDB 条件断点、CTest 回归、Git 与 README 干净克隆、静态库与 CLI / 测试分层。",
-      "experiments_and_verification": "第36节三项问题均修复复测；第37节修复输出 Result = 8；第38、39节 CTest 1/1 和 10 cases passed；第40节干净克隆 Sum = 8 且十个用例通过，越界输入退出 1。",
-      "mastery": "第 36–40 节已验收",
-      "open_questions": "复习 UB 与普通逻辑错误的定位差异，解释 CTest 入口数量与内部用例数量。",
-      "next_step": "从第 41 节内存布局与对齐继续，先观察 sizeof、alignof 和字段偏移。"
     }
   ],
-  "verified_summary": "11 月 12 日 C++ 第 41–44 节已验收。完成布局和 AoS/SoA 对照、多轮基准、macOS 采样与填充改写验证。第 45 节已讲解。\n\n11 月 10 日续学，#15 三数之和、#42 接雨水均有本人代码。修正版经助手本地 UBSan 和随机对拍通过，平台结果待补录。\n\n11 月 9 日，C++ 第 36–40 节已验收。Sanitizer 三项修复复测通过，LLDB 定位累加逻辑，CTest 十个用例通过，模块化工程干净克隆复现。第 35 节双构建与断言实验在 11 月 8 日完成。\n\n11 月 10 日，Hot 100 #438 已编码，用户确认 UBSan 报错解决。讨论 differ、missing 和同算法的计数容器对照，平台验收待补录。\n\n2026-11-06 在 CANN 社区 Notebook 跑通固定规格 Add（float，8 × 2048，8 核），程序报告精度校验通过。跨核边界改动与独立实现待实测。\nC++ 第32–34节结课，累计34/48（70.8%），剩余14节。11月5日新验收12项实验：第32节3项、第33节4项、第34节5项。第33节实验2已讲解，按用户要求跳过实操。第35节已讲解，实验1待实操。\n11-05 结课。11-04 已通过配置查询。11-05 验收实验2–4：合法更新为512，类型不符、缺键、负数均拒绝。模拟异常保持256/0.95，成功提交后为512/0.85。错误get<int>触发bad_variant_access，原配置保持512/0.85。\n多文件编译、CMake、静态库、增量构建四项通过。对齐声明和定义的参数类型后解决arm64链接报错，IntelliSense改为C++20后红线消失。实验2头文件保护已讲解，用户跳过实操。\n五项通过：规范目录与PUBLIC使用要求。故意改PRIVATE复现config.h缺失。生成约110KB的dylib。otool -L显示@rpath/libconfig_lib.dylib。otool -l显示LC_RPATH指向build目录。\n已讲解Debug/Release、-g、-O0/-O2/-O3、NDEBUG和CMAKE_BUILD_TYPE。实验1已布置，待确认目录和源码后进行两套构建，尚缺实际输出。\n此前验证：\n2026-11-04新增验证：2026-11-04：C++第29–31节编程实验通过，主线31/48（64.6%）；第32节进行中，实验1配置查询通过。今日20项实验有运行/编译证据（6+6+7+1），包含预期失败和修复验证。第30节2道、第31节1道概念小测未提交。实际时长未提供；Jetson/CUDA没有新增实机实验。\n6/6编程实验通过。异常捕获后继续运行；栈展开按B→A析构（模拟资源日志）；直接修改后保留40，临时副本失败则原值10/20/30不变；本机vector扩容有noexcept时Move A、去掉后Copy A。非GPU实验。\n6/6编程实验通过。constexpr与static_assert、int/const/constexpr、运行期输入10→100；constexpr常量表达式故意编译失败为验证成功；多文件缺实现链接失败后修复输出25；-c目标文件108K/1.9K，链接运行输出25。末尾2道概念小测未提交；未实现CMake。\n7/7编程实验通过。optional/空值取值、variant三类型切换与get、visit、if constexpr/类型别名、any_cast/reset均有输出。末尾1道optional<double>概念小测未提交。MatMul38ms/GPU名称为模拟示例，非设备性能。\n实验1配置查询已验收：在cpp_lesson32正确目录重新编译运行，block_size=256、threshold=0.95、device=GPU、unknown: Not found。旧day1目录any程序的输出不是本节证据；实验2–5尚未运行。\n此前验证（保留原日期与证据）：\n第1–13节主要练习沿用原进度。2026-10-31日报附有第14节移动赋值和自移动输出、第15节数组统计两组输出、第16节重载及引用增量输出、第17节作用域输出和引用语义问答。第17节随后由用户确认验收；生命周期回答指出局部对象离开作用域后消失、指针悬空，核心判断正确。\nLinux 2026-11-01：惠普光影精灵7，Windows + WSL Ubuntu，目录[本地路径已省略]。已验证grep/管道/wc/find/重定向、日志检查三分支、chmod755、bash与直接执行、位置参数及跨目录path_demo.sh。仅有主目录启动的一组路径输出；command -v bash在脚本内已验证。\n2026-11-01 C++：第18–21节已验收。string/view复制与观察、分词6/3→7/4；vector统计588/93/3/84与重分配检查；span三类容器求和与重建；STL排序/查找/求和、迭代器失效与erase安全删除均有日报实测依据。第1–17节沿用既有状态。\n2026-11-02：第22节四组关联容器实验据教学记录已验收；第23节四项Lambda编程实验现已通过，专项复习仍保留。\n2026-11-02续学：Lambda四个编程实验通过。基础25、1/0、3、3；阈值30→40时值捕获计数3→3、引用捕获3→1；mutable内部15→20而外部10，引用修改外部15；自定义sort得到MatMul38、Reduce25、Softmax25、Add12、ReLU8，慢算子数3，并正确解释return控制流。以上排序耗时为手工模拟数据，非GPU性能。泛型L",
-  "open_questions": "第 45 节记录 add 循环的向量宽度与精度。第 44 节两种填充写法具体生成的优化指令待用报告或汇编核对。\n\n复做 #15 的两级去重和 #42 的最高柱分界，记录边界用例与平台结果。\n\n#3 与 #438 需独立复做并保存用例和提交结果。\n\n复习 optional→variant→visit 的取值顺序、字符串字面量与const引用、类型检查和副本提交。对照声明与定义的函数签名、编译/链接/运行三个阶段、CMake的PUBLIC/PRIVATE/INTERFACE与增量依赖。第33节头文件保护已讲解并跳过实操，第35节实验1待运行。\n\n此前复习记录：\n当前复习与未完成项：优先巩固：编译期/运行期、局部变量与常量表达式、const/constexpr；声明/定义/编译/链接/-c/.o；Lambda与普通函数；using类型别名/class定义/template<class T>；optional/variant/any、visit运行期派发与if constexpr编译期分支；unordered_map的find与[]；void return;、nullopt与break；-Wall/-Wextra含义（用户选择不加做额外实验）。第30节末2道概念小测、第31节末1道小测尚未提交，不撤销编程通过状态。\n第28节const move与转发路径仍需巩固；扩容/noexcept对照已由第29节覆盖。第32节实验2–5尚未运行。\n\n既有专项复习与历史疑问（当前断点以上方为准）：\n当前专项复习：第26节：按值传vector的复制→移动链与默认特殊成员条件；第27节：所有权图、lock临时拥有者、循环引用；第28节优先：实参值类别→T推导→引用折叠→传出表达式→最终构造。const move、扩容/noexcept仍未补验。第24、25节依据日报汇总确认完成，尚缺本次新增逐实验输出。第23节既有专项复习继续；Linux原待实操保留。\n\n此前疑问留档（以下按日期追溯，当前状态以上方与课表为准）：\n第14节：含 unique_ptr 成员且未自定义特殊成员函数的类，为何不能拷贝却可以移动？此自测题待复习。第17节生命周期题已验收，复习时注意 p 是指针，解引用悬空指针是未定义行为。\n\nLinux 待实操：sed修正errror后复测计数为2（未展示输出）；不传参数调用check_log.sh，验证默认文件名（未展示输出）；报错信息补充文件名后重新验证（未展示输出）；查看PATH并运行command -v code（待实操）；对比source/bash/直接执行及$0/BASH_SOURCE[0]（待实操）；补做从脚本所在目录启动的对照输出（尚缺一组）；Git/CMake/GDB小型C++项目综合实践（今日未开展）。\n\n第14节 unique_ptr/Rule of Zero题仍待复习；视图生命周期、扩容导致引用/span/迭代器失效、旧end失效及erase返回值需持续巩固。\n\n2026-11-02更新：第22节已验收；第23节捕获对照现已通过。第14节unique_ptr/Rule of Zero和Linux原待实操清单继续保留。\n\n泛型Lambda、std::transform、引用捕获生命周期/悬空风险仍待专项练习；两道概念测验未提交。四项编程实验已通过，不阻止继续第24节。 第24节现由11-03日报汇总确认完成，新增逐实验输出仍待补。",
-  "next_step": "1. 先练 1–2 道 Hot 100。下一道待记录题为 #239 滑动窗口最大值（DS04 · 单调队列）。\n\n2. 做一项 CANN 小实战。CANN 继续 CANN-01 的边界实验。在固定 Add 样例中修改下标 2047 和 2048 的输入，用逐元素 CPU golden 核对两处结果和全部输出，再进入泛化 Add。\n\n3. 接续正课。C++ 第 45 节编译优化与向量化。用 -O2 和 -O3 编译 CPU Add，找到 add 循环对应的向量化报告，记录向量宽度、Max error 和 Add time，逐项校验绝对误差 ≤ 1e-6，再比较两种构建。\n\nLinux：先用sed修正errror并复测，再验证无参数默认文件名和包含文件名的报错；随后补PATH、source和路径对照实验，再做Git/CMake/GDB小项目。每日Linux复习≤1小时。",
-  "linux_and_cann_plan": "每个学习日的顺序是 Hot 100（1–2 道） → CANN 小实战 → 当前正课。Hot 100 继续用 C++，可做新题或复做错题。CANN 每次只安排一项小任务。当前正课是 48 节 C++，以后进入 Python 或其他正课时也沿用这个顺序。\nC++ 保留原 48 节，用 DS01–DS07 补数据结构和算法。力扣记录独立思路、边界、复杂度与实测结果。Linux 随工程构建和排错复习，每天最多 1 小时。\nCANN 从固定规格 Add 基线继续，逐步做泛化 Add、Reduce / Softmax、可测量的优化与赛题。样例通过、独立实现和性能验收分开记录。\n泛化 Add 时补 Python / NumPy；C++ 结课后以 Python / PyTorch 和 Transformer 为正课，做一个有评测的小模型应用。随后分别做单卡推理服务和 DDP 训练。\n真机报告需记录 NPU、软件版本和测量条件，多卡实验按可用资源启动。CANN 竞赛、课题研究和实习按产出推进，软挑按时间选做，赛程以官方公告为准。",
+  "verified_summary": "11 月 13 日 C++ 第 45–48 节已验收。CPU Add 校验通过，双线程求和、同步计数与矩阵乘法对照通过。毕业项目从提交 e97b459 干净克隆，两种构建均通过小矩阵与六轮逐元素校验。Hot 100 #239 已编码。\n\n11 月 12 日 C++ 第 41–44 节已验收。完成布局和 AoS/SoA 对照、多轮基准、macOS 采样与填充改写验证。第 45 节已讲解。\n\n11 月 10 日续学，#15 三数之和、#42 接雨水均有本人代码。修正版经助手本地 UBSan 和随机对拍通过，平台结果待补录。\n\n11 月 9 日，C++ 第 36–40 节已验收。Sanitizer 三项修复复测通过，LLDB 定位累加逻辑，CTest 十个用例通过，模块化工程干净克隆复现。第 35 节双构建与断言实验在 11 月 8 日完成。\n\n11 月 10 日，Hot 100 #438 已编码，用户确认 UBSan 报错解决。讨论 differ、missing 和同算法的计数容器对照，平台验收待补录。\n\n2026-11-06 在 CANN 社区 Notebook 跑通固定规格 Add（float，8 × 2048，8 核），程序报告精度校验通过。跨核边界改动与独立实现待实测。\nC++ 第32–34节结课，累计34/48（70.8%），剩余14节。11月5日新验收12项实验：第32节3项、第33节4项、第34节5项。第33节实验2已讲解，按用户要求跳过实操。第35节已讲解，实验1待实操。\n11-05 结课。11-04 已通过配置查询。11-05 验收实验2–4：合法更新为512，类型不符、缺键、负数均拒绝。模拟异常保持256/0.95，成功提交后为512/0.85。错误get<int>触发bad_variant_access，原配置保持512/0.85。\n多文件编译、CMake、静态库、增量构建四项通过。对齐声明和定义的参数类型后解决arm64链接报错，IntelliSense改为C++20后红线消失。实验2头文件保护已讲解，用户跳过实操。\n五项通过：规范目录与PUBLIC使用要求。故意改PRIVATE复现config.h缺失。生成约110KB的dylib。otool -L显示@rpath/libconfig_lib.dylib。otool -l显示LC_RPATH指向build目录。\n已讲解Debug/Release、-g、-O0/-O2/-O3、NDEBUG和CMAKE_BUILD_TYPE。实验1已布置，待确认目录和源码后进行两套构建，尚缺实际输出。\n此前验证：\n2026-11-04新增验证：2026-11-04：C++第29–31节编程实验通过，主线31/48（64.6%）；第32节进行中，实验1配置查询通过。今日20项实验有运行/编译证据（6+6+7+1），包含预期失败和修复验证。第30节2道、第31节1道概念小测未提交。实际时长未提供；Jetson/CUDA没有新增实机实验。\n6/6编程实验通过。异常捕获后继续运行；栈展开按B→A析构（模拟资源日志）；直接修改后保留40，临时副本失败则原值10/20/30不变；本机vector扩容有noexcept时Move A、去掉后Copy A。非GPU实验。\n6/6编程实验通过。constexpr与static_assert、int/const/constexpr、运行期输入10→100；constexpr常量表达式故意编译失败为验证成功；多文件缺实现链接失败后修复输出25；-c目标文件108K/1.9K，链接运行输出25。末尾2道概念小测未提交；未实现CMake。\n7/7编程实验通过。optional/空值取值、variant三类型切换与get、visit、if constexpr/类型别名、any_cast/reset均有输出。末尾1道optional<double>概念小测未提交。MatMul38ms/GPU名称为模拟示例，非设备性能。\n实验1配置查询已验收：在cpp_lesson32正确目录重新编译运行，block_size=256、threshold=0.95、device=GPU、unknown: Not found。旧day1目录any程序的输出不是本节证据；实验2–5尚未运行。\n此前验证（保留原日期与证据）：\n第1–13节主要练习沿用原进度。2026-10-31日报附有第14节移动赋值和自移动输出、第15节数组统计两组输出、第16节重载及引用增量输出、第17节作用域输出和引用语义问答。第17节随后由用户确认验收；生命周期回答指出局部对象离开作用域后消失、指针悬空，核心判断正确。\nLinux 2026-11-01：惠普光影精灵7，Windows + WSL Ubuntu，目录[本地路径已省略]。已验证grep/管道/wc/find/重定向、日志检查三分支、chmod755、bash与直接执行、位置参数及跨目录path_demo.sh。仅有主目录启动的一组路径输出；command -v bash在脚本内已验证。\n2026-11-01 C++：第18–21节已验收。string/view复制与观察、分词6/3→7/4；vector统计588/93/3/84与重分配检查；span三类容器求和与重建；STL排序/查找/求和、迭代器失效与erase安全删除均有日报实测依据。第1–17节沿用既有状态。\n2026-11-02：第22节四组关联容器实验据教学记录已验收；第23节四项Lambda编程实验现已通过，专项复习仍保留。\n2026-11-02续学：Lambda四个编程实验通过。基础25、1/0、3、3；阈值30→40时值捕获计数3→3、引用捕获3→1；muta",
+  "open_questions": "Hot 100 #239 复做时用递减数组触发队首过期，补录力扣提交结果。第 48 节向量化报告与计时已留档，访存与计算各自的收益可继续分析。\n\n第 44 节两种填充写法具体生成的优化指令待用报告或汇编核对。\n\n复做 #15 的两级去重和 #42 的最高柱分界，记录边界用例与平台结果。\n\n#3 与 #438 需独立复做并保存用例和提交结果。\n\n复习 optional→variant→visit 的取值顺序、字符串字面量与const引用、类型检查和副本提交。对照声明与定义的函数签名、编译/链接/运行三个阶段、CMake的PUBLIC/PRIVATE/INTERFACE与增量依赖。第33节头文件保护已讲解并跳过实操，第35节实验1待运行。\n\n此前复习记录：\n当前复习与未完成项：优先巩固：编译期/运行期、局部变量与常量表达式、const/constexpr；声明/定义/编译/链接/-c/.o；Lambda与普通函数；using类型别名/class定义/template<class T>；optional/variant/any、visit运行期派发与if constexpr编译期分支；unordered_map的find与[]；void return;、nullopt与break；-Wall/-Wextra含义（用户选择不加做额外实验）。第30节末2道概念小测、第31节末1道小测尚未提交，不撤销编程通过状态。\n第28节const move与转发路径仍需巩固；扩容/noexcept对照已由第29节覆盖。第32节实验2–5尚未运行。\n\n既有专项复习与历史疑问（当前断点以上方为准）：\n当前专项复习：第26节：按值传vector的复制→移动链与默认特殊成员条件；第27节：所有权图、lock临时拥有者、循环引用；第28节优先：实参值类别→T推导→引用折叠→传出表达式→最终构造。const move、扩容/noexcept仍未补验。第24、25节依据日报汇总确认完成，尚缺本次新增逐实验输出。第23节既有专项复习继续；Linux原待实操保留。\n\n此前疑问留档（以下按日期追溯，当前状态以上方与课表为准）：\n第14节：含 unique_ptr 成员且未自定义特殊成员函数的类，为何不能拷贝却可以移动？此自测题待复习。第17节生命周期题已验收，复习时注意 p 是指针，解引用悬空指针是未定义行为。\n\nLinux 待实操：sed修正errror后复测计数为2（未展示输出）；不传参数调用check_log.sh，验证默认文件名（未展示输出）；报错信息补充文件名后重新验证（未展示输出）；查看PATH并运行command -v code（待实操）；对比source/bash/直接执行及$0/BASH_SOURCE[0]（待实操）；补做从脚本所在目录启动的对照输出（尚缺一组）；Git/CMake/GDB小型C++项目综合实践（今日未开展）。\n\n第14节 unique_ptr/Rule of Zero题仍待复习；视图生命周期、扩容导致引用/span/迭代器失效、旧end失效及erase返回值需持续巩固。\n\n2026-11-02更新：第22节已验收；第23节捕获对照现已通过。第14节unique_ptr/Rule of Zero和Linux原待实操清单继续保留。\n\n泛型Lambda、std::transform、引用捕获生命周期/悬空风险仍待专项练习；两道概念测验未提交。四项编程实验已通过，不阻止继续第24节。 第24节现由11-03日报汇总确认完成，新增逐实验输出仍待补。",
+  "next_step": "1. 先练 1–2 道 Hot 100。下一道待记录题为 #76 最小覆盖子串（DS07 · 变长滑动窗口）。\n\n2. 做一项 CANN 小实战。CANN 继续 CANN-01 的边界实验。在固定 Add 样例中修改下标 2047 和 2048 的输入，用逐元素 CPU golden 核对两处结果和全部输出，再进入泛化 Add。\n\n3. 接续正课。11 月 14 日正课 · Python 基础 + 数据结构。先学 Python 的 list、for、函数与 collections.deque，再用 C++ std::deque 和 Python collections.deque 各写一遍双端队列练习。\n\n用两种语言复做 Hot 100 #239。两端操作分别处理过期下标和淘汰较小或相等的候选。用同一组用例验收：递减 [9,8,7,6]、k=2 得 [9,8,7]，另外覆盖相等元素、k=1 与 k=n。说明 O(n) 时间与 O(k) 队列空间。\n\n后续 DS 专项沿用双语实现和同用例对照。熟悉 Python 基础后，再做 NumPy Add 与 C++ 结果对拍。\n\nLinux：先用sed修正errror并复测，再验证无参数默认文件名和包含文件名的报错；随后补PATH、source和路径对照实验，再做Git/CMake/GDB小项目。每日Linux复习≤1小时。",
+  "linux_and_cann_plan": "每个学习日的顺序是 Hot 100（1–2 道） → CANN 小实战 → 当前正课。Hot 100 可做新题或复做错题，CANN 每次安排一项小任务。C++ 结课后，正课并行学习 Python 基础与数据结构。\nDS01–DS07 的练习用 C++ 与 Python 各实现一遍，复用同一组输入和预期输出，比较容器接口、复杂度与边界。力扣记录独立思路、边界、复杂度与实测结果。Linux 随工程构建和排错复习，每天最多 1 小时。\nCANN 从固定规格 Add 基线继续，逐步做泛化 Add、Reduce / Softmax、可测量的优化与赛题。样例通过、独立实现和性能验收分开记录。\n泛化 Add 时补 Python / NumPy；C++ 结课后以 Python / PyTorch 和 Transformer 为正课，做一个有评测的小模型应用。随后分别做单卡推理服务和 DDP 训练。\n真机报告需记录 NPU、软件版本和测量条件，多卡实验按可用资源启动。CANN 竞赛、课题研究和实习按产出推进，软挑按时间选做，赛程以官方公告为准。",
   "learning_path": {
     "version": "2026-11-06-cann-hot100-v3",
     "goal": "AI Infra 工程师 · 以 CANN / Ascend C 算子开发为专业主修，用 C++、Python 和模型实验打底，向推理与分布式训练拓展。",
-    "policy": "每个学习日的顺序是 Hot 100（1–2 道） → CANN 小实战 → 当前正课。Hot 100 继续用 C++，可做新题或复做错题。CANN 每次只安排一项小任务。当前正课是 48 节 C++，以后进入 Python 或其他正课时也沿用这个顺序。\nC++ 保留原 48 节，用 DS01–DS07 补数据结构和算法。力扣记录独立思路、边界、复杂度与实测结果。Linux 随工程构建和排错复习，每天最多 1 小时。\nCANN 从固定规格 Add 基线继续，逐步做泛化 Add、Reduce / Softmax、可测量的优化与赛题。样例通过、独立实现和性能验收分开记录。\n泛化 Add 时补 Python / NumPy；C++ 结课后以 Python / PyTorch 和 Transformer 为正课，做一个有评测的小模型应用。随后分别做单卡推理服务和 DDP 训练。\n真机报告需记录 NPU、软件版本和测量条件，多卡实验按可用资源启动。CANN 竞赛、课题研究和实习按产出推进，软挑按时间选做，赛程以官方公告为准。",
+    "policy": "每个学习日的顺序是 Hot 100（1–2 道） → CANN 小实战 → 当前正课。Hot 100 可做新题或复做错题，CANN 每次安排一项小任务。C++ 结课后，正课并行学习 Python 基础与数据结构。\nDS01–DS07 的练习用 C++ 与 Python 各实现一遍，复用同一组输入和预期输出，比较容器接口、复杂度与边界。力扣记录独立思路、边界、复杂度与实测结果。Linux 随工程构建和排错复习，每天最多 1 小时。\nCANN 从固定规格 Add 基线继续，逐步做泛化 Add、Reduce / Softmax、可测量的优化与赛题。样例通过、独立实现和性能验收分开记录。\n泛化 Add 时补 Python / NumPy；C++ 结课后以 Python / PyTorch 和 Transformer 为正课，做一个有评测的小模型应用。随后分别做单卡推理服务和 DDP 训练。\n真机报告需记录 NPU、软件版本和测量条件，多卡实验按可用资源启动。CANN 竞赛、课题研究和实习按产出推进，软挑按时间选做，赛程以官方公告为准。",
     "hardware": {
       "device": "本地 CPU 参考与匹配的昇腾 NPU 环境",
       "device_status": "具体 NPU 型号和 CANN 版本以实际练习或评测环境为准",
@@ -1780,7 +1843,7 @@
               },
               {
                 "title": "Benchmark、Profiling 与向量化",
-                "status": "进行中",
+                "status": "已验收",
                 "focus": true,
                 "difficult": true,
                 "knowledge_points": [
@@ -1793,7 +1856,7 @@
               },
               {
                 "title": "线程、同步、原子与毕业项目",
-                "status": "未开始",
+                "status": "已验收",
                 "focus": true,
                 "difficult": true,
                 "knowledge_points": [
