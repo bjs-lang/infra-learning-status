@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "data_version": 82,
-  "updated_at": "2026-11-25T15:37:23.770000Z",
+  "data_version": 83,
+  "updated_at": "2026-11-27T00:21:16.528000Z",
   "updated_at_note": "旧记录可能没有精确保存时间；空值不是同步失败。",
-  "synced_at": "2026-11-26T23:06:39.619417Z",
-  "last_learning_date": "2026-11-25",
+  "synced_at": "2026-11-27T04:59:42.426333Z",
+  "last_learning_date": "2026-11-26",
   "current_cpp_lesson": null,
   "cpp_lessons": [
     {
@@ -1217,6 +1217,16 @@
   ],
   "recent_learning": [
     {
+      "date": "2026-11-26",
+      "track": "雷达心率支线",
+      "title": "AWR1642 有线心率基线与七版实验复盘",
+      "summary": "AWR1642 板载距离 FFT、Atlas 在线估计和 Mac 上的 Polar H10 同刻对照。",
+      "experiments_and_verification": "tracking 最新实测 1,200/1,200 帧、82/82 窗。全窗 MAE 6.46 BPM，65–79 秒集中出现错误高频轨迹。",
+      "mastery": "未评估",
+      "open_questions": "换人后初始峰选择与多峰跟踪中途切换仍待验证。",
+      "next_step": "以冻结的 tracking 版为对照，验证错误轨迹和冷启动的改动。"
+    },
+    {
       "date": "2026-11-25",
       "track": "雷达心率支线",
       "title": "AWR1642 无线回放复盘",
@@ -1255,16 +1265,6 @@
       "mastery": "已验证",
       "open_questions": "长对话、连续测速和语言模型的 NPU 部署仍待验证。",
       "next_step": "重新打开 Mac 终端运行启动脚本，待模型加载后用浏览器确认服务，再启动语音端。"
-    },
-    {
-      "date": "2026-11-19",
-      "track": "语音与通信",
-      "title": "搭建语音对话，排查动漫音色脚本版本",
-      "summary": "Mac 录音后用中文 Zipformer 识别，发送识别文本给 Atlas。板端返回文字，Mac 用系统语音或 Qwen3‑TTS 播放。",
-      "experiments_and_verification": "新版脚本已提供系统语音和 Qwen3‑TTS 两种播报方式，以及独立试听模式。旧文件运行时报 unrecognized arguments。已核验重新发出的 atlas_voice_chat_qwen.py 支持 --tts 和 --preview。",
-      "mastery": "待实测",
-      "open_questions": "待在 Mac 上确认 Vivian 试听、中文识别和语音对话的完整运行结果，并测量停口到首声的实际延迟。",
-      "next_step": "下次在 Mac 重开两个终端。先启动 Atlas 对话服务和 SSH 隧道，再试听新版脚本的 Vivian 音色。试听通过后，做两轮中文语音问答，记录识别文本、回复和首声耗时。"
     }
   ],
   "verified_summary": "2026-11-19 · Atlas 200I DK A2 从存储卡启动，根分区剩余约 36 GiB。确认 NVMe SSD 尚未挂载，CANN Toolkit 为 7.0.RC1，Ascend 310B1 健康状态为 OK。ResNet50 识别 Standard Poodle 的最高概率为 0.9355。\nllamafile 0.10.6 在 Atlas CPU 上运行 Qwen3.5‑2B Q4_K_M。通过 Mac 上的浏览器完成两轮中文文字对话，第二轮复述了第一轮给出的名字。首轮回复面板显示 16 tokens、4.7 秒、约 3.42 tokens/s。\n2026-11-19 · 已首次进入 Atlas 200I DK A2 的 Linux 终端。fdisk -l 列出 mmcblk1（58.42 GiB，GPT，三个分区）和 nvme0n1（Great Wall GW3500 256GB，238.47 GiB）。\n11 月 18 日 · MacBook Air 内置麦克风录得 10.00 秒单声道 Int16 音频，48,000 Hz，数组形状为 (480000, 1)。用 afplay 回放原文件，可以听见。afinfo 显示转换后的 WAV 为 16,000 Hz、单声道、Int16，仍为 10.00 秒，共 160,000 个采样帧，音频数据占 320,000 字节。\nCANN-01 固定规格 Add 已验证跨核边界。下标 2047 的输出和 golden 均为 4.5，下标 2048 均为 5.5，程序报告整组精度校验通过。\n\n11 月 15 日完成 DS04 栈双语练习（#20、#155、#739）。用户反馈 #739 的 Python 单调栈提交约 100 ms，击败 40%。\n\n11 月 14 日完成 Python 基础第 1 课与 DS04 单调队列双语练习。Hot 100 #239 的 Python 和 C++ 版本均通过 5 组本地断言，终端输出 Python PASS 和 C++ PASS。\n\n11 月 13 日 C++ 第 45–48 节已验收。CPU Add 校验通过，双线程求和、同步计数与矩阵乘法对照通过。毕业项目从提交 e97b459 干净克隆，两种构建均通过小矩阵与六轮逐元素校验。Hot 100 #239 已编码。\n\n11 月 12 日 C++ 第 41–44 节已验收。完成布局和 AoS/SoA 对照、多轮基准、macOS 采样与填充改写验证。第 45 节已讲解。\n\n11 月 10 日续学，#15 三数之和、#42 接雨水均有本人代码。修正版经助手本地 UBSan 和随机对拍通过，平台结果待补录。\n\n11 月 9 日，C++ 第 36–40 节已验收。Sanitizer 三项修复复测通过，LLDB 定位累加逻辑，CTest 十个用例通过，模块化工程干净克隆复现。第 35 节双构建与断言实验在 11 月 8 日完成。\n\n11 月 10 日，Hot 100 #438 已编码，用户确认 UBSan 报错解决。讨论 differ、missing 和同算法的计数容器对照，平台验收待补录。\n\n2026-11-06 在 CANN 社区 Notebook 跑通固定规格 Add（float，8 × 2048，8 核），程序报告精度校验通过。泛化 Add 的独立实现和性能基线待验证。\nC++ 第32–34节结课，累计34/48（70.8%），剩余14节。11月5日新验收12项实验：第32节3项、第33节4项、第34节5项。第33节实验2已讲解，按用户要求跳过实操。第35节已讲解，实验1待实操。\n11-05 结课。11-04 已通过配置查询。11-05 验收实验2–4：合法更新为512，类型不符、缺键、负数均拒绝。模拟异常保持256/0.95，成功提交后为512/0.85。错误get<int>触发bad_variant_access，原配置保持512/0.85。\n多文件编译、CMake、静态库、增量构建四项通过。对齐声明和定义的参数类型后解决arm64链接报错，IntelliSense改为C++20后红线消失。实验2头文件保护已讲解，用户跳过实操。\n五项通过：规范目录与PUBLIC使用要求。故意改PRIVATE复现config.h缺失。生成约110KB的dylib。otool -L显示@rpath/libconfig_lib.dylib。otool -l显示LC_RPATH指向build目录。\n已讲解Debug/Release、-g、-O0/-O2/-O3、NDEBUG和CMAKE_BUILD_TYPE。实验1已布置，待确认目录和源码后进行两套构建，尚缺实际输出。\n此前验证：\n2026-11-04新增验证：2026-11-04：C++第29–31节编程实验通过，主线31/48（64.6%）；第32节进行中，实验1配置查询通过。今日20项实验有运行/编译证据（6+6+7+1），包含预期失败和修复验证。第30节2道、第31节1道概念小测未提交。实际时长未提供；Jetson/CUDA没有新增实机实验。\n6/6编程实验通过。异常捕获后继续运行；栈展开按B→A析构（模拟资源日志）；直接修改后保留40，临时副本失败则原值10/20/30不变；本机vector扩容有noexcept时Move A、去掉后Copy A。非GPU实验。\n6/6编程实验通过。constexpr与static_assert、int/const/constexpr、运行期输入10→100；constexpr常量表达式故意编译失败为验证成功；多文件缺实现链接失败后修复输出25；-c目标文件108K/1.9K，链接运行输出25。末",
